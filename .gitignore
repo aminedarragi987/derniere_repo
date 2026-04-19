@@ -1,0 +1,23 @@
+# Build folders
+bin/
+obj/
+
+# Visual Studio
+.vs/
+*.user
+*.suo
+
+# Rider / IDE
+.idea/
+
+# Logs
+*.log
+
+# OS
+.DS_Store
+
+# EF Core migrations cache (optionnel mais propre)
+Migrations/*Snapshot.cs
+
+# Copilot / cache
+CopilotSnapshots/
