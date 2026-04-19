@@ -1,0 +1,51 @@
+﻿using Microsoft.AspNetCore.Cors;
+using Microsoft.AspNetCore.Mvc;
+using Service.DTO;
+using Service.IService;
+
+namespace Commande.API.Controllers;
+
+[Produces("application/json")]
+[Route("Commande")]
+[EnableCors("CORSPolicy")]
+[ApiController]
+public class CommandeController : ControllerBase
+{
+    private readonly IGestionStockService _gestionStockService;
+
+    public CommandeController(IGestionStockService gestionStockService)
+    {
+        _gestionStockService = gestionStockService;
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> CreerCommande([FromBody] CommandeCreateDto commande)
+    {
+        var created = await _gestionStockService.CreateCommande(commande);
+        if (created == null)
+        {
+            return NotFound(new { Message = "Client introuvable." });
+        }
+
+        return Ok(created);
+    }
+
+    [HttpPost("{idcommande:int}/Article")]
+    public async Task<IActionResult> AjouterArticleCommande(int idcommande, [FromBody] LigneCommandeDto ligne)
+    {
+        try
+        {
+            var updated = await _gestionStockService.AddLigneCommande(idcommande, ligne);
+            if (updated == null)
+            {
+                return NotFound(new { Message = "Commande introuvable." });
+            }
+
+            return Ok(updated);
+        }
+        catch (InvalidOperationException ex)
+        {
+            return BadRequest(new { Message = ex.Message });
+        }
+    }
+}

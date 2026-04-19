@@ -1,0 +1,1794 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "D:\\ERPMs\\ERPMs\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{9C8CB701-102D-CF49-A3E0-89AC09D42C2C}|\u00C9l\u00E9ments de solution{9C8CB701-102D-CF49-A3E0-89AC09D42C2C}|D:\\ERPMs\\ERPMs\\docker-compose.yml||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{9C8CB701-102D-CF49-A3E0-89AC09D42C2C}|\u00C9l\u00E9ments de solution{9C8CB701-102D-CF49-A3E0-89AC09D42C2C}|solutionrelative:docker-compose.yml||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4FF7C8E6-E16E-4383-A55B-1AADB047B87B}|Commande.API\\Commande.API.csproj|d:\\erpms\\erpms\\commande.api\\dockerfile||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{4FF7C8E6-E16E-4383-A55B-1AADB047B87B}|Commande.API\\Commande.API.csproj|solutionrelative:commande.api\\dockerfile||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{28E1F9DD-FD6C-42BD-A999-CB6628DA6578}|Core\\Core.csproj|d:\\erpms\\erpms\\core\\entities\\iamdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{28E1F9DD-FD6C-42BD-A999-CB6628DA6578}|Core\\Core.csproj|solutionrelative:core\\entities\\iamdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2B98AEE8-7C26-4977-94A5-FC392CBD9117}|Service\\Service.csproj|d:\\erpms\\erpms\\service\\dependencyinjection.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2B98AEE8-7C26-4977-94A5-FC392CBD9117}|Service\\Service.csproj|solutionrelative:service\\dependencyinjection.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3FD7C604-9BE7-471D-B060-C08F2A09485A}|Gestion_de_stock.API\\Gestion_de_stock.API.csproj|d:\\erpms\\erpms\\gestion_de_stock.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3FD7C604-9BE7-471D-B060-C08F2A09485A}|Gestion_de_stock.API\\Gestion_de_stock.API.csproj|solutionrelative:gestion_de_stock.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2855BD67-5181-4381-9AED-BFA2643C60B7}|User.API\\User.API.csproj|d:\\erpms\\erpms\\user.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2855BD67-5181-4381-9AED-BFA2643C60B7}|User.API\\User.API.csproj|solutionrelative:user.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2B98AEE8-7C26-4977-94A5-FC392CBD9117}|Service\\Service.csproj|d:\\erpms\\erpms\\service\\injectservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2B98AEE8-7C26-4977-94A5-FC392CBD9117}|Service\\Service.csproj|solutionrelative:service\\injectservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2B98AEE8-7C26-4977-94A5-FC392CBD9117}|Service\\Service.csproj|d:\\erpms\\erpms\\service\\dto\\clientdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2B98AEE8-7C26-4977-94A5-FC392CBD9117}|Service\\Service.csproj|solutionrelative:service\\dto\\clientdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2B98AEE8-7C26-4977-94A5-FC392CBD9117}|Service\\Service.csproj|d:\\erpms\\erpms\\service\\dto\\articledto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2B98AEE8-7C26-4977-94A5-FC392CBD9117}|Service\\Service.csproj|solutionrelative:service\\dto\\articledto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2B98AEE8-7C26-4977-94A5-FC392CBD9117}|Service\\Service.csproj|d:\\erpms\\erpms\\service\\common\\mappings\\mappingprofile.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2B98AEE8-7C26-4977-94A5-FC392CBD9117}|Service\\Service.csproj|solutionrelative:service\\common\\mappings\\mappingprofile.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2B98AEE8-7C26-4977-94A5-FC392CBD9117}|Service\\Service.csproj|d:\\erpms\\erpms\\service\\common\\mappings\\imapfrom.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2B98AEE8-7C26-4977-94A5-FC392CBD9117}|Service\\Service.csproj|solutionrelative:service\\common\\mappings\\imapfrom.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2B98AEE8-7C26-4977-94A5-FC392CBD9117}|Service\\Service.csproj|d:\\erpms\\erpms\\service\\service\\serviceasync.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2B98AEE8-7C26-4977-94A5-FC392CBD9117}|Service\\Service.csproj|solutionrelative:service\\service\\serviceasync.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2B98AEE8-7C26-4977-94A5-FC392CBD9117}|Service\\Service.csproj|d:\\erpms\\erpms\\service\\dto\\menudto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2B98AEE8-7C26-4977-94A5-FC392CBD9117}|Service\\Service.csproj|solutionrelative:service\\dto\\menudto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2B98AEE8-7C26-4977-94A5-FC392CBD9117}|Service\\Service.csproj|d:\\erpms\\erpms\\service\\service\\gestionstockservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2B98AEE8-7C26-4977-94A5-FC392CBD9117}|Service\\Service.csproj|solutionrelative:service\\service\\gestionstockservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2B98AEE8-7C26-4977-94A5-FC392CBD9117}|Service\\Service.csproj|d:\\erpms\\erpms\\service\\iservice\\igestionstockservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2B98AEE8-7C26-4977-94A5-FC392CBD9117}|Service\\Service.csproj|solutionrelative:service\\iservice\\igestionstockservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2B98AEE8-7C26-4977-94A5-FC392CBD9117}|Service\\Service.csproj|d:\\erpms\\erpms\\service\\dto\\paiementdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2B98AEE8-7C26-4977-94A5-FC392CBD9117}|Service\\Service.csproj|solutionrelative:service\\dto\\paiementdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2B98AEE8-7C26-4977-94A5-FC392CBD9117}|Service\\Service.csproj|d:\\erpms\\erpms\\service\\dto\\lignecommandedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2B98AEE8-7C26-4977-94A5-FC392CBD9117}|Service\\Service.csproj|solutionrelative:service\\dto\\lignecommandedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2B98AEE8-7C26-4977-94A5-FC392CBD9117}|Service\\Service.csproj|d:\\erpms\\erpms\\service\\dto\\articlefilterdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2B98AEE8-7C26-4977-94A5-FC392CBD9117}|Service\\Service.csproj|solutionrelative:service\\dto\\articlefilterdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2CADB68C-FB3B-D474-56C8-AE901F365B9C}|Gateway\\Gateway.csproj|d:\\erpms\\erpms\\gateway\\dockerfile||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{2CADB68C-FB3B-D474-56C8-AE901F365B9C}|Gateway\\Gateway.csproj|solutionrelative:gateway\\dockerfile||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D57696A8-6FE3-4A99-82DE-DE5B1070747D}|DAL\\DAL.csproj|d:\\erpms\\erpms\\dal\\injections\\repositoryinjectionmodule.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D57696A8-6FE3-4A99-82DE-DE5B1070747D}|DAL\\DAL.csproj|solutionrelative:dal\\injections\\repositoryinjectionmodule.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D57696A8-6FE3-4A99-82DE-DE5B1070747D}|DAL\\DAL.csproj|d:\\erpms\\erpms\\dal\\config\\jwtsettings.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D57696A8-6FE3-4A99-82DE-DE5B1070747D}|DAL\\DAL.csproj|solutionrelative:dal\\config\\jwtsettings.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D57696A8-6FE3-4A99-82DE-DE5B1070747D}|DAL\\DAL.csproj|d:\\erpms\\erpms\\dal\\config\\dbcontextsettings.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D57696A8-6FE3-4A99-82DE-DE5B1070747D}|DAL\\DAL.csproj|solutionrelative:dal\\config\\dbcontextsettings.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D57696A8-6FE3-4A99-82DE-DE5B1070747D}|DAL\\DAL.csproj|d:\\erpms\\erpms\\dal\\dal.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{D57696A8-6FE3-4A99-82DE-DE5B1070747D}|DAL\\DAL.csproj|solutionrelative:dal\\dal.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{28E1F9DD-FD6C-42BD-A999-CB6628DA6578}|Core\\Core.csproj|d:\\erpms\\erpms\\core\\entities\\profile.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{28E1F9DD-FD6C-42BD-A999-CB6628DA6578}|Core\\Core.csproj|solutionrelative:core\\entities\\profile.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{28E1F9DD-FD6C-42BD-A999-CB6628DA6578}|Core\\Core.csproj|d:\\erpms\\erpms\\core\\entities\\paiement.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{28E1F9DD-FD6C-42BD-A999-CB6628DA6578}|Core\\Core.csproj|solutionrelative:core\\entities\\paiement.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E9FA2AED-90FD-43A1-8326-2FE927BB78A8}|Client.API\\Client.API.csproj|d:\\erpms\\erpms\\client.api\\controllers\\clientcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E9FA2AED-90FD-43A1-8326-2FE927BB78A8}|Client.API\\Client.API.csproj|solutionrelative:client.api\\controllers\\clientcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4FF7C8E6-E16E-4383-A55B-1AADB047B87B}|Commande.API\\Commande.API.csproj|d:\\erpms\\erpms\\commande.api\\controllers\\commandecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4FF7C8E6-E16E-4383-A55B-1AADB047B87B}|Commande.API\\Commande.API.csproj|solutionrelative:commande.api\\controllers\\commandecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3FD7C604-9BE7-471D-B060-C08F2A09485A}|Gestion_de_stock.API\\Gestion_de_stock.API.csproj|d:\\erpms\\erpms\\gestion_de_stock.api\\controllers\\gestionstockcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3FD7C604-9BE7-471D-B060-C08F2A09485A}|Gestion_de_stock.API\\Gestion_de_stock.API.csproj|solutionrelative:gestion_de_stock.api\\controllers\\gestionstockcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6CCB51E9-DAB4-2CD9-A6C7-0D831C6FB937}|Auth.API\\Auth.API.csproj|d:\\erpms\\erpms\\auth.api\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6CCB51E9-DAB4-2CD9-A6C7-0D831C6FB937}|Auth.API\\Auth.API.csproj|solutionrelative:auth.api\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2855BD67-5181-4381-9AED-BFA2643C60B7}|User.API\\User.API.csproj|d:\\erpms\\erpms\\user.api\\controllers\\utilisateurcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2855BD67-5181-4381-9AED-BFA2643C60B7}|User.API\\User.API.csproj|solutionrelative:user.api\\controllers\\utilisateurcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{28E1F9DD-FD6C-42BD-A999-CB6628DA6578}|Core\\Core.csproj|d:\\erpms\\erpms\\core\\entities\\role.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{28E1F9DD-FD6C-42BD-A999-CB6628DA6578}|Core\\Core.csproj|solutionrelative:core\\entities\\role.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2CADB68C-FB3B-D474-56C8-AE901F365B9C}|Gateway\\Gateway.csproj|d:\\erpms\\erpms\\gateway\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2CADB68C-FB3B-D474-56C8-AE901F365B9C}|Gateway\\Gateway.csproj|solutionrelative:gateway\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2B98AEE8-7C26-4977-94A5-FC392CBD9117}|Service\\Service.csproj|d:\\erpms\\erpms\\service\\iservice\\iauthservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2B98AEE8-7C26-4977-94A5-FC392CBD9117}|Service\\Service.csproj|solutionrelative:service\\iservice\\iauthservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2B98AEE8-7C26-4977-94A5-FC392CBD9117}|Service\\Service.csproj|d:\\erpms\\erpms\\service\\iservice\\iutilisateurservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2B98AEE8-7C26-4977-94A5-FC392CBD9117}|Service\\Service.csproj|solutionrelative:service\\iservice\\iutilisateurservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2B98AEE8-7C26-4977-94A5-FC392CBD9117}|Service\\Service.csproj|d:\\erpms\\erpms\\service\\dto\\utilisateurdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2B98AEE8-7C26-4977-94A5-FC392CBD9117}|Service\\Service.csproj|solutionrelative:service\\dto\\utilisateurdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2B98AEE8-7C26-4977-94A5-FC392CBD9117}|Service\\Service.csproj|d:\\erpms\\erpms\\service\\service.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{2B98AEE8-7C26-4977-94A5-FC392CBD9117}|Service\\Service.csproj|solutionrelative:service\\service.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D57696A8-6FE3-4A99-82DE-DE5B1070747D}|DAL\\DAL.csproj|d:\\erpms\\erpms\\dal\\repository\\repositoryasync.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D57696A8-6FE3-4A99-82DE-DE5B1070747D}|DAL\\DAL.csproj|solutionrelative:dal\\repository\\repositoryasync.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D57696A8-6FE3-4A99-82DE-DE5B1070747D}|DAL\\DAL.csproj|d:\\erpms\\erpms\\dal\\repository\\dbcontextfactory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D57696A8-6FE3-4A99-82DE-DE5B1070747D}|DAL\\DAL.csproj|solutionrelative:dal\\repository\\dbcontextfactory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D57696A8-6FE3-4A99-82DE-DE5B1070747D}|DAL\\DAL.csproj|d:\\erpms\\erpms\\dal\\irepository\\irepositoryasync.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D57696A8-6FE3-4A99-82DE-DE5B1070747D}|DAL\\DAL.csproj|solutionrelative:dal\\irepository\\irepositoryasync.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D57696A8-6FE3-4A99-82DE-DE5B1070747D}|DAL\\DAL.csproj|d:\\erpms\\erpms\\dal\\irepository\\idbcontextfactory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D57696A8-6FE3-4A99-82DE-DE5B1070747D}|DAL\\DAL.csproj|solutionrelative:dal\\irepository\\idbcontextfactory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{28E1F9DD-FD6C-42BD-A999-CB6628DA6578}|Core\\Core.csproj|d:\\erpms\\erpms\\core\\entities\\client.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{28E1F9DD-FD6C-42BD-A999-CB6628DA6578}|Core\\Core.csproj|solutionrelative:core\\entities\\client.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2B98AEE8-7C26-4977-94A5-FC392CBD9117}|Service\\Service.csproj|d:\\erpms\\erpms\\service\\service\\authservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2B98AEE8-7C26-4977-94A5-FC392CBD9117}|Service\\Service.csproj|solutionrelative:service\\service\\authservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{28E1F9DD-FD6C-42BD-A999-CB6628DA6578}|Core\\Core.csproj|d:\\erpms\\erpms\\core\\entities\\lignecommande.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{28E1F9DD-FD6C-42BD-A999-CB6628DA6578}|Core\\Core.csproj|solutionrelative:core\\entities\\lignecommande.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{28E1F9DD-FD6C-42BD-A999-CB6628DA6578}|Core\\Core.csproj|d:\\erpms\\erpms\\core\\entities\\menu.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{28E1F9DD-FD6C-42BD-A999-CB6628DA6578}|Core\\Core.csproj|solutionrelative:core\\entities\\menu.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{28E1F9DD-FD6C-42BD-A999-CB6628DA6578}|Core\\Core.csproj|d:\\erpms\\erpms\\core\\entities\\refreshtoken.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{28E1F9DD-FD6C-42BD-A999-CB6628DA6578}|Core\\Core.csproj|solutionrelative:core\\entities\\refreshtoken.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{28E1F9DD-FD6C-42BD-A999-CB6628DA6578}|Core\\Core.csproj|d:\\erpms\\erpms\\core\\entities\\utilisateur.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{28E1F9DD-FD6C-42BD-A999-CB6628DA6578}|Core\\Core.csproj|solutionrelative:core\\entities\\utilisateur.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2B98AEE8-7C26-4977-94A5-FC392CBD9117}|Service\\Service.csproj|d:\\erpms\\erpms\\service\\iservice\\iserviceasync.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2B98AEE8-7C26-4977-94A5-FC392CBD9117}|Service\\Service.csproj|solutionrelative:service\\iservice\\iserviceasync.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6CCB51E9-DAB4-2CD9-A6C7-0D831C6FB937}|Auth.API\\Auth.API.csproj|d:\\erpms\\erpms\\auth.api\\auth.api.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{6CCB51E9-DAB4-2CD9-A6C7-0D831C6FB937}|Auth.API\\Auth.API.csproj|solutionrelative:auth.api\\auth.api.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2B98AEE8-7C26-4977-94A5-FC392CBD9117}|Service\\Service.csproj|d:\\erpms\\erpms\\service\\models\\accesstkn.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2B98AEE8-7C26-4977-94A5-FC392CBD9117}|Service\\Service.csproj|solutionrelative:service\\models\\accesstkn.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2B98AEE8-7C26-4977-94A5-FC392CBD9117}|Service\\Service.csproj|d:\\erpms\\erpms\\service\\models\\revokerequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2B98AEE8-7C26-4977-94A5-FC392CBD9117}|Service\\Service.csproj|solutionrelative:service\\models\\revokerequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2B98AEE8-7C26-4977-94A5-FC392CBD9117}|Service\\Service.csproj|d:\\erpms\\erpms\\service\\models\\login.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2B98AEE8-7C26-4977-94A5-FC392CBD9117}|Service\\Service.csproj|solutionrelative:service\\models\\login.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2B98AEE8-7C26-4977-94A5-FC392CBD9117}|Service\\Service.csproj|d:\\erpms\\erpms\\service\\models\\refreshrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2B98AEE8-7C26-4977-94A5-FC392CBD9117}|Service\\Service.csproj|solutionrelative:service\\models\\refreshrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\ERPMs\\ERPMs\\init-db\\iam.sql||{CC5D8DF0-88F4-4BB2-9DBB-B48CEE65C30A}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:init-db\\iam.sql||{CC5D8DF0-88F4-4BB2-9DBB-B48CEE65C30A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{28E1F9DD-FD6C-42BD-A999-CB6628DA6578}|Core\\Core.csproj|d:\\erpms\\erpms\\core\\entities\\article.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{28E1F9DD-FD6C-42BD-A999-CB6628DA6578}|Core\\Core.csproj|solutionrelative:core\\entities\\article.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6CCB51E9-DAB4-2CD9-A6C7-0D831C6FB937}|Auth.API\\Auth.API.csproj|d:\\erpms\\erpms\\auth.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6CCB51E9-DAB4-2CD9-A6C7-0D831C6FB937}|Auth.API\\Auth.API.csproj|solutionrelative:auth.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6CCB51E9-DAB4-2CD9-A6C7-0D831C6FB937}|Auth.API\\Auth.API.csproj|d:\\erpms\\erpms\\auth.api\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{6CCB51E9-DAB4-2CD9-A6C7-0D831C6FB937}|Auth.API\\Auth.API.csproj|solutionrelative:auth.api\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6CCB51E9-DAB4-2CD9-A6C7-0D831C6FB937}|Auth.API\\Auth.API.csproj|d:\\erpms\\erpms\\auth.api\\appsettings.development.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{6CCB51E9-DAB4-2CD9-A6C7-0D831C6FB937}|Auth.API\\Auth.API.csproj|solutionrelative:auth.api\\appsettings.development.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2CADB68C-FB3B-D474-56C8-AE901F365B9C}|Gateway\\Gateway.csproj|d:\\erpms\\erpms\\gateway\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{2CADB68C-FB3B-D474-56C8-AE901F365B9C}|Gateway\\Gateway.csproj|solutionrelative:gateway\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2CADB68C-FB3B-D474-56C8-AE901F365B9C}|Gateway\\Gateway.csproj|d:\\erpms\\erpms\\gateway\\gateway.http||{5703B403-55E7-4C63-8C88-A8F52C7A45C5}",
+      "RelativeMoniker": "D:0:0:{2CADB68C-FB3B-D474-56C8-AE901F365B9C}|Gateway\\Gateway.csproj|solutionrelative:gateway\\gateway.http||{5703B403-55E7-4C63-8C88-A8F52C7A45C5}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2855BD67-5181-4381-9AED-BFA2643C60B7}|User.API\\User.API.csproj|d:\\erpms\\erpms\\user.api\\user.api.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{2855BD67-5181-4381-9AED-BFA2643C60B7}|User.API\\User.API.csproj|solutionrelative:user.api\\user.api.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{28E1F9DD-FD6C-42BD-A999-CB6628DA6578}|Core\\Core.csproj|d:\\erpms\\erpms\\core\\entities\\categorie.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{28E1F9DD-FD6C-42BD-A999-CB6628DA6578}|Core\\Core.csproj|solutionrelative:core\\entities\\categorie.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{28E1F9DD-FD6C-42BD-A999-CB6628DA6578}|Core\\Core.csproj|d:\\erpms\\erpms\\core\\entities\\articlefournisseur.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{28E1F9DD-FD6C-42BD-A999-CB6628DA6578}|Core\\Core.csproj|solutionrelative:core\\entities\\articlefournisseur.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{28E1F9DD-FD6C-42BD-A999-CB6628DA6578}|Core\\Core.csproj|d:\\erpms\\erpms\\core\\entities\\fournisseur.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{28E1F9DD-FD6C-42BD-A999-CB6628DA6578}|Core\\Core.csproj|solutionrelative:core\\entities\\fournisseur.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2B98AEE8-7C26-4977-94A5-FC392CBD9117}|Service\\Service.csproj|d:\\erpms\\erpms\\service\\dto\\categoriedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2B98AEE8-7C26-4977-94A5-FC392CBD9117}|Service\\Service.csproj|solutionrelative:service\\dto\\categoriedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2B98AEE8-7C26-4977-94A5-FC392CBD9117}|Service\\Service.csproj|d:\\erpms\\erpms\\service\\dto\\dashboardstockdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2B98AEE8-7C26-4977-94A5-FC392CBD9117}|Service\\Service.csproj|solutionrelative:service\\dto\\dashboardstockdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2B98AEE8-7C26-4977-94A5-FC392CBD9117}|Service\\Service.csproj|d:\\erpms\\erpms\\service\\dto\\fournisseurdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2B98AEE8-7C26-4977-94A5-FC392CBD9117}|Service\\Service.csproj|solutionrelative:service\\dto\\fournisseurdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2B98AEE8-7C26-4977-94A5-FC392CBD9117}|Service\\Service.csproj|d:\\erpms\\erpms\\service\\dto\\stockniveaudto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2B98AEE8-7C26-4977-94A5-FC392CBD9117}|Service\\Service.csproj|solutionrelative:service\\dto\\stockniveaudto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3FD7C604-9BE7-471D-B060-C08F2A09485A}|Gestion_de_stock.API\\Gestion_de_stock.API.csproj|d:\\erpms\\erpms\\gestion_de_stock.api\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{3FD7C604-9BE7-471D-B060-C08F2A09485A}|Gestion_de_stock.API\\Gestion_de_stock.API.csproj|solutionrelative:gestion_de_stock.api\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3FD7C604-9BE7-471D-B060-C08F2A09485A}|Gestion_de_stock.API\\Gestion_de_stock.API.csproj|d:\\erpms\\erpms\\gestion_de_stock.api\\appsettings.development.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{3FD7C604-9BE7-471D-B060-C08F2A09485A}|Gestion_de_stock.API\\Gestion_de_stock.API.csproj|solutionrelative:gestion_de_stock.api\\appsettings.development.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3FD7C604-9BE7-471D-B060-C08F2A09485A}|Gestion_de_stock.API\\Gestion_de_stock.API.csproj|d:\\erpms\\erpms\\gestion_de_stock.api\\dockerfile||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{3FD7C604-9BE7-471D-B060-C08F2A09485A}|Gestion_de_stock.API\\Gestion_de_stock.API.csproj|solutionrelative:gestion_de_stock.api\\dockerfile||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3FD7C604-9BE7-471D-B060-C08F2A09485A}|Gestion_de_stock.API\\Gestion_de_stock.API.csproj|d:\\erpms\\erpms\\gestion_de_stock.api\\gestion_de_stock.api.csproj||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{3FD7C604-9BE7-471D-B060-C08F2A09485A}|Gestion_de_stock.API\\Gestion_de_stock.API.csproj|solutionrelative:gestion_de_stock.api\\gestion_de_stock.api.csproj||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{28E1F9DD-FD6C-42BD-A999-CB6628DA6578}|Core\\Core.csproj|d:\\erpms\\erpms\\core\\entities\\livraison.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{28E1F9DD-FD6C-42BD-A999-CB6628DA6578}|Core\\Core.csproj|solutionrelative:core\\entities\\livraison.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{28E1F9DD-FD6C-42BD-A999-CB6628DA6578}|Core\\Core.csproj|d:\\erpms\\erpms\\core\\entities\\facture.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{28E1F9DD-FD6C-42BD-A999-CB6628DA6578}|Core\\Core.csproj|solutionrelative:core\\entities\\facture.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{28E1F9DD-FD6C-42BD-A999-CB6628DA6578}|Core\\Core.csproj|d:\\erpms\\erpms\\core\\entities\\commande.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{28E1F9DD-FD6C-42BD-A999-CB6628DA6578}|Core\\Core.csproj|solutionrelative:core\\entities\\commande.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2B98AEE8-7C26-4977-94A5-FC392CBD9117}|Service\\Service.csproj|d:\\erpms\\erpms\\service\\dto\\commandecreatedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2B98AEE8-7C26-4977-94A5-FC392CBD9117}|Service\\Service.csproj|solutionrelative:service\\dto\\commandecreatedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2B98AEE8-7C26-4977-94A5-FC392CBD9117}|Service\\Service.csproj|d:\\erpms\\erpms\\service\\dto\\facturedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2B98AEE8-7C26-4977-94A5-FC392CBD9117}|Service\\Service.csproj|solutionrelative:service\\dto\\facturedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2B98AEE8-7C26-4977-94A5-FC392CBD9117}|Service\\Service.csproj|d:\\erpms\\erpms\\service\\dto\\paiementcreatedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2B98AEE8-7C26-4977-94A5-FC392CBD9117}|Service\\Service.csproj|solutionrelative:service\\dto\\paiementcreatedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2B98AEE8-7C26-4977-94A5-FC392CBD9117}|Service\\Service.csproj|d:\\erpms\\erpms\\service\\dto\\commandedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2B98AEE8-7C26-4977-94A5-FC392CBD9117}|Service\\Service.csproj|solutionrelative:service\\dto\\commandedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2B98AEE8-7C26-4977-94A5-FC392CBD9117}|Service\\Service.csproj|d:\\erpms\\erpms\\service\\dto\\livraisondto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2B98AEE8-7C26-4977-94A5-FC392CBD9117}|Service\\Service.csproj|solutionrelative:service\\dto\\livraisondto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2B98AEE8-7C26-4977-94A5-FC392CBD9117}|Service\\Service.csproj|d:\\erpms\\erpms\\service\\dto\\facturefilterdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2B98AEE8-7C26-4977-94A5-FC392CBD9117}|Service\\Service.csproj|solutionrelative:service\\dto\\facturefilterdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2B98AEE8-7C26-4977-94A5-FC392CBD9117}|Service\\Service.csproj|d:\\erpms\\erpms\\service\\dto\\commandestatusdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2B98AEE8-7C26-4977-94A5-FC392CBD9117}|Service\\Service.csproj|solutionrelative:service\\dto\\commandestatusdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2B98AEE8-7C26-4977-94A5-FC392CBD9117}|Service\\Service.csproj|d:\\erpms\\erpms\\service\\dto\\facturedetaildto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2B98AEE8-7C26-4977-94A5-FC392CBD9117}|Service\\Service.csproj|solutionrelative:service\\dto\\facturedetaildto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2B98AEE8-7C26-4977-94A5-FC392CBD9117}|Service\\Service.csproj|d:\\erpms\\erpms\\service\\dto\\commandefilterdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2B98AEE8-7C26-4977-94A5-FC392CBD9117}|Service\\Service.csproj|solutionrelative:service\\dto\\commandefilterdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A5C7B968-E421-4A83-AD78-13980070EB19}|Livraison.API\\Livraison.API.csproj|d:\\erpms\\erpms\\livraison.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A5C7B968-E421-4A83-AD78-13980070EB19}|Livraison.API\\Livraison.API.csproj|solutionrelative:livraison.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A5C7B968-E421-4A83-AD78-13980070EB19}|Livraison.API\\Livraison.API.csproj|d:\\erpms\\erpms\\livraison.api\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{A5C7B968-E421-4A83-AD78-13980070EB19}|Livraison.API\\Livraison.API.csproj|solutionrelative:livraison.api\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A5C7B968-E421-4A83-AD78-13980070EB19}|Livraison.API\\Livraison.API.csproj|d:\\erpms\\erpms\\livraison.api\\appsettings.development.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{A5C7B968-E421-4A83-AD78-13980070EB19}|Livraison.API\\Livraison.API.csproj|solutionrelative:livraison.api\\appsettings.development.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A5C7B968-E421-4A83-AD78-13980070EB19}|Livraison.API\\Livraison.API.csproj|d:\\erpms\\erpms\\livraison.api\\controllers\\livraisoncontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A5C7B968-E421-4A83-AD78-13980070EB19}|Livraison.API\\Livraison.API.csproj|solutionrelative:livraison.api\\controllers\\livraisoncontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A5C7B968-E421-4A83-AD78-13980070EB19}|Livraison.API\\Livraison.API.csproj|d:\\erpms\\erpms\\livraison.api\\livraison.api.csproj||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{A5C7B968-E421-4A83-AD78-13980070EB19}|Livraison.API\\Livraison.API.csproj|solutionrelative:livraison.api\\livraison.api.csproj||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A5C7B968-E421-4A83-AD78-13980070EB19}|Livraison.API\\Livraison.API.csproj|d:\\erpms\\erpms\\livraison.api\\dockerfile||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{A5C7B968-E421-4A83-AD78-13980070EB19}|Livraison.API\\Livraison.API.csproj|solutionrelative:livraison.api\\dockerfile||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E5E0F3AF-E77A-4EE2-8717-D2619135910D}|Facturation.API\\Facturation.API.csproj|d:\\erpms\\erpms\\facturation.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E5E0F3AF-E77A-4EE2-8717-D2619135910D}|Facturation.API\\Facturation.API.csproj|solutionrelative:facturation.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E5E0F3AF-E77A-4EE2-8717-D2619135910D}|Facturation.API\\Facturation.API.csproj|d:\\erpms\\erpms\\facturation.api\\facturation.api.csproj||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{E5E0F3AF-E77A-4EE2-8717-D2619135910D}|Facturation.API\\Facturation.API.csproj|solutionrelative:facturation.api\\facturation.api.csproj||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E5E0F3AF-E77A-4EE2-8717-D2619135910D}|Facturation.API\\Facturation.API.csproj|d:\\erpms\\erpms\\facturation.api\\controllers\\facturationcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E5E0F3AF-E77A-4EE2-8717-D2619135910D}|Facturation.API\\Facturation.API.csproj|solutionrelative:facturation.api\\controllers\\facturationcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E5E0F3AF-E77A-4EE2-8717-D2619135910D}|Facturation.API\\Facturation.API.csproj|d:\\erpms\\erpms\\facturation.api\\dockerfile||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{E5E0F3AF-E77A-4EE2-8717-D2619135910D}|Facturation.API\\Facturation.API.csproj|solutionrelative:facturation.api\\dockerfile||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E5E0F3AF-E77A-4EE2-8717-D2619135910D}|Facturation.API\\Facturation.API.csproj|d:\\erpms\\erpms\\facturation.api\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{E5E0F3AF-E77A-4EE2-8717-D2619135910D}|Facturation.API\\Facturation.API.csproj|solutionrelative:facturation.api\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E5E0F3AF-E77A-4EE2-8717-D2619135910D}|Facturation.API\\Facturation.API.csproj|d:\\erpms\\erpms\\facturation.api\\appsettings.development.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{E5E0F3AF-E77A-4EE2-8717-D2619135910D}|Facturation.API\\Facturation.API.csproj|solutionrelative:facturation.api\\appsettings.development.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4FF7C8E6-E16E-4383-A55B-1AADB047B87B}|Commande.API\\Commande.API.csproj|d:\\erpms\\erpms\\commande.api\\appsettings.development.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{4FF7C8E6-E16E-4383-A55B-1AADB047B87B}|Commande.API\\Commande.API.csproj|solutionrelative:commande.api\\appsettings.development.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4FF7C8E6-E16E-4383-A55B-1AADB047B87B}|Commande.API\\Commande.API.csproj|d:\\erpms\\erpms\\commande.api\\commande.api.csproj||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{4FF7C8E6-E16E-4383-A55B-1AADB047B87B}|Commande.API\\Commande.API.csproj|solutionrelative:commande.api\\commande.api.csproj||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4FF7C8E6-E16E-4383-A55B-1AADB047B87B}|Commande.API\\Commande.API.csproj|d:\\erpms\\erpms\\commande.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4FF7C8E6-E16E-4383-A55B-1AADB047B87B}|Commande.API\\Commande.API.csproj|solutionrelative:commande.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4FF7C8E6-E16E-4383-A55B-1AADB047B87B}|Commande.API\\Commande.API.csproj|d:\\erpms\\erpms\\commande.api\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{4FF7C8E6-E16E-4383-A55B-1AADB047B87B}|Commande.API\\Commande.API.csproj|solutionrelative:commande.api\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E9FA2AED-90FD-43A1-8326-2FE927BB78A8}|Client.API\\Client.API.csproj|d:\\erpms\\erpms\\client.api\\dockerfile||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{E9FA2AED-90FD-43A1-8326-2FE927BB78A8}|Client.API\\Client.API.csproj|solutionrelative:client.api\\dockerfile||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E9FA2AED-90FD-43A1-8326-2FE927BB78A8}|Client.API\\Client.API.csproj|d:\\erpms\\erpms\\client.api\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{E9FA2AED-90FD-43A1-8326-2FE927BB78A8}|Client.API\\Client.API.csproj|solutionrelative:client.api\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E9FA2AED-90FD-43A1-8326-2FE927BB78A8}|Client.API\\Client.API.csproj|d:\\erpms\\erpms\\client.api\\client.api.csproj||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{E9FA2AED-90FD-43A1-8326-2FE927BB78A8}|Client.API\\Client.API.csproj|solutionrelative:client.api\\client.api.csproj||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E9FA2AED-90FD-43A1-8326-2FE927BB78A8}|Client.API\\Client.API.csproj|d:\\erpms\\erpms\\client.api\\appsettings.development.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{E9FA2AED-90FD-43A1-8326-2FE927BB78A8}|Client.API\\Client.API.csproj|solutionrelative:client.api\\appsettings.development.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E9FA2AED-90FD-43A1-8326-2FE927BB78A8}|Client.API\\Client.API.csproj|d:\\erpms\\erpms\\client.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E9FA2AED-90FD-43A1-8326-2FE927BB78A8}|Client.API\\Client.API.csproj|solutionrelative:client.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6CCB51E9-DAB4-2CD9-A6C7-0D831C6FB937}|Auth.API\\Auth.API.csproj|d:\\erpms\\erpms\\auth.api\\dockerfile||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{6CCB51E9-DAB4-2CD9-A6C7-0D831C6FB937}|Auth.API\\Auth.API.csproj|solutionrelative:auth.api\\dockerfile||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2855BD67-5181-4381-9AED-BFA2643C60B7}|User.API\\User.API.csproj|d:\\erpms\\erpms\\user.api\\dockerfile||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{2855BD67-5181-4381-9AED-BFA2643C60B7}|User.API\\User.API.csproj|solutionrelative:user.api\\dockerfile||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2B98AEE8-7C26-4977-94A5-FC392CBD9117}|Service\\Service.csproj|d:\\erpms\\erpms\\service\\dto\\clientupdatedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2B98AEE8-7C26-4977-94A5-FC392CBD9117}|Service\\Service.csproj|solutionrelative:service\\dto\\clientupdatedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2B98AEE8-7C26-4977-94A5-FC392CBD9117}|Service\\Service.csproj|d:\\erpms\\erpms\\service\\dto\\clientcreatedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2B98AEE8-7C26-4977-94A5-FC392CBD9117}|Service\\Service.csproj|solutionrelative:service\\dto\\clientcreatedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 5,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "DependencyInjection.cs",
+              "DocumentMoniker": "D:\\ERPMs\\ERPMs\\Service\\DependencyInjection.cs",
+              "RelativeDocumentMoniker": "Service\\DependencyInjection.cs",
+              "ToolTip": "D:\\ERPMs\\ERPMs\\Service\\DependencyInjection.cs",
+              "RelativeToolTip": "Service\\DependencyInjection.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-25T00:08:47.571Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Program.cs",
+              "DocumentMoniker": "D:\\ERPMs\\ERPMs\\User.API\\Program.cs",
+              "RelativeDocumentMoniker": "User.API\\Program.cs",
+              "ToolTip": "D:\\ERPMs\\ERPMs\\User.API\\Program.cs",
+              "RelativeToolTip": "User.API\\Program.cs",
+              "ViewState": "AgIAACcAAAAAAAAAAAAswFwAAAAKAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-25T01:37:36.614Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Program.cs",
+              "DocumentMoniker": "D:\\ERPMs\\ERPMs\\Gestion_de_stock.API\\Program.cs",
+              "RelativeDocumentMoniker": "Gestion_de_stock.API\\Program.cs",
+              "ToolTip": "D:\\ERPMs\\ERPMs\\Gestion_de_stock.API\\Program.cs",
+              "RelativeToolTip": "Gestion_de_stock.API\\Program.cs",
+              "ViewState": "AgIAAA4AAAAAAAAAAAAmwFMAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-13T19:05:23.088Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "IAMDbContext.cs",
+              "DocumentMoniker": "D:\\ERPMs\\ERPMs\\Core\\Entities\\IAMDbContext.cs",
+              "RelativeDocumentMoniker": "Core\\Entities\\IAMDbContext.cs",
+              "ToolTip": "D:\\ERPMs\\ERPMs\\Core\\Entities\\IAMDbContext.cs",
+              "RelativeToolTip": "Core\\Entities\\IAMDbContext.cs",
+              "ViewState": "AgIAAAwAAAAAAAAAAAA1wBMAAAAcAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-13T19:04:19.252Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Dockerfile",
+              "DocumentMoniker": "D:\\ERPMs\\ERPMs\\Commande.API\\Dockerfile",
+              "RelativeDocumentMoniker": "Commande.API\\Dockerfile",
+              "ToolTip": "D:\\ERPMs\\ERPMs\\Commande.API\\Dockerfile",
+              "RelativeToolTip": "Commande.API\\Dockerfile",
+              "ViewState": "AgIAAAwAAAAAAAAAAAAAABUAAAANAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2026-04-13T20:32:37.129Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "docker-compose.yml",
+              "DocumentMoniker": "D:\\ERPMs\\ERPMs\\docker-compose.yml",
+              "RelativeDocumentMoniker": "docker-compose.yml",
+              "ToolTip": "D:\\ERPMs\\ERPMs\\docker-compose.yml",
+              "RelativeToolTip": "docker-compose.yml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAJ8AAAAjAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003775|",
+              "WhenOpened": "2026-03-24T23:45:46.49Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "InjectService.cs",
+              "DocumentMoniker": "D:\\ERPMs\\ERPMs\\Service\\InjectService.cs",
+              "RelativeDocumentMoniker": "Service\\InjectService.cs",
+              "ToolTip": "D:\\ERPMs\\ERPMs\\Service\\InjectService.cs",
+              "RelativeToolTip": "Service\\InjectService.cs",
+              "ViewState": "AgIAAA0AAAAAAAAAAAAcwCMAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-25T23:11:06.761Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "ClientDto.cs",
+              "DocumentMoniker": "D:\\ERPMs\\ERPMs\\Service\\DTO\\ClientDto.cs",
+              "RelativeDocumentMoniker": "Service\\DTO\\ClientDto.cs",
+              "ToolTip": "D:\\ERPMs\\ERPMs\\Service\\DTO\\ClientDto.cs",
+              "RelativeToolTip": "Service\\DTO\\ClientDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-13T20:21:07.199Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 107,
+              "Title": "ClientCreateDto.cs",
+              "DocumentMoniker": "D:\\ERPMs\\ERPMs\\Service\\DTO\\ClientCreateDto.cs",
+              "RelativeDocumentMoniker": "Service\\DTO\\ClientCreateDto.cs",
+              "ToolTip": "D:\\ERPMs\\ERPMs\\Service\\DTO\\ClientCreateDto.cs",
+              "RelativeToolTip": "Service\\DTO\\ClientCreateDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-16T08:21:34.297Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "ArticleDto.cs",
+              "DocumentMoniker": "D:\\ERPMs\\ERPMs\\Service\\DTO\\ArticleDto.cs",
+              "RelativeDocumentMoniker": "Service\\DTO\\ArticleDto.cs",
+              "ToolTip": "D:\\ERPMs\\ERPMs\\Service\\DTO\\ArticleDto.cs",
+              "RelativeToolTip": "Service\\DTO\\ArticleDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABYAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-13T19:04:31.276Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 106,
+              "Title": "ClientUpdateDto.cs",
+              "DocumentMoniker": "D:\\ERPMs\\ERPMs\\Service\\DTO\\ClientUpdateDto.cs",
+              "RelativeDocumentMoniker": "Service\\DTO\\ClientUpdateDto.cs",
+              "ToolTip": "D:\\ERPMs\\ERPMs\\Service\\DTO\\ClientUpdateDto.cs",
+              "RelativeToolTip": "Service\\DTO\\ClientUpdateDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-16T08:21:34.172Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "MappingProfile.cs",
+              "DocumentMoniker": "D:\\ERPMs\\ERPMs\\Service\\Common\\Mappings\\MappingProfile.cs",
+              "RelativeDocumentMoniker": "Service\\Common\\Mappings\\MappingProfile.cs",
+              "ToolTip": "D:\\ERPMs\\ERPMs\\Service\\Common\\Mappings\\MappingProfile.cs",
+              "RelativeToolTip": "Service\\Common\\Mappings\\MappingProfile.cs",
+              "ViewState": "AgIAABIAAAAAAAAAAAAAADgAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-24T23:48:19.317Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "IMapFrom.cs",
+              "DocumentMoniker": "D:\\ERPMs\\ERPMs\\Service\\Common\\Mappings\\IMapFrom.cs",
+              "RelativeDocumentMoniker": "Service\\Common\\Mappings\\IMapFrom.cs",
+              "ToolTip": "D:\\ERPMs\\ERPMs\\Service\\Common\\Mappings\\IMapFrom.cs",
+              "RelativeToolTip": "Service\\Common\\Mappings\\IMapFrom.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-24T23:48:15.834Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "ServiceAsync.cs",
+              "DocumentMoniker": "D:\\ERPMs\\ERPMs\\Service\\Service\\ServiceAsync.cs",
+              "RelativeDocumentMoniker": "Service\\Service\\ServiceAsync.cs",
+              "ToolTip": "D:\\ERPMs\\ERPMs\\Service\\Service\\ServiceAsync.cs",
+              "RelativeToolTip": "Service\\Service\\ServiceAsync.cs",
+              "ViewState": "AgIAAKQAAAAAAAAAAAAqwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-13T20:49:51.528Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "MenuDto.cs",
+              "DocumentMoniker": "D:\\ERPMs\\ERPMs\\Service\\DTO\\MenuDto.cs",
+              "RelativeDocumentMoniker": "Service\\DTO\\MenuDto.cs",
+              "ToolTip": "D:\\ERPMs\\ERPMs\\Service\\DTO\\MenuDto.cs",
+              "RelativeToolTip": "Service\\DTO\\MenuDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-24T23:48:02.534Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "GestionStockService.cs",
+              "DocumentMoniker": "D:\\ERPMs\\ERPMs\\Service\\Service\\GestionStockService.cs",
+              "RelativeDocumentMoniker": "Service\\Service\\GestionStockService.cs",
+              "ToolTip": "D:\\ERPMs\\ERPMs\\Service\\Service\\GestionStockService.cs",
+              "RelativeToolTip": "Service\\Service\\GestionStockService.cs",
+              "ViewState": "AgIAAHUBAAAAAAAAAAAWwBwDAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-13T19:04:56.994Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "IGestionStockService.cs",
+              "DocumentMoniker": "D:\\ERPMs\\ERPMs\\Service\\IService\\IGestionStockService.cs",
+              "RelativeDocumentMoniker": "Service\\IService\\IGestionStockService.cs",
+              "ToolTip": "D:\\ERPMs\\ERPMs\\Service\\IService\\IGestionStockService.cs",
+              "RelativeToolTip": "Service\\IService\\IGestionStockService.cs",
+              "ViewState": "AgIAAA8AAAAAAAAAAAAxwCUAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-13T19:04:57.133Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "PaiementDto.cs",
+              "DocumentMoniker": "D:\\ERPMs\\ERPMs\\Service\\DTO\\PaiementDto.cs",
+              "RelativeDocumentMoniker": "Service\\DTO\\PaiementDto.cs",
+              "ToolTip": "D:\\ERPMs\\ERPMs\\Service\\DTO\\PaiementDto.cs",
+              "RelativeToolTip": "Service\\DTO\\PaiementDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-13T20:21:07.766Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "LigneCommandeDto.cs",
+              "DocumentMoniker": "D:\\ERPMs\\ERPMs\\Service\\DTO\\LigneCommandeDto.cs",
+              "RelativeDocumentMoniker": "Service\\DTO\\LigneCommandeDto.cs",
+              "ToolTip": "D:\\ERPMs\\ERPMs\\Service\\DTO\\LigneCommandeDto.cs",
+              "RelativeToolTip": "Service\\DTO\\LigneCommandeDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-13T20:21:07.584Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "ArticleFilterDto.cs",
+              "DocumentMoniker": "D:\\ERPMs\\ERPMs\\Service\\DTO\\ArticleFilterDto.cs",
+              "RelativeDocumentMoniker": "Service\\DTO\\ArticleFilterDto.cs",
+              "ToolTip": "D:\\ERPMs\\ERPMs\\Service\\DTO\\ArticleFilterDto.cs",
+              "RelativeToolTip": "Service\\DTO\\ArticleFilterDto.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAAA1wA4AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-13T19:04:31.451Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "Dockerfile",
+              "DocumentMoniker": "D:\\ERPMs\\ERPMs\\Gateway\\Dockerfile",
+              "RelativeDocumentMoniker": "Gateway\\Dockerfile",
+              "ToolTip": "D:\\ERPMs\\ERPMs\\Gateway\\Dockerfile",
+              "RelativeToolTip": "Gateway\\Dockerfile",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAASAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2026-03-24T23:48:31.003Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
+              "Title": "RepositoryInjectionModule.cs",
+              "DocumentMoniker": "D:\\ERPMs\\ERPMs\\DAL\\Injections\\RepositoryInjectionModule.cs",
+              "RelativeDocumentMoniker": "DAL\\Injections\\RepositoryInjectionModule.cs",
+              "ToolTip": "D:\\ERPMs\\ERPMs\\DAL\\Injections\\RepositoryInjectionModule.cs",
+              "RelativeToolTip": "DAL\\Injections\\RepositoryInjectionModule.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABwAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-25T02:51:31.215Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 20,
+              "Title": "JwtSettings.cs",
+              "DocumentMoniker": "D:\\ERPMs\\ERPMs\\DAL\\Config\\JwtSettings.cs",
+              "RelativeDocumentMoniker": "DAL\\Config\\JwtSettings.cs",
+              "ToolTip": "D:\\ERPMs\\ERPMs\\DAL\\Config\\JwtSettings.cs",
+              "RelativeToolTip": "DAL\\Config\\JwtSettings.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-16T07:23:01.859Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 21,
+              "Title": "DbContextSettings.cs",
+              "DocumentMoniker": "D:\\ERPMs\\ERPMs\\DAL\\Config\\DbContextSettings.cs",
+              "RelativeDocumentMoniker": "DAL\\Config\\DbContextSettings.cs",
+              "ToolTip": "D:\\ERPMs\\ERPMs\\DAL\\Config\\DbContextSettings.cs",
+              "RelativeToolTip": "DAL\\Config\\DbContextSettings.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-16T07:22:56.6Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 22,
+              "Title": "DAL",
+              "DocumentMoniker": "D:\\ERPMs\\ERPMs\\DAL\\DAL.csproj",
+              "RelativeDocumentMoniker": "DAL\\DAL.csproj",
+              "ToolTip": "D:\\ERPMs\\ERPMs\\DAL\\DAL.csproj",
+              "RelativeToolTip": "DAL\\DAL.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2026-04-16T07:22:47.792Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 25,
+              "Title": "ClientController.cs",
+              "DocumentMoniker": "D:\\ERPMs\\ERPMs\\Client.API\\Controllers\\ClientController.cs",
+              "RelativeDocumentMoniker": "Client.API\\Controllers\\ClientController.cs",
+              "ToolTip": "D:\\ERPMs\\ERPMs\\Client.API\\Controllers\\ClientController.cs",
+              "RelativeToolTip": "Client.API\\Controllers\\ClientController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAADsAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-13T20:32:18.26Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 26,
+              "Title": "CommandeController.cs",
+              "DocumentMoniker": "D:\\ERPMs\\ERPMs\\Commande.API\\Controllers\\CommandeController.cs",
+              "RelativeDocumentMoniker": "Commande.API\\Controllers\\CommandeController.cs",
+              "ToolTip": "D:\\ERPMs\\ERPMs\\Commande.API\\Controllers\\CommandeController.cs",
+              "RelativeToolTip": "Commande.API\\Controllers\\CommandeController.cs",
+              "ViewState": "AgIAAAsAAAAAAAAAAABBwGYAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-13T20:32:37.025Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 27,
+              "Title": "GestionStockController.cs",
+              "DocumentMoniker": "D:\\ERPMs\\ERPMs\\Gestion_de_stock.API\\Controllers\\GestionStockController.cs",
+              "RelativeDocumentMoniker": "Gestion_de_stock.API\\Controllers\\GestionStockController.cs",
+              "ToolTip": "D:\\ERPMs\\ERPMs\\Gestion_de_stock.API\\Controllers\\GestionStockController.cs",
+              "RelativeToolTip": "Gestion_de_stock.API\\Controllers\\GestionStockController.cs",
+              "ViewState": "AgIAABcAAAAAAAAAAIBIwJEAAAAVAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-13T19:05:23.951Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 24,
+              "Title": "Paiement.cs",
+              "DocumentMoniker": "D:\\ERPMs\\ERPMs\\Core\\Entities\\Paiement.cs",
+              "RelativeDocumentMoniker": "Core\\Entities\\Paiement.cs",
+              "ToolTip": "D:\\ERPMs\\ERPMs\\Core\\Entities\\Paiement.cs",
+              "RelativeToolTip": "Core\\Entities\\Paiement.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-13T20:20:54.793Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 23,
+              "Title": "Profile.cs",
+              "DocumentMoniker": "D:\\ERPMs\\ERPMs\\Core\\Entities\\Profile.cs",
+              "RelativeDocumentMoniker": "Core\\Entities\\Profile.cs",
+              "ToolTip": "D:\\ERPMs\\ERPMs\\Core\\Entities\\Profile.cs",
+              "RelativeToolTip": "Core\\Entities\\Profile.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-13T22:21:39.433Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 28,
+              "Title": "AuthController.cs",
+              "DocumentMoniker": "D:\\ERPMs\\ERPMs\\Auth.API\\Controllers\\AuthController.cs",
+              "RelativeDocumentMoniker": "Auth.API\\Controllers\\AuthController.cs",
+              "ToolTip": "D:\\ERPMs\\ERPMs\\Auth.API\\Controllers\\AuthController.cs",
+              "RelativeToolTip": "Auth.API\\Controllers\\AuthController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAABBwDYAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-25T23:09:17.583Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 29,
+              "Title": "UtilisateurController.cs",
+              "DocumentMoniker": "D:\\ERPMs\\ERPMs\\User.API\\Controllers\\UtilisateurController.cs",
+              "RelativeDocumentMoniker": "User.API\\Controllers\\UtilisateurController.cs",
+              "ToolTip": "D:\\ERPMs\\ERPMs\\User.API\\Controllers\\UtilisateurController.cs",
+              "RelativeToolTip": "User.API\\Controllers\\UtilisateurController.cs",
+              "ViewState": "AgIAAA0AAAAAAAAAAIBJwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-16T00:09:35.416Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 31,
+              "Title": "Program.cs",
+              "DocumentMoniker": "D:\\ERPMs\\ERPMs\\Gateway\\Program.cs",
+              "RelativeDocumentMoniker": "Gateway\\Program.cs",
+              "ToolTip": "D:\\ERPMs\\ERPMs\\Gateway\\Program.cs",
+              "RelativeToolTip": "Gateway\\Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAKAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-25T23:10:30.857Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 32,
+              "Title": "IAuthService.cs",
+              "DocumentMoniker": "D:\\ERPMs\\ERPMs\\Service\\IService\\IAuthService.cs",
+              "RelativeDocumentMoniker": "Service\\IService\\IAuthService.cs",
+              "ToolTip": "D:\\ERPMs\\ERPMs\\Service\\IService\\IAuthService.cs",
+              "RelativeToolTip": "Service\\IService\\IAuthService.cs",
+              "ViewState": "AgIAAAgAAAAAAAAAAAAwwBIAAAA5AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-13T20:49:23.988Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 30,
+              "Title": "Role.cs",
+              "DocumentMoniker": "D:\\ERPMs\\ERPMs\\Core\\Entities\\Role.cs",
+              "RelativeDocumentMoniker": "Core\\Entities\\Role.cs",
+              "ToolTip": "D:\\ERPMs\\ERPMs\\Core\\Entities\\Role.cs",
+              "RelativeToolTip": "Core\\Entities\\Role.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-13T22:21:33.877Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 33,
+              "Title": "IUtilisateurService.cs",
+              "DocumentMoniker": "D:\\ERPMs\\ERPMs\\Service\\IService\\IUtilisateurService.cs",
+              "RelativeDocumentMoniker": "Service\\IService\\IUtilisateurService.cs",
+              "ToolTip": "D:\\ERPMs\\ERPMs\\Service\\IService\\IUtilisateurService.cs",
+              "RelativeToolTip": "Service\\IService\\IUtilisateurService.cs",
+              "ViewState": "AgIAABEAAAAAAAAAAAAAwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-13T20:49:14.319Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 34,
+              "Title": "UtilisateurDto.cs",
+              "DocumentMoniker": "D:\\ERPMs\\ERPMs\\Service\\DTO\\UtilisateurDto.cs",
+              "RelativeDocumentMoniker": "Service\\DTO\\UtilisateurDto.cs",
+              "ToolTip": "D:\\ERPMs\\ERPMs\\Service\\DTO\\UtilisateurDto.cs",
+              "RelativeToolTip": "Service\\DTO\\UtilisateurDto.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-14T09:36:22.092Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 35,
+              "Title": "Service.csproj",
+              "DocumentMoniker": "D:\\ERPMs\\ERPMs\\Service\\Service.csproj",
+              "RelativeDocumentMoniker": "Service\\Service.csproj",
+              "ToolTip": "D:\\ERPMs\\ERPMs\\Service\\Service.csproj",
+              "RelativeToolTip": "Service\\Service.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2026-04-14T09:35:29.491Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 37,
+              "Title": "DbContextFactory.cs",
+              "DocumentMoniker": "D:\\ERPMs\\ERPMs\\DAL\\Repository\\DbContextFactory.cs",
+              "RelativeDocumentMoniker": "DAL\\Repository\\DbContextFactory.cs",
+              "ToolTip": "D:\\ERPMs\\ERPMs\\DAL\\Repository\\DbContextFactory.cs",
+              "RelativeToolTip": "DAL\\Repository\\DbContextFactory.cs",
+              "ViewState": "AgIAABsAAAAAAAAAAAAUwC0AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-14T09:35:05.386Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 39,
+              "Title": "IDbContextFactory.cs",
+              "DocumentMoniker": "D:\\ERPMs\\ERPMs\\DAL\\IRepository\\IDbContextFactory.cs",
+              "RelativeDocumentMoniker": "DAL\\IRepository\\IDbContextFactory.cs",
+              "ToolTip": "D:\\ERPMs\\ERPMs\\DAL\\IRepository\\IDbContextFactory.cs",
+              "RelativeToolTip": "DAL\\IRepository\\IDbContextFactory.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-14T09:34:15.219Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 40,
+              "Title": "Client.cs",
+              "DocumentMoniker": "D:\\ERPMs\\ERPMs\\Core\\Entities\\Client.cs",
+              "RelativeDocumentMoniker": "Core\\Entities\\Client.cs",
+              "ToolTip": "D:\\ERPMs\\ERPMs\\Core\\Entities\\Client.cs",
+              "RelativeToolTip": "Core\\Entities\\Client.cs",
+              "ViewState": "AgIAAAIAAAAAAAAAAAAswBEAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-13T20:20:54.601Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 36,
+              "Title": "RepositoryAsync.cs",
+              "DocumentMoniker": "D:\\ERPMs\\ERPMs\\DAL\\Repository\\RepositoryAsync.cs",
+              "RelativeDocumentMoniker": "DAL\\Repository\\RepositoryAsync.cs",
+              "ToolTip": "D:\\ERPMs\\ERPMs\\DAL\\Repository\\RepositoryAsync.cs",
+              "RelativeToolTip": "DAL\\Repository\\RepositoryAsync.cs",
+              "ViewState": "AgIAADEAAAAAAAAAAAAiwPQAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-13T23:34:22.968Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 41,
+              "Title": "AuthService.cs",
+              "DocumentMoniker": "D:\\ERPMs\\ERPMs\\Service\\Service\\AuthService.cs",
+              "RelativeDocumentMoniker": "Service\\Service\\AuthService.cs",
+              "ToolTip": "D:\\ERPMs\\ERPMs\\Service\\Service\\AuthService.cs",
+              "RelativeToolTip": "Service\\Service\\AuthService.cs",
+              "ViewState": "AgIAAGYAAAAAAAAAAAAYwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-13T20:49:46.2Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 38,
+              "Title": "IRepositoryAsync.cs",
+              "DocumentMoniker": "D:\\ERPMs\\ERPMs\\DAL\\IRepository\\IRepositoryAsync.cs",
+              "RelativeDocumentMoniker": "DAL\\IRepository\\IRepositoryAsync.cs",
+              "ToolTip": "D:\\ERPMs\\ERPMs\\DAL\\IRepository\\IRepositoryAsync.cs",
+              "RelativeToolTip": "DAL\\IRepository\\IRepositoryAsync.cs",
+              "ViewState": "AgIAABUAAAAAAAAAAAAAAHwAAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-25T04:42:31.291Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 104,
+              "Title": "Dockerfile",
+              "DocumentMoniker": "D:\\ERPMs\\ERPMs\\Auth.API\\Dockerfile",
+              "RelativeDocumentMoniker": "Auth.API\\Dockerfile",
+              "ToolTip": "D:\\ERPMs\\ERPMs\\Auth.API\\Dockerfile",
+              "RelativeToolTip": "Auth.API\\Dockerfile",
+              "ViewState": "AgIAAAcAAAAAAAAAAABBwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2026-04-13T22:55:01.631Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 105,
+              "Title": "Dockerfile",
+              "DocumentMoniker": "D:\\ERPMs\\ERPMs\\User.API\\Dockerfile",
+              "RelativeDocumentMoniker": "User.API\\Dockerfile",
+              "ToolTip": "D:\\ERPMs\\ERPMs\\User.API\\Dockerfile",
+              "RelativeToolTip": "User.API\\Dockerfile",
+              "ViewState": "AgIAAAcAAAAAAAAAAABBwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2026-04-13T22:55:06.639Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 42,
+              "Title": "LigneCommande.cs",
+              "DocumentMoniker": "D:\\ERPMs\\ERPMs\\Core\\Entities\\LigneCommande.cs",
+              "RelativeDocumentMoniker": "Core\\Entities\\LigneCommande.cs",
+              "ToolTip": "D:\\ERPMs\\ERPMs\\Core\\Entities\\LigneCommande.cs",
+              "RelativeToolTip": "Core\\Entities\\LigneCommande.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-13T20:20:54.162Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 43,
+              "Title": "Menu.cs",
+              "DocumentMoniker": "D:\\ERPMs\\ERPMs\\Core\\Entities\\Menu.cs",
+              "RelativeDocumentMoniker": "Core\\Entities\\Menu.cs",
+              "ToolTip": "D:\\ERPMs\\ERPMs\\Core\\Entities\\Menu.cs",
+              "RelativeToolTip": "Core\\Entities\\Menu.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-13T22:21:45.081Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 44,
+              "Title": "Refreshtoken.cs",
+              "DocumentMoniker": "D:\\ERPMs\\ERPMs\\Core\\Entities\\Refreshtoken.cs",
+              "RelativeDocumentMoniker": "Core\\Entities\\Refreshtoken.cs",
+              "ToolTip": "D:\\ERPMs\\ERPMs\\Core\\Entities\\Refreshtoken.cs",
+              "RelativeToolTip": "Core\\Entities\\Refreshtoken.cs",
+              "ViewState": "AgIAAAUAAAAAAAAAAAAxwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-13T22:21:34.916Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 45,
+              "Title": "Utilisateur.cs",
+              "DocumentMoniker": "D:\\ERPMs\\ERPMs\\Core\\Entities\\Utilisateur.cs",
+              "RelativeDocumentMoniker": "Core\\Entities\\Utilisateur.cs",
+              "ToolTip": "D:\\ERPMs\\ERPMs\\Core\\Entities\\Utilisateur.cs",
+              "RelativeToolTip": "Core\\Entities\\Utilisateur.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-13T22:21:30.684Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 46,
+              "Title": "IServiceAsync.cs",
+              "DocumentMoniker": "D:\\ERPMs\\ERPMs\\Service\\IService\\IServiceAsync.cs",
+              "RelativeDocumentMoniker": "Service\\IService\\IServiceAsync.cs",
+              "ToolTip": "D:\\ERPMs\\ERPMs\\Service\\IService\\IServiceAsync.cs",
+              "RelativeToolTip": "Service\\IService\\IServiceAsync.cs",
+              "ViewState": "AgIAABEAAAAAAAAAAAA3wAoAAAAVAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-13T20:49:15.991Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 79,
+              "Title": "FactureFilterDto.cs",
+              "DocumentMoniker": "D:\\ERPMs\\ERPMs\\Service\\DTO\\FactureFilterDto.cs",
+              "RelativeDocumentMoniker": "Service\\DTO\\FactureFilterDto.cs",
+              "ToolTip": "D:\\ERPMs\\ERPMs\\Service\\DTO\\FactureFilterDto.cs",
+              "RelativeToolTip": "Service\\DTO\\FactureFilterDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-13T21:20:36.161Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 80,
+              "Title": "CommandeStatusDto.cs",
+              "DocumentMoniker": "D:\\ERPMs\\ERPMs\\Service\\DTO\\CommandeStatusDto.cs",
+              "RelativeDocumentMoniker": "Service\\DTO\\CommandeStatusDto.cs",
+              "ToolTip": "D:\\ERPMs\\ERPMs\\Service\\DTO\\CommandeStatusDto.cs",
+              "RelativeToolTip": "Service\\DTO\\CommandeStatusDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-13T21:20:36.44Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 82,
+              "Title": "CommandeFilterDto.cs",
+              "DocumentMoniker": "D:\\ERPMs\\ERPMs\\Service\\DTO\\CommandeFilterDto.cs",
+              "RelativeDocumentMoniker": "Service\\DTO\\CommandeFilterDto.cs",
+              "ToolTip": "D:\\ERPMs\\ERPMs\\Service\\DTO\\CommandeFilterDto.cs",
+              "RelativeToolTip": "Service\\DTO\\CommandeFilterDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-13T21:20:36.707Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 81,
+              "Title": "FactureDetailDto.cs",
+              "DocumentMoniker": "D:\\ERPMs\\ERPMs\\Service\\DTO\\FactureDetailDto.cs",
+              "RelativeDocumentMoniker": "Service\\DTO\\FactureDetailDto.cs",
+              "ToolTip": "D:\\ERPMs\\ERPMs\\Service\\DTO\\FactureDetailDto.cs",
+              "RelativeToolTip": "Service\\DTO\\FactureDetailDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABYAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-13T21:20:36.599Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 47,
+              "Title": "Auth.API.csproj",
+              "DocumentMoniker": "D:\\ERPMs\\ERPMs\\Auth.API\\Auth.API.csproj",
+              "RelativeDocumentMoniker": "Auth.API\\Auth.API.csproj",
+              "ToolTip": "D:\\ERPMs\\ERPMs\\Auth.API\\Auth.API.csproj",
+              "RelativeToolTip": "Auth.API\\Auth.API.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2026-03-25T01:37:14.772Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 48,
+              "Title": "AccessTkn.cs",
+              "DocumentMoniker": "D:\\ERPMs\\ERPMs\\Service\\Models\\AccessTkn.cs",
+              "RelativeDocumentMoniker": "Service\\Models\\AccessTkn.cs",
+              "ToolTip": "D:\\ERPMs\\ERPMs\\Service\\Models\\AccessTkn.cs",
+              "RelativeToolTip": "Service\\Models\\AccessTkn.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-13T20:49:32.605Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 49,
+              "Title": "RevokeRequest.cs",
+              "DocumentMoniker": "D:\\ERPMs\\ERPMs\\Service\\Models\\RevokeRequest.cs",
+              "RelativeDocumentMoniker": "Service\\Models\\RevokeRequest.cs",
+              "ToolTip": "D:\\ERPMs\\ERPMs\\Service\\Models\\RevokeRequest.cs",
+              "RelativeToolTip": "Service\\Models\\RevokeRequest.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-13T20:49:30.887Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 50,
+              "Title": "Login.cs",
+              "DocumentMoniker": "D:\\ERPMs\\ERPMs\\Service\\Models\\Login.cs",
+              "RelativeDocumentMoniker": "Service\\Models\\Login.cs",
+              "ToolTip": "D:\\ERPMs\\ERPMs\\Service\\Models\\Login.cs",
+              "RelativeToolTip": "Service\\Models\\Login.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-13T20:49:28.933Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 51,
+              "Title": "RefreshRequest.cs",
+              "DocumentMoniker": "D:\\ERPMs\\ERPMs\\Service\\Models\\RefreshRequest.cs",
+              "RelativeDocumentMoniker": "Service\\Models\\RefreshRequest.cs",
+              "ToolTip": "D:\\ERPMs\\ERPMs\\Service\\Models\\RefreshRequest.cs",
+              "RelativeToolTip": "Service\\Models\\RefreshRequest.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-13T20:49:27.944Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 52,
+              "Title": "iam.sql",
+              "DocumentMoniker": "D:\\ERPMs\\ERPMs\\init-db\\iam.sql",
+              "RelativeDocumentMoniker": "init-db\\iam.sql",
+              "ToolTip": "D:\\ERPMs\\ERPMs\\init-db\\iam.sql",
+              "RelativeToolTip": "init-db\\iam.sql",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000826|",
+              "WhenOpened": "2026-04-13T19:05:58.899Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 71,
+              "Title": "Livraison.cs",
+              "DocumentMoniker": "D:\\ERPMs\\ERPMs\\Core\\Entities\\Livraison.cs",
+              "RelativeDocumentMoniker": "Core\\Entities\\Livraison.cs",
+              "ToolTip": "D:\\ERPMs\\ERPMs\\Core\\Entities\\Livraison.cs",
+              "RelativeToolTip": "Core\\Entities\\Livraison.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-13T20:20:54.41Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 72,
+              "Title": "Facture.cs",
+              "DocumentMoniker": "D:\\ERPMs\\ERPMs\\Core\\Entities\\Facture.cs",
+              "RelativeDocumentMoniker": "Core\\Entities\\Facture.cs",
+              "ToolTip": "D:\\ERPMs\\ERPMs\\Core\\Entities\\Facture.cs",
+              "RelativeToolTip": "Core\\Entities\\Facture.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-13T20:20:54.514Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 83,
+              "Title": "Program.cs",
+              "DocumentMoniker": "D:\\ERPMs\\ERPMs\\Livraison.API\\Program.cs",
+              "RelativeDocumentMoniker": "Livraison.API\\Program.cs",
+              "ToolTip": "D:\\ERPMs\\ERPMs\\Livraison.API\\Program.cs",
+              "RelativeToolTip": "Livraison.API\\Program.cs",
+              "ViewState": "AgIAAAIAAAAAAAAAAIBJwFIAAAAKAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-13T20:33:14.473Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 84,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "D:\\ERPMs\\ERPMs\\Livraison.API\\appsettings.json",
+              "RelativeDocumentMoniker": "Livraison.API\\appsettings.json",
+              "ToolTip": "D:\\ERPMs\\ERPMs\\Livraison.API\\appsettings.json",
+              "RelativeToolTip": "Livraison.API\\appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2026-04-13T20:33:14.376Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 85,
+              "Title": "appsettings.Development.json",
+              "DocumentMoniker": "D:\\ERPMs\\ERPMs\\Livraison.API\\appsettings.Development.json",
+              "RelativeDocumentMoniker": "Livraison.API\\appsettings.Development.json",
+              "ToolTip": "D:\\ERPMs\\ERPMs\\Livraison.API\\appsettings.Development.json",
+              "RelativeToolTip": "Livraison.API\\appsettings.Development.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2026-04-13T20:33:14.255Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 86,
+              "Title": "LivraisonController.cs",
+              "DocumentMoniker": "D:\\ERPMs\\ERPMs\\Livraison.API\\Controllers\\LivraisonController.cs",
+              "RelativeDocumentMoniker": "Livraison.API\\Controllers\\LivraisonController.cs",
+              "ToolTip": "D:\\ERPMs\\ERPMs\\Livraison.API\\Controllers\\LivraisonController.cs",
+              "RelativeToolTip": "Livraison.API\\Controllers\\LivraisonController.cs",
+              "ViewState": "AgIAAAoAAAAAAAAAAABBwDMAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-13T20:33:14.159Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 87,
+              "Title": "Livraison.API.csproj",
+              "DocumentMoniker": "D:\\ERPMs\\ERPMs\\Livraison.API\\Livraison.API.csproj",
+              "RelativeDocumentMoniker": "Livraison.API\\Livraison.API.csproj",
+              "ToolTip": "D:\\ERPMs\\ERPMs\\Livraison.API\\Livraison.API.csproj",
+              "RelativeToolTip": "Livraison.API\\Livraison.API.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABcAAAAKAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2026-04-13T20:33:14.066Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 88,
+              "Title": "Dockerfile",
+              "DocumentMoniker": "D:\\ERPMs\\ERPMs\\Livraison.API\\Dockerfile",
+              "RelativeDocumentMoniker": "Livraison.API\\Dockerfile",
+              "ToolTip": "D:\\ERPMs\\ERPMs\\Livraison.API\\Dockerfile",
+              "RelativeToolTip": "Livraison.API\\Dockerfile",
+              "ViewState": "AgIAAAYAAAAAAAAAAABBwBUAAAAqAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2026-04-13T20:33:13.957Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 89,
+              "Title": "Program.cs",
+              "DocumentMoniker": "D:\\ERPMs\\ERPMs\\Facturation.API\\Program.cs",
+              "RelativeDocumentMoniker": "Facturation.API\\Program.cs",
+              "ToolTip": "D:\\ERPMs\\ERPMs\\Facturation.API\\Program.cs",
+              "RelativeToolTip": "Facturation.API\\Program.cs",
+              "ViewState": "AgIAAAIAAAAAAAAAAIBJwFIAAAAKAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-13T20:32:55.299Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 90,
+              "Title": "Facturation.API.csproj",
+              "DocumentMoniker": "D:\\ERPMs\\ERPMs\\Facturation.API\\Facturation.API.csproj",
+              "RelativeDocumentMoniker": "Facturation.API\\Facturation.API.csproj",
+              "ToolTip": "D:\\ERPMs\\ERPMs\\Facturation.API\\Facturation.API.csproj",
+              "RelativeToolTip": "Facturation.API\\Facturation.API.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABcAAAAKAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2026-04-13T20:32:55.202Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 91,
+              "Title": "FacturationController.cs",
+              "DocumentMoniker": "D:\\ERPMs\\ERPMs\\Facturation.API\\Controllers\\FacturationController.cs",
+              "RelativeDocumentMoniker": "Facturation.API\\Controllers\\FacturationController.cs",
+              "ToolTip": "D:\\ERPMs\\ERPMs\\Facturation.API\\Controllers\\FacturationController.cs",
+              "RelativeToolTip": "Facturation.API\\Controllers\\FacturationController.cs",
+              "ViewState": "AgIAAAsAAAAAAAAAAABBwDsAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-13T20:32:55.112Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 92,
+              "Title": "Dockerfile",
+              "DocumentMoniker": "D:\\ERPMs\\ERPMs\\Facturation.API\\Dockerfile",
+              "RelativeDocumentMoniker": "Facturation.API\\Dockerfile",
+              "ToolTip": "D:\\ERPMs\\ERPMs\\Facturation.API\\Dockerfile",
+              "RelativeToolTip": "Facturation.API\\Dockerfile",
+              "ViewState": "AgIAAAYAAAAAAAAAAABBwBUAAAAsAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2026-04-13T20:32:54.999Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 93,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "D:\\ERPMs\\ERPMs\\Facturation.API\\appsettings.json",
+              "RelativeDocumentMoniker": "Facturation.API\\appsettings.json",
+              "ToolTip": "D:\\ERPMs\\ERPMs\\Facturation.API\\appsettings.json",
+              "RelativeToolTip": "Facturation.API\\appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2026-04-13T20:32:54.923Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 94,
+              "Title": "appsettings.Development.json",
+              "DocumentMoniker": "D:\\ERPMs\\ERPMs\\Facturation.API\\appsettings.Development.json",
+              "RelativeDocumentMoniker": "Facturation.API\\appsettings.Development.json",
+              "ToolTip": "D:\\ERPMs\\ERPMs\\Facturation.API\\appsettings.Development.json",
+              "RelativeToolTip": "Facturation.API\\appsettings.Development.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2026-04-13T20:32:54.82Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 95,
+              "Title": "appsettings.Development.json",
+              "DocumentMoniker": "D:\\ERPMs\\ERPMs\\Commande.API\\appsettings.Development.json",
+              "RelativeDocumentMoniker": "Commande.API\\appsettings.Development.json",
+              "ToolTip": "D:\\ERPMs\\ERPMs\\Commande.API\\appsettings.Development.json",
+              "RelativeToolTip": "Commande.API\\appsettings.Development.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2026-04-13T20:32:37.336Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 96,
+              "Title": "Commande.API.csproj",
+              "DocumentMoniker": "D:\\ERPMs\\ERPMs\\Commande.API\\Commande.API.csproj",
+              "RelativeDocumentMoniker": "Commande.API\\Commande.API.csproj",
+              "ToolTip": "D:\\ERPMs\\ERPMs\\Commande.API\\Commande.API.csproj",
+              "RelativeToolTip": "Commande.API\\Commande.API.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABcAAAAKAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2026-04-13T20:32:37.243Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 97,
+              "Title": "Program.cs",
+              "DocumentMoniker": "D:\\ERPMs\\ERPMs\\Commande.API\\Program.cs",
+              "RelativeDocumentMoniker": "Commande.API\\Program.cs",
+              "ToolTip": "D:\\ERPMs\\ERPMs\\Commande.API\\Program.cs",
+              "RelativeToolTip": "Commande.API\\Program.cs",
+              "ViewState": "AgIAAAIAAAAAAAAAAIBJwFIAAAAKAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-13T20:32:36.916Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 98,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "D:\\ERPMs\\ERPMs\\Commande.API\\appsettings.json",
+              "RelativeDocumentMoniker": "Commande.API\\appsettings.json",
+              "ToolTip": "D:\\ERPMs\\ERPMs\\Commande.API\\appsettings.json",
+              "RelativeToolTip": "Commande.API\\appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2026-04-13T20:32:36.794Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 99,
+              "Title": "Dockerfile",
+              "DocumentMoniker": "D:\\ERPMs\\ERPMs\\Client.API\\Dockerfile",
+              "RelativeDocumentMoniker": "Client.API\\Dockerfile",
+              "ToolTip": "D:\\ERPMs\\ERPMs\\Client.API\\Dockerfile",
+              "RelativeToolTip": "Client.API\\Dockerfile",
+              "ViewState": "AgIAAAYAAAAAAAAAAABBwBUAAAAnAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2026-04-13T20:32:18.431Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 100,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "D:\\ERPMs\\ERPMs\\Client.API\\appsettings.json",
+              "RelativeDocumentMoniker": "Client.API\\appsettings.json",
+              "ToolTip": "D:\\ERPMs\\ERPMs\\Client.API\\appsettings.json",
+              "RelativeToolTip": "Client.API\\appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2026-04-13T20:32:18.347Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 101,
+              "Title": "Client.API.csproj",
+              "DocumentMoniker": "D:\\ERPMs\\ERPMs\\Client.API\\Client.API.csproj",
+              "RelativeDocumentMoniker": "Client.API\\Client.API.csproj",
+              "ToolTip": "D:\\ERPMs\\ERPMs\\Client.API\\Client.API.csproj",
+              "RelativeToolTip": "Client.API\\Client.API.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABcAAAAKAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2026-04-13T20:32:18.151Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 102,
+              "Title": "appsettings.Development.json",
+              "DocumentMoniker": "D:\\ERPMs\\ERPMs\\Client.API\\appsettings.Development.json",
+              "RelativeDocumentMoniker": "Client.API\\appsettings.Development.json",
+              "ToolTip": "D:\\ERPMs\\ERPMs\\Client.API\\appsettings.Development.json",
+              "RelativeToolTip": "Client.API\\appsettings.Development.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2026-04-13T20:32:17.946Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 103,
+              "Title": "Program.cs",
+              "DocumentMoniker": "D:\\ERPMs\\ERPMs\\Client.API\\Program.cs",
+              "RelativeDocumentMoniker": "Client.API\\Program.cs",
+              "ToolTip": "D:\\ERPMs\\ERPMs\\Client.API\\Program.cs",
+              "RelativeToolTip": "Client.API\\Program.cs",
+              "ViewState": "AgIAAAIAAAAAAAAAAIBJwFIAAAAKAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-13T20:32:17.768Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 78,
+              "Title": "LivraisonDto.cs",
+              "DocumentMoniker": "D:\\ERPMs\\ERPMs\\Service\\DTO\\LivraisonDto.cs",
+              "RelativeDocumentMoniker": "Service\\DTO\\LivraisonDto.cs",
+              "ToolTip": "D:\\ERPMs\\ERPMs\\Service\\DTO\\LivraisonDto.cs",
+              "RelativeToolTip": "Service\\DTO\\LivraisonDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-13T20:21:07.875Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 77,
+              "Title": "CommandeDto.cs",
+              "DocumentMoniker": "D:\\ERPMs\\ERPMs\\Service\\DTO\\CommandeDto.cs",
+              "RelativeDocumentMoniker": "Service\\DTO\\CommandeDto.cs",
+              "ToolTip": "D:\\ERPMs\\ERPMs\\Service\\DTO\\CommandeDto.cs",
+              "RelativeToolTip": "Service\\DTO\\CommandeDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-13T20:21:07.668Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 76,
+              "Title": "PaiementCreateDto.cs",
+              "DocumentMoniker": "D:\\ERPMs\\ERPMs\\Service\\DTO\\PaiementCreateDto.cs",
+              "RelativeDocumentMoniker": "Service\\DTO\\PaiementCreateDto.cs",
+              "ToolTip": "D:\\ERPMs\\ERPMs\\Service\\DTO\\PaiementCreateDto.cs",
+              "RelativeToolTip": "Service\\DTO\\PaiementCreateDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-13T20:21:07.506Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 75,
+              "Title": "FactureDto.cs",
+              "DocumentMoniker": "D:\\ERPMs\\ERPMs\\Service\\DTO\\FactureDto.cs",
+              "RelativeDocumentMoniker": "Service\\DTO\\FactureDto.cs",
+              "ToolTip": "D:\\ERPMs\\ERPMs\\Service\\DTO\\FactureDto.cs",
+              "RelativeToolTip": "Service\\DTO\\FactureDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-13T20:21:07.415Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 74,
+              "Title": "CommandeCreateDto.cs",
+              "DocumentMoniker": "D:\\ERPMs\\ERPMs\\Service\\DTO\\CommandeCreateDto.cs",
+              "RelativeDocumentMoniker": "Service\\DTO\\CommandeCreateDto.cs",
+              "ToolTip": "D:\\ERPMs\\ERPMs\\Service\\DTO\\CommandeCreateDto.cs",
+              "RelativeToolTip": "Service\\DTO\\CommandeCreateDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-13T20:21:07.287Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 73,
+              "Title": "Commande.cs",
+              "DocumentMoniker": "D:\\ERPMs\\ERPMs\\Core\\Entities\\Commande.cs",
+              "RelativeDocumentMoniker": "Core\\Entities\\Commande.cs",
+              "ToolTip": "D:\\ERPMs\\ERPMs\\Core\\Entities\\Commande.cs",
+              "RelativeToolTip": "Core\\Entities\\Commande.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABgAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-13T20:20:54.7Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 53,
+              "Title": "Article.cs",
+              "DocumentMoniker": "D:\\ERPMs\\ERPMs\\Core\\Entities\\Article.cs",
+              "RelativeDocumentMoniker": "Core\\Entities\\Article.cs",
+              "ToolTip": "D:\\ERPMs\\ERPMs\\Core\\Entities\\Article.cs",
+              "RelativeToolTip": "Core\\Entities\\Article.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-13T19:04:01.588Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 67,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "D:\\ERPMs\\ERPMs\\Gestion_de_stock.API\\appsettings.json",
+              "RelativeDocumentMoniker": "Gestion_de_stock.API\\appsettings.json",
+              "ToolTip": "D:\\ERPMs\\ERPMs\\Gestion_de_stock.API\\appsettings.json",
+              "RelativeToolTip": "Gestion_de_stock.API\\appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2026-04-13T19:05:23.868Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 68,
+              "Title": "appsettings.Development.json",
+              "DocumentMoniker": "D:\\ERPMs\\ERPMs\\Gestion_de_stock.API\\appsettings.Development.json",
+              "RelativeDocumentMoniker": "Gestion_de_stock.API\\appsettings.Development.json",
+              "ToolTip": "D:\\ERPMs\\ERPMs\\Gestion_de_stock.API\\appsettings.Development.json",
+              "RelativeToolTip": "Gestion_de_stock.API\\appsettings.Development.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2026-04-13T19:05:23.36Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 66,
+              "Title": "StockNiveauDto.cs",
+              "DocumentMoniker": "D:\\ERPMs\\ERPMs\\Service\\DTO\\StockNiveauDto.cs",
+              "RelativeDocumentMoniker": "Service\\DTO\\StockNiveauDto.cs",
+              "ToolTip": "D:\\ERPMs\\ERPMs\\Service\\DTO\\StockNiveauDto.cs",
+              "RelativeToolTip": "Service\\DTO\\StockNiveauDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-13T19:04:31.371Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 69,
+              "Title": "Dockerfile",
+              "DocumentMoniker": "D:\\ERPMs\\ERPMs\\Gestion_de_stock.API\\Dockerfile",
+              "RelativeDocumentMoniker": "Gestion_de_stock.API\\Dockerfile",
+              "ToolTip": "D:\\ERPMs\\ERPMs\\Gestion_de_stock.API\\Dockerfile",
+              "RelativeToolTip": "Gestion_de_stock.API\\Dockerfile",
+              "ViewState": "AgIAAAYAAAAAAAAAAABBwBYAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2026-04-13T19:05:23.165Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 70,
+              "Title": "Gestion_de_stock.API.csproj",
+              "DocumentMoniker": "D:\\ERPMs\\ERPMs\\Gestion_de_stock.API\\Gestion_de_stock.API.csproj",
+              "RelativeDocumentMoniker": "Gestion_de_stock.API\\Gestion_de_stock.API.csproj",
+              "ToolTip": "D:\\ERPMs\\ERPMs\\Gestion_de_stock.API\\Gestion_de_stock.API.csproj",
+              "RelativeToolTip": "Gestion_de_stock.API\\Gestion_de_stock.API.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABkAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2026-04-13T19:05:22.942Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 65,
+              "Title": "FournisseurDto.cs",
+              "DocumentMoniker": "D:\\ERPMs\\ERPMs\\Service\\DTO\\FournisseurDto.cs",
+              "RelativeDocumentMoniker": "Service\\DTO\\FournisseurDto.cs",
+              "ToolTip": "D:\\ERPMs\\ERPMs\\Service\\DTO\\FournisseurDto.cs",
+              "RelativeToolTip": "Service\\DTO\\FournisseurDto.cs",
+              "ViewState": "AgIAAA8AAAAAAAAAAIBQwBUAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-13T19:04:31.107Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 64,
+              "Title": "DashboardStockDto.cs",
+              "DocumentMoniker": "D:\\ERPMs\\ERPMs\\Service\\DTO\\DashboardStockDto.cs",
+              "RelativeDocumentMoniker": "Service\\DTO\\DashboardStockDto.cs",
+              "ToolTip": "D:\\ERPMs\\ERPMs\\Service\\DTO\\DashboardStockDto.cs",
+              "RelativeToolTip": "Service\\DTO\\DashboardStockDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-13T19:04:31.027Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 63,
+              "Title": "CategorieDto.cs",
+              "DocumentMoniker": "D:\\ERPMs\\ERPMs\\Service\\DTO\\CategorieDto.cs",
+              "RelativeDocumentMoniker": "Service\\DTO\\CategorieDto.cs",
+              "ToolTip": "D:\\ERPMs\\ERPMs\\Service\\DTO\\CategorieDto.cs",
+              "RelativeToolTip": "Service\\DTO\\CategorieDto.cs",
+              "ViewState": "AgIAAA0AAAAAAAAAAIBQwBMAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-13T19:04:30.912Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 61,
+              "Title": "ArticleFournisseur.cs",
+              "DocumentMoniker": "D:\\ERPMs\\ERPMs\\Core\\Entities\\ArticleFournisseur.cs",
+              "RelativeDocumentMoniker": "Core\\Entities\\ArticleFournisseur.cs",
+              "ToolTip": "D:\\ERPMs\\ERPMs\\Core\\Entities\\ArticleFournisseur.cs",
+              "RelativeToolTip": "Core\\Entities\\ArticleFournisseur.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-13T19:04:01.441Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 60,
+              "Title": "Categorie.cs",
+              "DocumentMoniker": "D:\\ERPMs\\ERPMs\\Core\\Entities\\Categorie.cs",
+              "RelativeDocumentMoniker": "Core\\Entities\\Categorie.cs",
+              "ToolTip": "D:\\ERPMs\\ERPMs\\Core\\Entities\\Categorie.cs",
+              "RelativeToolTip": "Core\\Entities\\Categorie.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-13T19:04:01.177Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 62,
+              "Title": "Fournisseur.cs",
+              "DocumentMoniker": "D:\\ERPMs\\ERPMs\\Core\\Entities\\Fournisseur.cs",
+              "RelativeDocumentMoniker": "Core\\Entities\\Fournisseur.cs",
+              "ToolTip": "D:\\ERPMs\\ERPMs\\Core\\Entities\\Fournisseur.cs",
+              "RelativeToolTip": "Core\\Entities\\Fournisseur.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-13T19:04:01.682Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 54,
+              "Title": "Program.cs",
+              "DocumentMoniker": "D:\\ERPMs\\ERPMs\\Auth.API\\Program.cs",
+              "RelativeDocumentMoniker": "Auth.API\\Program.cs",
+              "ToolTip": "D:\\ERPMs\\ERPMs\\Auth.API\\Program.cs",
+              "RelativeToolTip": "Auth.API\\Program.cs",
+              "ViewState": "AgIAAAEAAAAAAAAAAIBJwGgAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-25T01:37:31.991Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 55,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "D:\\ERPMs\\ERPMs\\Auth.API\\appsettings.json",
+              "RelativeDocumentMoniker": "Auth.API\\appsettings.json",
+              "ToolTip": "D:\\ERPMs\\ERPMs\\Auth.API\\appsettings.json",
+              "RelativeToolTip": "Auth.API\\appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2026-03-25T23:07:46.559Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 56,
+              "Title": "appsettings.Development.json",
+              "DocumentMoniker": "D:\\ERPMs\\ERPMs\\Auth.API\\appsettings.Development.json",
+              "RelativeDocumentMoniker": "Auth.API\\appsettings.Development.json",
+              "ToolTip": "D:\\ERPMs\\ERPMs\\Auth.API\\appsettings.Development.json",
+              "RelativeToolTip": "Auth.API\\appsettings.Development.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2026-03-25T23:07:51.327Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 57,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "D:\\ERPMs\\ERPMs\\Gateway\\appsettings.json",
+              "RelativeDocumentMoniker": "Gateway\\appsettings.json",
+              "ToolTip": "D:\\ERPMs\\ERPMs\\Gateway\\appsettings.json",
+              "RelativeToolTip": "Gateway\\appsettings.json",
+              "ViewState": "AgIAADIAAAAAAAAAAABBwHkAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2026-03-24T23:45:46.866Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 59,
+              "Title": "User.API.csproj",
+              "DocumentMoniker": "D:\\ERPMs\\ERPMs\\User.API\\User.API.csproj",
+              "RelativeDocumentMoniker": "User.API\\User.API.csproj",
+              "ToolTip": "D:\\ERPMs\\ERPMs\\User.API\\User.API.csproj",
+              "RelativeToolTip": "User.API\\User.API.csproj",
+              "ViewState": "AgIAAAoAAAAAAAAAAABBwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2026-03-25T01:37:23.257Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 58,
+              "Title": "Gateway.http",
+              "DocumentMoniker": "D:\\ERPMs\\ERPMs\\Gateway\\Gateway.http",
+              "RelativeDocumentMoniker": "Gateway\\Gateway.http",
+              "ToolTip": "D:\\ERPMs\\ERPMs\\Gateway\\Gateway.http",
+              "RelativeToolTip": "Gateway\\Gateway.http",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003502|",
+              "WhenOpened": "2026-03-24T23:48:54.771Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
