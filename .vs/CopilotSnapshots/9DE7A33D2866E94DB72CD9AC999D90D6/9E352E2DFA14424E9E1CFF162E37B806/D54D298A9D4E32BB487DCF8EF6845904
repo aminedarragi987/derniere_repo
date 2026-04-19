@@ -1,0 +1,23 @@
+﻿using Service.DTO;
+
+namespace Service.IService;
+
+public interface IGestionStockService
+{
+    Task<ArticleDto> AddArticle(ArticleDto article);
+    Task<bool> UpdateArticle(int idarticle, ArticleDto article);
+    Task<bool> DeleteArticle(int idarticle);
+    Task<IEnumerable<ArticleDto>> GetArticles(ArticleFilterDto filter);
+    Task<StockNiveauDto?> GetStockNiveau(int idarticle);
+    Task<bool> AssocierFournisseur(int idarticle, int idfournisseur);
+    Task<FournisseurDto> AddFournisseur(FournisseurDto fournisseur);
+    Task<DashboardStockDto> GetDashboard();
+    Task<ClientDto> AddClient(ClientDto client);
+    Task<bool> UpdateClient(int idclient, ClientDto client);
+    Task<IEnumerable<ClientDto>> GetClients();
+    Task<CommandeDto?> CreateCommande(CommandeCreateDto commande);
+    Task<CommandeDto?> AddLigneCommande(int idcommande, LigneCommandeDto ligne);
+    Task<FactureDto?> GenererFacture(int idcommande);
+    Task<PaiementDto?> AddPaiement(int idfacture, PaiementCreateDto paiement);
+    Task<LivraisonDto?> GenererLivraison(int idcommande);
+}

@@ -1,0 +1,73 @@
+﻿{
+  "Logging": {
+    "LogLevel": {
+      "Default": "Information",
+      "Microsoft.AspNetCore": "Warning"
+    }
+  },
+  "ReverseProxy": {
+    "Routes": {
+      "usersRoute": {
+        "ClusterId": "usersCluster",
+        "Match": {
+          "Path": "/User/{**catch-all}"
+        }
+      },
+      "authRoute": {
+        "ClusterId": "authCluster",
+        "Match": {
+          "Path": "/Auth/{**catch-all}"
+        }
+      },
+      "stockRoute": {
+        "ClusterId": "stockCluster",
+        "Match": {
+          "Path": "/stock/{**catch-all}"
+        },
+        "Transforms": [
+          { "PathRemovePrefix": "/stock" }
+        ]
+      },
+      "ordersRoute": {
+        "ClusterId": "ordersCluster",
+        "Match": {
+          "Path": "/orders/{**catch-all}"
+        },
+        "Transforms": [
+          { "PathRemovePrefix": "/orders" }
+        ]
+      }
+    },
+    "Clusters": {
+      "usersCluster": {
+        "Destinations": {
+          "d1": {
+            "Address": "http://userapi:8080/"
+          }
+        }
+      },
+      "authCluster": {
+        "Destinations": {
+          "d1": {
+            "Address": "http://authapi:8080/"
+          }
+        }
+      },
+      "stockCluster": {
+        "Destinations": {
+          "d1": {
+            "Address": "http://host.docker.internal:5000/"
+          }
+        }
+      },
+      "ordersCluster": {
+        "Destinations": {
+          "d1": {
+            "Address": "http://host.docker.internal:5001/"
+          }
+        }
+      }
+    }
+  },
+  "AllowedHosts": "*"
+}
