@@ -1,0 +1,13 @@
+<header class="header">
+	<div class="brand">ERP Microservices</div>
+
+	<div class="actions" *ngIf="user$ | async as user">
+		<div class="identity">
+			<strong>{{ user.nom && user.prenom ? (user.prenom + ' ' + user.nom) : (user.userName || user.email) }}</strong>
+			<small>{{ user.roles.join(', ') || 'Aucun role' }}</small>
+		</div>
+
+		<a routerLink="/auth/change-password" class="link">Mot de passe</a>
+		<button type="button" (click)="logout()">Logout</button>
+	</div>
+</header>

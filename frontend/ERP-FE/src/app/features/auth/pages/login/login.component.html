@@ -1,0 +1,38 @@
+<section class="login-page">
+	<div class="login-card">
+		<h1>Connexion ERP</h1>
+		<p>Connecte-toi pour acceder aux modules metier.</p>
+
+		<div class="info" *ngIf="infoMessage">{{ infoMessage }}</div>
+		<div class="error" *ngIf="errorMessage">{{ errorMessage }}</div>
+
+		<form [formGroup]="form" (ngSubmit)="submit()" novalidate>
+			<label>
+				<span>Nom d'utilisateur</span>
+				<input type="text" formControlName="Username" placeholder="foulen" />
+				<small class="validation" *ngIf="emailControl.touched && emailControl.invalid">
+					Nom d'utilisateur obligatoire.
+				</small>
+			</label>
+
+			<label>
+				<span>Mot de passe</span>
+				<input type="password" formControlName="Password" placeholder="••••••••" />
+				<small class="validation" *ngIf="passwordControl.touched && passwordControl.invalid">
+					Minimum 6 caracteres.
+				</small>
+			</label>
+
+			<label class="remember">
+				<input type="checkbox" formControlName="rememberMe" />
+				<span>Rester connecte</span>
+			</label>
+
+			<button class="btn-primary" [disabled]="isSubmitting" type="submit">
+				{{ isSubmitting ? 'Connexion...' : 'Se connecter' }}
+			</button>
+		</form>
+
+		<a routerLink="/auth/change-password" class="link">Changer mot de passe</a>
+	</div>
+</section>

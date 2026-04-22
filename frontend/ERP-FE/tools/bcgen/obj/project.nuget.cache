@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "gTpJl6QRIbs=",
+  "success": true,
+  "projectFilePath": "D:\\ERPMs\\ERPMs\\frontend\\ERP-FE\\tools\\bcgen\\bcgen.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Amine\\.nuget\\packages\\bcrypt.net-next\\4.1.0\\bcrypt.net-next.4.1.0.nupkg.sha512"
+  ],
+  "logs": []
+}

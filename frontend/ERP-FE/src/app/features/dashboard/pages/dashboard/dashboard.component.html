@@ -1,0 +1,103 @@
+<section class="dashboard-page">
+	<header class="hero">
+		<div>
+			<p class="eyebrow">Vue d'ensemble</p>
+			<h1>Tableau de bord ERP</h1>
+			<p class="subtitle">Suivi rapide des donnees IAM et Stock pour piloter l'activite.</p>
+		</div>
+		<a class="btn" routerLink="/articles">Aller aux articles</a>
+	</header>
+
+	<p class="loading" *ngIf="isLoading">Chargement des indicateurs...</p>
+	<p class="error" *ngIf="errorMessage">{{ errorMessage }}</p>
+
+	<section class="kpi-grid" *ngIf="!isLoading">
+		<article class="kpi-card" *ngFor="let kpi of kpis">
+			<p class="kpi-title">{{ kpi.title }}</p>
+			<p class="kpi-value">{{ kpi.value }}</p>
+			<p class="kpi-subtitle">{{ kpi.subtitle }}</p>
+		</article>
+	</section>
+
+	<section class="status-grid" *ngIf="!isLoading">
+		<article class="status-card" [class.bad]="usersHealth === 'error'">
+			<h2>Service IAM</h2>
+			<p>{{ usersHealth === 'ok' ? 'Operationnel' : 'Reponse partielle ou refus d acces' }}</p>
+		</article>
+
+		<article class="status-card" [class.bad]="stockHealth === 'error'">
+			<h2>Service Stock</h2>
+			<p>{{ stockHealth === 'ok' ? 'Operationnel' : 'Reponse partielle ou refus d acces' }}</p>
+		</article>
+	</section>
+
+	<section class="actions">
+		<a class="action" routerLink="/users">Gerer les utilisateurs</a>
+		<a class="action" routerLink="/admin/roles">Configurer les roles</a>
+		<a class="action" routerLink="/admin/menus">Personnaliser les menus</a>
+	</section>
+
+	<section class="insights" *ngIf="!isLoading">
+		<article class="chart-card">
+			<header>
+				<h2>Tendance utilisateurs (7 jours)</h2>
+			</header>
+			<div class="bars" *ngIf="userTrend.length > 0">
+				<div class="bar-item" *ngFor="let point of userTrend">
+					<div
+						class="bar"
+						[style.height.%]="(point.value / maxTrendValue(userTrend)) * 100">
+					</div>
+					<span>{{ point.label }}</span>
+				</div>
+			</div>
+		</article>
+
+		<article class="chart-card">
+			<header>
+				<h2>Tendance articles (7 jours)</h2>
+			</header>
+			<div class="bars" *ngIf="articleTrend.length > 0">
+				<div class="bar-item" *ngFor="let point of articleTrend">
+					<div
+						class="bar accent"
+						[style.height.%]="(point.value / maxTrendValue(articleTrend)) * 100">
+					</div>
+					<span>{{ point.label }}</span>
+				</div>
+			</div>
+		</article>
+	</section>
+
+	<section class="alerts" *ngIf="!isLoading">
+		<header>
+			<h2>Alertes stock</h2>
+			<p [class.danger]="hasCriticalAlert">
+				{{ hasCriticalAlert ? 'Articles sous seuil detectes.' : 'Aucune alerte critique.' }}
+			</p>
+		</header>
+
+		<div class="alert-table" *ngIf="lowStockAlerts.length > 0; else noAlertTpl">
+			<table>
+				<thead>
+					<tr>
+						<th>Article</th>
+						<th>Stock actuel</th>
+						<th>Seuil min</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr *ngFor="let alert of lowStockAlerts">
+						<td>{{ alert.nom }}</td>
+						<td>{{ alert.quantitestock }}</td>
+						<td>{{ alert.seuilminimum }}</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+
+		<ng-template #noAlertTpl>
+			<p class="muted">Le stock est stable sur les articles visibles.</p>
+		</ng-template>
+	</section>
+</section>

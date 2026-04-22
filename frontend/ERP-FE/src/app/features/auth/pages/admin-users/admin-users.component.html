@@ -1,0 +1,63 @@
+<div class="admin-users-container">
+  <div class="header">
+    <h1>Gestion des Utilisateurs</h1>
+    <button class="btn-primary" (click)="toggleForm()">
+      {{ showForm ? 'Annuler' : '+ Ajouter utilisateur' }}
+    </button>
+  </div>
+
+  <!-- Messages -->
+  <div *ngIf="successMessage" class="alert alert-success">{{ successMessage }}</div>
+  <div *ngIf="errorMessage" class="alert alert-danger">{{ errorMessage }}</div>
+
+  <!-- Formulaire -->
+  <form *ngIf="showForm" [formGroup]="form" (ngSubmit)="submit()" class="form-card">
+    <div class="form-group">
+      <label>Nom d'utilisateur</label>
+      <input type="text" formControlName="userName" class="form-control" />
+    </div>
+    <div class="form-group">
+      <label>Email</label>
+      <input type="email" formControlName="email" class="form-control" />
+    </div>
+    <div class="form-group">
+      <label>Nom</label>
+      <input type="text" formControlName="nom" class="form-control" />
+    </div>
+    <div class="form-group">
+      <label>Prénom</label>
+      <input type="text" formControlName="prenom" class="form-control" />
+    </div>
+    <div class="form-group">
+      <label>Mot de passe</label>
+      <input type="password" formControlName="motdepasse" class="form-control" placeholder="Laisser vide pour ne pas changer" />
+    </div>
+    <button type="submit" class="btn-success">Enregistrer</button>
+  </form>
+
+  <!-- Tableau utilisateurs -->
+  <div class="loading" *ngIf="isLoading">Chargement...</div>
+  <table *ngIf="!isLoading && users.length > 0" class="table">
+    <thead>
+      <tr>
+        <th>Nom d'utilisateur</th>
+        <th>Email</th>
+        <th>Nom Complet</th>
+        <th>Rôles</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let user of users">
+        <td>{{ user.userName }}</td>
+        <td>{{ user.email }}</td>
+        <td>{{ user.nom }} {{ user.prenom }}</td>
+        <td>{{ user.roles?.join(', ') || '-' }}</td>
+        <td>
+          <button class="btn-sm btn-edit" (click)="edit(user)">Éditer</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <div *ngIf="!isLoading && users.length === 0" class="empty-state">Aucun utilisateur trouvé.</div>
+</div>

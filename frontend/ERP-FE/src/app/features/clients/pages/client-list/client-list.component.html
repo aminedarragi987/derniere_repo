@@ -1,0 +1,41 @@
+<section class="page">
+  <header class="page-header">
+    <div>
+      <h1>Clients</h1>
+      <p>Consulte la base clients et recherche rapidement un contact.</p>
+    </div>
+    <button type="button" class="btn-outline" (click)="loadClients()">Actualiser</button>
+  </header>
+
+  <div class="toolbar">
+    <input
+      type="text"
+      [(ngModel)]="search"
+      (ngModelChange)="applyFilter()"
+      placeholder="Rechercher nom, email, telephone..." />
+  </div>
+
+  <p class="loading" *ngIf="isLoading">Chargement des clients...</p>
+  <p class="error" *ngIf="errorMessage">{{ errorMessage }}</p>
+
+  <table class="table" *ngIf="!isLoading && !errorMessage && filtered.length > 0">
+    <thead>
+      <tr>
+        <th>Nom</th>
+        <th>Email</th>
+        <th>Téléphone</th>
+        <th>Adresse</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let client of filtered">
+        <td>{{ client.nom }}</td>
+        <td>{{ client.email || '-' }}</td>
+        <td>{{ client.telephone || '-' }}</td>
+        <td>{{ client.adresse || '-' }}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p class="empty" *ngIf="!isLoading && !errorMessage && filtered.length === 0">Aucun client trouvé.</p>
+</section>

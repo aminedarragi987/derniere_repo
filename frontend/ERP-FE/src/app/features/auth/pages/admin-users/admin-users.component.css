@@ -1,0 +1,29 @@
+.admin-users-page {
+  padding: 20px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #fff;
+  border: 1px solid #e2e8f0;
+}
+
+th,
+td {
+  padding: 10px 12px;
+  border-bottom: 1px solid #e2e8f0;
+  text-align: left;
+}
+
+.error {
+  color: #b91c1c;
+  font-weight: 600;
+  margin: 10px 0;
+}
+
+.info {
+  color: #0369a1;
+  font-weight: 600;
+  margin: 10px 0;
+}

@@ -1,0 +1,47 @@
+<section class="page">
+  <header class="page-header">
+    <div>
+      <h1>Commandes</h1>
+      <p>Suivi des commandes clients et de leur état d'avancement.</p>
+    </div>
+    <button type="button" class="btn-outline" (click)="loadCommandes()">Actualiser</button>
+  </header>
+
+  <div class="toolbar">
+    <label>
+      Filtre statut
+      <select [(ngModel)]="statusFilter" (change)="loadCommandes()">
+        <option value="">Tous</option>
+        <option value="Brouillon">Brouillon</option>
+        <option value="Validee">Validee</option>
+        <option value="Livree">Livree</option>
+      </select>
+    </label>
+  </div>
+
+  <p class="loading" *ngIf="isLoading">Chargement des commandes...</p>
+  <p class="error" *ngIf="errorMessage">{{ errorMessage }}</p>
+
+  <table class="table" *ngIf="!isLoading && !errorMessage && commandes.length > 0">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Date</th>
+        <th>Client</th>
+        <th>Statut</th>
+        <th>Total</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let commande of commandes">
+        <td>#{{ commande.idcommande }}</td>
+        <td>{{ commande.datecommande | date: 'dd/MM/yyyy HH:mm' }}</td>
+        <td>{{ commande.idclient || '-' }}</td>
+        <td>{{ commande.statut || 'N/A' }}</td>
+        <td>{{ commande.total || 0 | number: '1.2-2' }}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p class="empty" *ngIf="!isLoading && !errorMessage && commandes.length === 0">Aucune commande trouvée.</p>
+</section>

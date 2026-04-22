@@ -1,0 +1,46 @@
+.header {
+	height: 64px;
+	padding: 0 16px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	background: #ffffff;
+	border-bottom: 1px solid #e2e8f0;
+}
+
+.brand {
+	font-weight: 800;
+	letter-spacing: 0.03em;
+}
+
+.actions {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+}
+
+.identity {
+	display: grid;
+	text-align: right;
+	line-height: 1.15;
+}
+
+.identity small {
+	color: #64748b;
+}
+
+.link {
+	color: #0369a1;
+	text-decoration: none;
+	font-weight: 600;
+}
+
+button {
+	border: none;
+	border-radius: 8px;
+	padding: 8px 12px;
+	font-weight: 700;
+	background: #0f172a;
+	color: #fff;
+	cursor: pointer;
+}

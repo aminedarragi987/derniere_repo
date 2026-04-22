@@ -1,0 +1,65 @@
+<section class="article-form-page">
+  <div class="form-card">
+    <header>
+      <h1>{{ isEdit ? 'Modifier' : 'Créer' }} un article</h1>
+      <p>Renseigne les informations nécessaires pour le stock.</p>
+      <p class="permission-hint" *ngIf="!canManageArticles">
+        Votre profil ne permet pas d'enregistrer des articles. Le role Gestionnaire est requis.
+      </p>
+    </header>
+
+    <div *ngIf="errorMessage" class="alert alert-danger">{{ errorMessage }}</div>
+    <div *ngIf="successMessage" class="alert alert-success">{{ successMessage }}</div>
+
+    <form [formGroup]="form" (ngSubmit)="save()" class="form-grid">
+      <label>
+        <span>Nom *</span>
+        <input formControlName="nom" placeholder="Ex: Clavier mécanique" />
+        <small *ngIf="form.get('nom')?.touched && form.get('nom')?.invalid" class="error">Nom requis</small>
+      </label>
+
+      <label>
+        <span>Description</span>
+        <input formControlName="description" placeholder="Ex: RGB, AZERTY" />
+      </label>
+
+      <label>
+        <span>Prix (DH) *</span>
+        <input type="number" formControlName="prix" placeholder="0" step="0.01" />
+        <small *ngIf="form.get('prix')?.touched && form.get('prix')?.invalid" class="error">Prix requis</small>
+      </label>
+
+      <label>
+        <span>Quantité en stock *</span>
+        <input type="number" formControlName="quantitestock" placeholder="0" />
+        <small *ngIf="form.get('quantitestock')?.touched && form.get('quantitestock')?.invalid" class="error">Quantité requise</small>
+      </label>
+
+      <label>
+        <span>Seuil minimum *</span>
+        <input type="number" formControlName="seuilminimum" placeholder="0" />
+        <small *ngIf="form.get('seuilminimum')?.touched && form.get('seuilminimum')?.invalid" class="error">Seuil requis</small>
+      </label>
+
+      <label class="wide">
+        <span>Fournisseurs</span>
+        <select multiple (change)="onSelectFournisseurs($event)">
+          <option
+            *ngFor="let f of fournisseurs"
+            [value]="f.idfournisseur"
+            [selected]="isSelectedFournisseur(f.idfournisseur)">
+            {{ f.nom }}
+          </option>
+        </select>
+        <small class="hint">Maintiens Ctrl (ou Cmd) pour sélectionner plusieurs fournisseurs.</small>
+      </label>
+
+      <div class="actions">
+        <button type="button" class="btn-light" (click)="cancel()">Retour</button>
+        <button type="submit" class="btn-primary" [disabled]="isSubmitting || !canManageArticles">
+          {{ isSubmitting ? 'Enregistrement...' : 'Enregistrer' }}
+        </button>
+      </div>
+    </form>
+  </div>
+</section>

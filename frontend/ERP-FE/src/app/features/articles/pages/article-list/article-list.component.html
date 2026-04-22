@@ -1,0 +1,78 @@
+<section class="articles-page">
+  <header class="page-header">
+    <div>
+      <h1>Catalogue Articles</h1>
+      <p>Consulte, modifie et supprime les articles de ton stock.</p>
+      <p class="permission-hint" *ngIf="!canManageArticles">
+        Vous etes connecte en lecture seule sur ce module. Le role Gestionnaire est requis pour ajouter, modifier ou supprimer.
+      </p>
+    </div>
+    <button class="btn-primary" [disabled]="!canManageArticles" (click)="create()">+ Ajouter un article</button>
+  </header>
+
+  <!-- Filtres -->
+  <form [formGroup]="filterForm" class="filter-card">
+    <div class="filter-row">
+      <div class="filter-group">
+        <label>Recherche</label>
+        <input type="text" formControlName="search" class="form-control" placeholder="Nom de l'article..." />
+      </div>
+      <div class="filter-group">
+        <label>Catégorie</label>
+        <select formControlName="idcategorie" class="form-control">
+          <option value="">-- Toutes --</option>
+        </select>
+      </div>
+      <div class="filter-group">
+        <label>Fournisseur</label>
+        <select formControlName="idfournisseur" class="form-control">
+          <option value="">-- Tous --</option>
+          <option *ngFor="let f of fournisseurs" [value]="f.idfournisseur">{{ f.nom }}</option>
+        </select>
+      </div>
+      <div class="filter-group">
+        <label>Prix Min</label>
+        <input type="number" formControlName="prixMin" class="form-control" step="0.01" />
+      </div>
+      <div class="filter-group">
+        <label>Prix Max</label>
+        <input type="number" formControlName="prixMax" class="form-control" step="0.01" />
+      </div>
+      <button type="button" class="btn-secondary" (click)="clearFilter()" style="margin-top: 24px;">Réinitialiser</button>
+    </div>
+  </form>
+
+  <div class="feedback loading" *ngIf="isLoading">Chargement des articles...</div>
+  <div class="feedback error" *ngIf="errorMessage">{{ errorMessage }}</div>
+
+  <div class="table-card" *ngIf="!isLoading && !errorMessage">
+    <table>
+      <thead>
+        <tr>
+          <th>Nom</th>
+          <th>Description</th>
+          <th>Prix</th>
+          <th>Stock</th>
+          <th>Seuil Min</th>
+          <th class="actions-col">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let a of articles">
+          <td><strong>{{ a.nom }}</strong></td>
+          <td>{{ a.description || '-' }}</td>
+          <td>{{ a.prix | number:'1.2-2' }} DH</td>
+          <td>{{ a.quantitestock }}</td>
+          <td>{{ a.seuilminimum }}</td>
+          <td class="actions">
+            <button class="btn-sm btn-secondary" [disabled]="!canManageArticles" (click)="edit(a.idarticle)">Modifier</button>
+            <button class="btn-sm btn-danger" [disabled]="!canManageArticles" (click)="delete(a.idarticle)">Supprimer</button>
+          </td>
+        </tr>
+        <tr *ngIf="articles.length === 0">
+          <td colspan="6" class="empty">Aucun article disponible.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>

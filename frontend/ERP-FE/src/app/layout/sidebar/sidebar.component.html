@@ -1,0 +1,13 @@
+<aside class="sidebar">
+	<h2>ERP</h2>
+
+	<nav>
+		<a
+			*ngFor="let menu of (menus$ | async)"
+			[routerLink]="menu.memRouterlink"
+			routerLinkActive="active"
+			class="menu-item">
+			{{ menu.titre }}
+		</a>
+	</nav>
+</aside>
