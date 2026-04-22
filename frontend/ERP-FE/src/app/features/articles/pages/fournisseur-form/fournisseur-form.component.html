@@ -1,0 +1,39 @@
+<section class="supplier-form-page">
+  <div class="form-card">
+    <header>
+      <h1>{{ isEdit ? 'Modifier' : 'Créer' }} un fournisseur</h1>
+      <p>Gere les donnees de contact du fournisseur.</p>
+      <p class="permission-hint" *ngIf="!canManageSuppliers">
+        Votre profil ne permet pas d'enregistrer des fournisseurs.
+      </p>
+    </header>
+
+    <div *ngIf="errorMessage" class="alert alert-danger">{{ errorMessage }}</div>
+    <div *ngIf="successMessage" class="alert alert-success">{{ successMessage }}</div>
+
+    <form [formGroup]="form" (ngSubmit)="save()" class="form-grid">
+      <label>
+        <span>Nom *</span>
+        <input formControlName="nom" placeholder="Ex: Atlas Distribution" />
+        <small *ngIf="form.get('nom')?.touched && form.get('nom')?.invalid" class="error">Nom requis</small>
+      </label>
+
+      <label>
+        <span>Email</span>
+        <input type="email" formControlName="email" placeholder="contact@exemple.com" />
+      </label>
+
+      <label>
+        <span>Téléphone</span>
+        <input type="text" formControlName="telephone" placeholder="+212 ..." />
+      </label>
+
+      <div class="actions">
+        <button type="button" class="btn-light" (click)="goBack()">Retour</button>
+        <button type="submit" class="btn-primary" [disabled]="isSubmitting || !canManageSuppliers">
+          {{ isSubmitting ? 'Enregistrement...' : 'Enregistrer' }}
+        </button>
+      </div>
+    </form>
+  </div>
+</section>

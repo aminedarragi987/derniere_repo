@@ -1,1 +1,62 @@
-<p>home works!</p>
+<section class="landing-page">
+	<header class="hero">
+		<div class="hero-copy">
+			<p class="eyebrow">Page de garde</p>
+			<h1>Bienvenue, {{ displayName }}</h1>
+			<p class="subtitle">
+				{{ primaryRole }} : voici les espaces et actions disponibles pour ton profil.
+			</p>
+		</div>
+
+		<div class="hero-panel">
+			<div class="role-chip">{{ primaryRole }}</div>
+			<p>La navigation adapte les menus selon ton role.</p>
+			<a routerLink="/dashboard/overview" class="btn-primary">Voir le tableau de bord</a>
+		</div>
+	</header>
+
+	<section class="summary-grid">
+		<article class="summary-card">
+			<span>Roles visibles</span>
+			<strong>{{ userService.currentUserValue?.roles?.length || 0 }}</strong>
+			<p>Les acces sont filtres par role serveur et menu.</p>
+		</article>
+		<article class="summary-card">
+			<span>Actions rapides</span>
+			<strong>{{ visibleActions.length }}</strong>
+			<p>Les cartes ci-dessous montrent quoi faire dans l’application.</p>
+		</article>
+		<article class="summary-card">
+			<span>Acces commun</span>
+			<strong>2</strong>
+			<p>Mot de passe et tableau de bord restent disponibles pour tous.</p>
+		</article>
+	</section>
+
+	<section class="role-section" *ngIf="userService.isAdmin()">
+		<header>
+			<p class="eyebrow">{{ primaryRole }}</p>
+			<h2>Ce role gere</h2>
+			<p>Les utilisateurs, les roles, les profils et les menus visibles par chaque compte.</p>
+		</header>
+	</section>
+
+	<section class="role-section" *ngIf="userService.isManager()">
+		<header>
+			<p class="eyebrow">Gestionnaire</p>
+			<h2>Ce role travaille sur</h2>
+			<p>Le catalogue, les clients et le suivi des commandes.</p>
+		</header>
+	</section>
+
+	<section class="actions-grid">
+		<article
+			class="action-card"
+			*ngFor="let action of visibleActions"
+			[ngClass]="action.tone">
+			<p class="action-title">{{ action.title }}</p>
+			<p class="action-description">{{ action.description }}</p>
+			<a [routerLink]="action.link">Ouvrir</a>
+		</article>
+	</section>
+</section>

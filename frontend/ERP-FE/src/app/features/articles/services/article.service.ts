@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { environment } from '../../../../environments/environment';
-import { ArticleDto, ArticleFilterDto, FournisseurDto } from '../models/article.model';
+import { ArticleDto, ArticleFilterDto, CategorieDto, FournisseurDto } from '../models/article.model';
 import { Observable } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
@@ -43,6 +43,10 @@ export class ArticleService {
 
   delete(id: number): Observable<{ Message: string }> {
     return this.http.delete<{ Message: string }>(`${this.api}/Article/${id}`);
+  }
+
+  getCategories(): Observable<CategorieDto[]> {
+    return this.http.get<CategorieDto[]>(`${this.api}/Categories`);
   }
 
   getFournisseurs(): Observable<FournisseurDto[]> {

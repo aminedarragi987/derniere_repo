@@ -41,6 +41,14 @@
         <small *ngIf="form.get('seuilminimum')?.touched && form.get('seuilminimum')?.invalid" class="error">Seuil requis</small>
       </label>
 
+      <label>
+        <span>Catégorie</span>
+        <select formControlName="idcategorie">
+          <option [ngValue]="null">-- Aucune --</option>
+          <option *ngFor="let c of categories" [ngValue]="c.idcategorie">{{ c.nom }}</option>
+        </select>
+      </label>
+
       <label class="wide">
         <span>Fournisseurs</span>
         <select multiple (change)="onSelectFournisseurs($event)">

@@ -63,6 +63,16 @@ export class MenuService {
         hassubmenu: false
       },
       {
+        idmenu: 2,
+        titre: 'Fournisseurs',
+        description: 'Gestion des fournisseurs',
+        memRouterlink: '/fournisseurs',
+        memHref: '',
+        memIcon: 'local_shipping',
+        memTarget: '',
+        hassubmenu: false
+      },
+      {
         idmenu: 6,
         titre: 'Clients',
         description: 'Gestion des clients',
@@ -84,7 +94,7 @@ export class MenuService {
       }
     ];
 
-    if (user.roles.includes('Administrateur')) {
+    if (this.authService.hasAnyRole(['Administrateur'])) {
       menus.push(
         {
           idmenu: 2,

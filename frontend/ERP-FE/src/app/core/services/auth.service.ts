@@ -133,8 +133,11 @@ export class AuthService {
     if (!expectedRoles.length) {
       return true;
     }
-    const roles = this.currentUserValue?.roles ?? [];
-    return expectedRoles.some((role) => roles.includes(role));
+
+    const currentRoles = (this.currentUserValue?.roles ?? []).map((role) => this.normalizeRole(role));
+    const requiredRoles = expectedRoles.map((role) => this.normalizeRole(role));
+
+    return requiredRoles.some((role) => currentRoles.includes(role));
   }
 
   hasAllPermissions(expectedPermissions: string[]): boolean {
@@ -185,5 +188,24 @@ export class AuthService {
     const claims = decodeJwtClaims(token);
     const user = normalizeUserFromClaims(claims);
     this.currentUserSubject.next(user);
+  }
+
+  private normalizeRole(role: string): string {
+    const normalized = role
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '')
+      .trim()
+      .replace(/\s+/g, ' ')
+      .toLowerCase();
+
+    if (normalized === 'administrateur' || normalized === 'admin' || normalized === 'dg' || normalized === 'directeur' || normalized === 'directeur general') {
+      return 'Administrateur';
+    }
+
+    if (normalized === 'gestionnaire' || normalized === 'manager') {
+      return 'Gestionnaire';
+    }
+
+    return role.trim();
   }
 }

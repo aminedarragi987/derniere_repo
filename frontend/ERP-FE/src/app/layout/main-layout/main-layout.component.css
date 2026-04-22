@@ -1,11 +1,15 @@
 .shell {
 	display: flex;
-	min-height: calc(100vh - 64px);
+	min-height: calc(100vh - 144px);
 }
 
 main {
 	flex: 1;
 	background: #f8fafc;
+}
+
+app-footer {
+	display: block;
 }
 
 @media (max-width: 920px) {

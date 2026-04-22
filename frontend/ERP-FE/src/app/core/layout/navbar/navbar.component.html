@@ -1,1 +1,28 @@
-<p>navbar works!</p>
+<header class="topbar">
+	<div class="brand-block">
+		<div class="logo">ERP</div>
+		<div>
+			<p class="eyebrow">Plateforme de gestion</p>
+			<h1>ERP Microservices</h1>
+		</div>
+	</div>
+
+	<div class="user-block" *ngIf="userService.currentUser$ | async as user; else guestTpl">
+		<div class="user-meta">
+			<strong>{{ userService.getDisplayName() }}</strong>
+			<span>
+				{{ user.roles.join(', ') || 'Aucun role' }}
+			</span>
+		</div>
+
+		<a routerLink="/dashboard" class="nav-link">Accueil</a>
+		<a routerLink="/auth/change-password" class="nav-link">Mot de passe</a>
+		<button type="button" class="logout-btn" (click)="logout()">Deconnexion</button>
+	</div>
+
+	<ng-template #guestTpl>
+		<div class="user-block guest">
+			<a routerLink="/auth/login" class="nav-link">Connexion</a>
+		</div>
+	</ng-template>
+</header>

@@ -10,6 +10,12 @@ export const routes: Routes = [
         .then((m) => m.LoginComponent)
   },
   {
+    path: 'auth/forgot-password',
+    loadComponent: () =>
+      import('./features/auth/forgot-password/forgot-password.component')
+        .then((m) => m.ForgotPasswordComponent)
+  },
+  {
     path: 'auth/change-password',
     canActivate: [authGuard],
     loadComponent: () =>
@@ -26,10 +32,16 @@ export const routes: Routes = [
       {
         path: '',
         pathMatch: 'full',
-        redirectTo: 'articles'
+        redirectTo: 'dashboard'
       },
       {
         path: 'dashboard',
+        loadComponent: () =>
+          import('./features/dashboard/home/home.component')
+            .then((m) => m.HomeComponent)
+      },
+      {
+        path: 'dashboard/overview',
         loadComponent: () =>
           import('./features/dashboard/pages/dashboard/dashboard.component')
             .then((m) => m.DashboardComponent)
@@ -58,6 +70,31 @@ export const routes: Routes = [
             loadComponent: () =>
               import('./features/articles/pages/article-form/article-form.component')
                 .then((m) => m.ArticleFormComponent)
+          }
+        ]
+      },
+      {
+        path: 'fournisseurs',
+        canActivate: [roleGuard],
+        data: { roles: ['Gestionnaire', 'Administrateur'] },
+        children: [
+          {
+            path: '',
+            loadComponent: () =>
+              import('./features/articles/pages/fournisseur-list/fournisseur-list.component')
+                .then((m) => m.FournisseurListComponent)
+          },
+          {
+            path: 'new',
+            loadComponent: () =>
+              import('./features/articles/pages/fournisseur-form/fournisseur-form.component')
+                .then((m) => m.FournisseurFormComponent)
+          },
+          {
+            path: 'edit/:id',
+            loadComponent: () =>
+              import('./features/articles/pages/fournisseur-form/fournisseur-form.component')
+                .then((m) => m.FournisseurFormComponent)
           }
         ]
       },

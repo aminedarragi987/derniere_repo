@@ -7,7 +7,10 @@
         Vous etes connecte en lecture seule sur ce module. Le role Gestionnaire est requis pour ajouter, modifier ou supprimer.
       </p>
     </div>
-    <button class="btn-primary" [disabled]="!canManageArticles" (click)="create()">+ Ajouter un article</button>
+    <div class="header-actions">
+      <button class="btn-secondary" type="button" (click)="goToFournisseurs()">Fournisseurs</button>
+      <button class="btn-primary" [disabled]="!canManageArticles" (click)="create()">+ Ajouter un article</button>
+    </div>
   </header>
 
   <!-- Filtres -->
@@ -21,6 +24,7 @@
         <label>Catégorie</label>
         <select formControlName="idcategorie" class="form-control">
           <option value="">-- Toutes --</option>
+          <option *ngFor="let c of categories" [value]="c.idcategorie">{{ c.nom }}</option>
         </select>
       </div>
       <div class="filter-group">

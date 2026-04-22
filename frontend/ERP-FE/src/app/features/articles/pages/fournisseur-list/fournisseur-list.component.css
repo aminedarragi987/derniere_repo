@@ -1,0 +1,116 @@
+.page {
+	padding: 24px;
+	display: grid;
+	gap: 16px;
+	font-family: 'Segoe UI Variable', 'Trebuchet MS', 'Lucida Sans', sans-serif;
+}
+
+.page-header,
+.toolbar,
+table {
+	background: #fff;
+	border: 1px solid #e2e8f0;
+	border-radius: 12px;
+}
+
+.page-header {
+	display: flex;
+	justify-content: space-between;
+	gap: 16px;
+	align-items: center;
+	padding: 16px 18px;
+}
+
+.page-header h1 {
+	margin: 0 0 6px;
+}
+
+.page-header p,
+.loading,
+.error,
+.empty {
+	margin: 0;
+	color: #475569;
+}
+
+.toolbar {
+	padding: 14px 16px;
+}
+
+input {
+	width: 100%;
+	border: 1px solid #cbd5e1;
+	border-radius: 10px;
+	padding: 10px 12px;
+	font-size: 0.96rem;
+}
+
+table {
+	width: 100%;
+	border-collapse: collapse;
+	overflow: hidden;
+}
+
+th,
+td {
+	padding: 12px 14px;
+	border-bottom: 1px solid #e5e7eb;
+	text-align: left;
+}
+
+.actions {
+	display: flex;
+	justify-content: flex-end;
+	gap: 8px;
+}
+
+button {
+	border: none;
+	border-radius: 10px;
+	padding: 9px 14px;
+	font-weight: 700;
+	cursor: pointer;
+}
+
+.btn-primary {
+	background: #0f766e;
+	color: #fff;
+}
+
+.btn-outline {
+	background: #ffffff;
+	color: #0f172a;
+	border: 1px solid #cbd5e1;
+}
+
+.btn-secondary {
+	background: #e2e8f0;
+	color: #0f172a;
+}
+
+.btn-danger {
+	background: #fee2e2;
+	color: #b91c1c;
+}
+
+.header-actions {
+	display: flex;
+	gap: 10px;
+	flex-wrap: wrap;
+}
+
+@media (max-width: 720px) {
+	.page {
+		padding: 16px;
+	}
+
+	.page-header {
+		flex-direction: column;
+		align-items: flex-start;
+	}
+
+	.actions {
+		justify-content: flex-start;
+		flex-wrap: wrap;
+	}
+}

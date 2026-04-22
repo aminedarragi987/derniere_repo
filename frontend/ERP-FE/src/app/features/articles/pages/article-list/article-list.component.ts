@@ -85,8 +85,14 @@ export class ArticleListComponent implements OnInit, OnDestroy {
   }
 
   loadCategories(): void {
-    // A implémenter via CategorieService si disponible
-    // Pour maintenant, laisser vide
+    this.service.getCategories().subscribe({
+      next: (res) => {
+        this.categories = res;
+      },
+      error: () => {
+        this.categories = [];
+      }
+    });
   }
 
   loadFournisseurs(): void {
@@ -137,6 +143,10 @@ export class ArticleListComponent implements OnInit, OnDestroy {
       return;
     }
     this.router.navigate(['/articles/new']);
+  }
+
+  goToFournisseurs(): void {
+    this.router.navigate(['/fournisseurs']);
   }
 
   edit(id: number | undefined): void {

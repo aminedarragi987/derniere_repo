@@ -3,7 +3,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ArticleService } from '../../services/article.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ArticleDto, FournisseurDto } from '../../models/article.model';
+import { ArticleDto, CategorieDto, FournisseurDto } from '../../models/article.model';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../../../../core/services/auth.service';
 
@@ -16,6 +16,7 @@ import { AuthService } from '../../../../core/services/auth.service';
 export class ArticleFormComponent implements OnInit {
 
   form!: FormGroup;
+  categories: CategorieDto[] = [];
   fournisseurs: FournisseurDto[] = [];
   isEdit = false;
   id!: number;
@@ -44,6 +45,15 @@ export class ArticleFormComponent implements OnInit {
 
   ngOnInit(): void {
     this.id = this.route.snapshot.params['id'];
+
+    this.service.getCategories().subscribe({
+      next: (res) => {
+        this.categories = res;
+      },
+      error: () => {
+        this.categories = [];
+      }
+    });
 
     this.service.getFournisseurs().subscribe({
       next: (res) => {

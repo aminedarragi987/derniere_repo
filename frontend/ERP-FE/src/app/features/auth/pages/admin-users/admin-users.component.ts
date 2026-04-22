@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserIamService } from '../../../../core/services/user-iam.service';
-import { UtilisateurDto } from '../../models/user.models';
+import { RolesDto, UtilisateurDto } from '../../models/user.models';
 
 @Component({
   standalone: true,
@@ -12,6 +12,7 @@ import { UtilisateurDto } from '../../models/user.models';
 })
 export class AdminUsersComponent implements OnInit {
   users: UtilisateurDto[] = [];
+  roles: RolesDto[] = [];
   isLoading = false;
   errorMessage = '';
   successMessage = '';
@@ -28,13 +29,26 @@ export class AdminUsersComponent implements OnInit {
       email: ['', [Validators.required, Validators.email]],
       nom: ['', Validators.required],
       prenom: [''],
+      telephone: [''],
       motdepasse: [''],
-      roles: [[] as string[]]
+      idrole: [null, Validators.required]
     });
   }
 
   ngOnInit(): void {
+    this.loadRoles();
     this.loadUsers();
+  }
+
+  loadRoles(): void {
+    this.userIamService.getRoles().subscribe({
+      next: (roles) => {
+        this.roles = roles;
+      },
+      error: () => {
+        this.errorMessage = 'Impossible de charger les roles.';
+      }
+    });
   }
 
   loadUsers(): void {
@@ -69,9 +83,20 @@ export class AdminUsersComponent implements OnInit {
     const formValue = this.form.getRawValue();
     const isEdit = formValue.iduser > 0;
 
-    (isEdit ? 
-      this.userIamService.updateUser(formValue) :
-      this.userIamService.addUser(formValue)
+    const payload: UtilisateurDto = {
+      iduser: formValue.iduser,
+      userName: formValue.userName,
+      email: formValue.email,
+      nom: formValue.nom,
+      prenom: formValue.prenom,
+      telephone: formValue.telephone,
+      motdepasse: formValue.motdepasse,
+      idrole: formValue.idrole ? Number(formValue.idrole) : undefined
+    };
+
+    (isEdit ?
+      this.userIamService.updateUser(payload) :
+      this.userIamService.addUser(payload)
     ).subscribe({
       next: () => {
         this.successMessage = `Utilisateur ${isEdit ? 'mis à jour' : 'créé'} avec succès.`;
@@ -85,7 +110,16 @@ export class AdminUsersComponent implements OnInit {
   }
 
   edit(user: UtilisateurDto): void {
-    this.form.patchValue(user);
+    this.form.patchValue({
+      iduser: user.iduser ?? 0,
+      userName: user.userName ?? '',
+      email: user.email ?? '',
+      nom: user.nom ?? '',
+      prenom: user.prenom ?? '',
+      telephone: user.telephone ?? '',
+      motdepasse: '',
+      idrole: user.idrole ?? null
+    });
     this.showForm = true;
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
