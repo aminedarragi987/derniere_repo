@@ -21,10 +21,10 @@ export class MenuService {
     return this.userIamService.getMenus().pipe(
       tap((menus) => {
         const sorted = [...menus].sort((a, b) => (a.idmenu ?? 0) - (b.idmenu ?? 0));
-        this.menusSubject.next(sorted);
+        this.menusSubject.next(this.ensureRoleMenus(sorted));
       }),
       catchError(() => {
-        const fallback = this.createFallbackMenus();
+        const fallback = this.ensureRoleMenus(this.createFallbackMenus());
         this.menusSubject.next(fallback);
         return of(fallback);
       })
@@ -36,11 +36,6 @@ export class MenuService {
   }
 
   private createFallbackMenus(): MenuDto[] {
-    const user = this.authService.currentUserValue;
-    if (!user) {
-      return [];
-    }
-
     const menus: MenuDto[] = [
       {
         idmenu: 0,
@@ -51,8 +46,17 @@ export class MenuService {
         memIcon: 'dashboard',
         memTarget: '',
         hassubmenu: false
-      },
-      {
+      }
+    ];
+
+    return menus;
+  }
+
+  private ensureRoleMenus(menus: MenuDto[]): MenuDto[] {
+    const merged = [...menus];
+
+    if (this.authService.hasAnyRole(['Gestionnaire', 'Administrateur'])) {
+      this.pushIfMissing(merged, {
         idmenu: 1,
         titre: 'Articles',
         description: 'Gestion des articles',
@@ -61,8 +65,8 @@ export class MenuService {
         memIcon: 'inventory',
         memTarget: '',
         hassubmenu: false
-      },
-      {
+      });
+      this.pushIfMissing(merged, {
         idmenu: 2,
         titre: 'Fournisseurs',
         description: 'Gestion des fournisseurs',
@@ -71,8 +75,11 @@ export class MenuService {
         memIcon: 'local_shipping',
         memTarget: '',
         hassubmenu: false
-      },
-      {
+      });
+    }
+
+    if (this.authService.hasAnyRole(['Gestionnaire', 'Comptable', 'Administrateur'])) {
+      this.pushIfMissing(merged, {
         idmenu: 6,
         titre: 'Clients',
         description: 'Gestion des clients',
@@ -81,8 +88,8 @@ export class MenuService {
         memIcon: 'groups',
         memTarget: '',
         hassubmenu: false
-      },
-      {
+      });
+      this.pushIfMissing(merged, {
         idmenu: 7,
         titre: 'Commandes',
         description: 'Suivi des commandes',
@@ -91,54 +98,60 @@ export class MenuService {
         memIcon: 'receipt_long',
         memTarget: '',
         hassubmenu: false
-      }
-    ];
-
-    if (this.authService.hasAnyRole(['Administrateur'])) {
-      menus.push(
-        {
-          idmenu: 2,
-          titre: 'Utilisateurs',
-          description: 'Gestion des utilisateurs',
-          memRouterlink: '/users',
-          memHref: '',
-          memIcon: 'group',
-          memTarget: '',
-          hassubmenu: false
-        },
-        {
-          idmenu: 3,
-          titre: 'Rôles',
-          description: 'Gestion des rôles',
-          memRouterlink: '/admin/roles',
-          memHref: '',
-          memIcon: 'security',
-          memTarget: '',
-          hassubmenu: false
-        },
-        {
-          idmenu: 4,
-          titre: 'Profils',
-          description: 'Gestion des profils',
-          memRouterlink: '/admin/profiles',
-          memHref: '',
-          memIcon: 'person',
-          memTarget: '',
-          hassubmenu: false
-        },
-        {
-          idmenu: 5,
-          titre: 'Menus',
-          description: 'Gestion des menus',
-          memRouterlink: '/admin/menus',
-          memHref: '',
-          memIcon: 'menu',
-          memTarget: '',
-          hassubmenu: false
-        }
-      );
+      });
     }
 
-    return menus;
+    if (this.authService.hasAnyRole(['Administrateur'])) {
+      this.pushIfMissing(merged, {
+        idmenu: 20,
+        titre: 'Utilisateurs',
+        description: 'Gestion des utilisateurs',
+        memRouterlink: '/users',
+        memHref: '',
+        memIcon: 'group',
+        memTarget: '',
+        hassubmenu: false
+      });
+      this.pushIfMissing(merged, {
+        idmenu: 21,
+        titre: 'Rôles',
+        description: 'Gestion des rôles',
+        memRouterlink: '/admin/roles',
+        memHref: '',
+        memIcon: 'security',
+        memTarget: '',
+        hassubmenu: false
+      });
+      this.pushIfMissing(merged, {
+        idmenu: 22,
+        titre: 'Profils',
+        description: 'Gestion des profils',
+        memRouterlink: '/admin/profiles',
+        memHref: '',
+        memIcon: 'person',
+        memTarget: '',
+        hassubmenu: false
+      });
+      this.pushIfMissing(merged, {
+        idmenu: 23,
+        titre: 'Menus',
+        description: 'Gestion des menus',
+        memRouterlink: '/admin/menus',
+        memHref: '',
+        memIcon: 'menu',
+        memTarget: '',
+        hassubmenu: false
+      });
+    }
+
+    return merged.sort((a, b) => (a.idmenu ?? 0) - (b.idmenu ?? 0));
+  }
+
+  private pushIfMissing(menus: MenuDto[], menu: MenuDto): void {
+    const route = (menu.memRouterlink ?? '').trim().toLowerCase();
+    const alreadyExists = menus.some((item) => (item.memRouterlink ?? '').trim().toLowerCase() === route);
+    if (!alreadyExists) {
+      menus.push(menu);
+    }
   }
 }

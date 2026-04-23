@@ -150,20 +150,14 @@ export class AuthService {
 
   loadConnectedUser(): Observable<AuthUserState> {
     return this.userIamService.getMe().pipe(
-      map((user: UtilisateurDto) => {
-        const normalized: AuthUserState = {
-          iduser: user.iduser,
-          userName: user.userName,
-          email: user.email,
-          nom: user.nom,
-          prenom: user.prenom,
-          profile: user.profileNom,
-          idprofil: user.idprofil,
-          roles: user.roles ?? [],
-          permissions: user.permissions ?? [],
-          claims: {}
-        };
-        return normalized;
+      map((payload: UtilisateurDto | UtilisateurDto[]) => {
+        const accessToken = this.tokenService.getAccessToken();
+        const fallback = accessToken
+          ? normalizeUserFromClaims(decodeJwtClaims(accessToken))
+          : ({ roles: [], permissions: [], claims: {} } as AuthUserState);
+
+        const selectedUser = this.selectConnectedUser(payload, fallback);
+        return this.toAuthUserState(selectedUser, fallback);
       }),
       tap((user) => this.currentUserSubject.next(user)),
       catchError(() => {
@@ -177,6 +171,46 @@ export class AuthService {
         return of(fallback);
       })
     );
+  }
+
+  private selectConnectedUser(
+    payload: UtilisateurDto | UtilisateurDto[],
+    fallback: AuthUserState
+  ): Partial<UtilisateurDto> {
+    const users = Array.isArray(payload) ? payload : [payload];
+    if (!users.length) {
+      return {};
+    }
+
+    const fallbackId = Number(fallback.id ?? 0);
+    const fallbackEmail = (fallback.email ?? '').toLowerCase();
+    const fallbackUserName = (fallback.userName ?? '').toLowerCase();
+
+    return (
+      users.find((user) => (user.iduser ?? 0) === fallbackId) ??
+      users.find((user) => (user.email ?? '').toLowerCase() === fallbackEmail) ??
+      users.find((user) => (user.userName ?? '').toLowerCase() === fallbackUserName) ??
+      users[0]
+    );
+  }
+
+  private toAuthUserState(user: Partial<UtilisateurDto>, fallback: AuthUserState): AuthUserState {
+    const roles = user.roles?.length ? user.roles : fallback.roles;
+    const permissions = user.permissions?.length ? user.permissions : fallback.permissions;
+
+    return {
+      id: fallback.id,
+      iduser: user.iduser ?? (fallback.id ? Number(fallback.id) : undefined),
+      userName: user.userName ?? fallback.userName,
+      email: user.email ?? fallback.email,
+      nom: user.nom ?? fallback.nom,
+      prenom: user.prenom,
+      profile: user.profileNom ?? fallback.profile,
+      idprofil: user.idprofil,
+      roles: roles ?? [],
+      permissions: permissions ?? [],
+      claims: fallback.claims ?? {}
+    };
   }
 
   private restoreUserFromToken(): void {
@@ -204,6 +238,10 @@ export class AuthService {
 
     if (normalized === 'gestionnaire' || normalized === 'manager') {
       return 'Gestionnaire';
+    }
+
+    if (normalized === 'comptable' || normalized === 'accountant' || normalized === 'finance') {
+      return 'Comptable';
     }
 
     return role.trim();

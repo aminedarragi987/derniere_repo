@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { environment } from '../../../environments/environment';
 import { MenuDto, ProfileDto, RoleMenuAssignDto, RolesDto, UtilisateurDto } from '../../features/auth/models/user.models';
 
@@ -10,20 +11,33 @@ import { MenuDto, ProfileDto, RoleMenuAssignDto, RolesDto, UtilisateurDto } from
 export class UserIamService {
   constructor(private http: HttpClient) {}
 
-  getMe(): Observable<UtilisateurDto> {
-    return this.http.get<UtilisateurDto>(`${environment.gatewayUrl}/User/Users`);
+  getMe(): Observable<UtilisateurDto | UtilisateurDto[]> {
+    return this.http
+      .get<unknown>(`${environment.gatewayUrl}/User/Users`)
+      .pipe(map((payload) => this.normalizeUsersResponse(payload)));
   }
 
   getUsers(): Observable<UtilisateurDto[]> {
-    return this.http.get<UtilisateurDto[]>(`${environment.gatewayUrl}/User/Users`);
+    return this.http
+      .get<unknown>(`${environment.gatewayUrl}/User/Users`)
+      .pipe(
+        map((payload) => this.normalizeUsersResponse(payload)),
+        map((payload) => (Array.isArray(payload) ? payload : [payload]))
+      );
   }
 
   addUser(user: UtilisateurDto): Observable<{ Message: string }> {
-    return this.http.post<{ Message: string }>(`${environment.gatewayUrl}/User/AddUser`, user);
+    return this.http.post<{ Message: string }>(
+      `${environment.gatewayUrl}/User/AddUser`,
+      this.toBackendUserPayload(user)
+    );
   }
 
   updateUser(user: UtilisateurDto): Observable<{ Message: string }> {
-    return this.http.put<{ Message: string }>(`${environment.gatewayUrl}/User/UpdUser`, user);
+    return this.http.put<{ Message: string }>(
+      `${environment.gatewayUrl}/User/UpdUser`,
+      this.toBackendUserPayload(user)
+    );
   }
 
   getRoles(): Observable<RolesDto[]> {
@@ -80,5 +94,78 @@ export class UserIamService {
 
   deleteMenu(idmenu: number): Observable<{ Message: string }> {
     return this.http.delete<{ Message: string }>(`${environment.gatewayUrl}/User/Menu/${idmenu}`);
+  }
+
+  private normalizeUsersResponse(payload: unknown): UtilisateurDto | UtilisateurDto[] {
+    if (Array.isArray(payload)) {
+      return payload.map((item) => this.normalizeUserDto(item));
+    }
+
+    if (payload && typeof payload === 'object' && 'value' in (payload as Record<string, unknown>)) {
+      const value = (payload as { value?: unknown }).value;
+      if (Array.isArray(value)) {
+        return value.map((item) => this.normalizeUserDto(item));
+      }
+      if (value && typeof value === 'object') {
+        return this.normalizeUserDto(value);
+      }
+    }
+
+    if (payload && typeof payload === 'object') {
+      return this.normalizeUserDto(payload);
+    }
+
+    return [];
+  }
+
+  private normalizeUserDto(payload: unknown): UtilisateurDto {
+    const user = (payload as Record<string, unknown>) ?? {};
+    return {
+      id: this.toNumber(user['id'] ?? user['iduser']),
+      iduser: this.toNumber(user['iduser'] ?? user['id']),
+      idrole: this.toNumber(user['idrole']),
+      userName: this.toString(user['userName'] ?? user['username']),
+      email: this.toString(user['email']),
+      nom: this.toString(user['nom']),
+      prenom: this.toString(user['prenom']),
+      telephone: this.toString(user['telephone']),
+      roles: Array.isArray(user['roles']) ? (user['roles'] as string[]) : undefined,
+      permissions: Array.isArray(user['permissions']) ? (user['permissions'] as string[]) : undefined,
+      idprofil: this.toNumber(user['idprofil']),
+      profileNom: this.toString(user['profileNom'])
+    };
+  }
+
+  private toBackendUserPayload(user: UtilisateurDto): Record<string, unknown> {
+    return {
+      iduser: user.iduser ?? user.id ?? 0,
+      idrole: user.idrole ?? null,
+      nom: user.nom ?? '',
+      prenom: user.prenom ?? '',
+      email: user.email ?? '',
+      telephone: user.telephone ?? '',
+      username: user.userName ?? '',
+      userName: user.userName ?? '',
+      motpass: user.motdepasse ?? '',
+      motdepasse: user.motdepasse ?? ''
+    };
+  }
+
+  private toNumber(value: unknown): number | undefined {
+    if (typeof value === 'number') {
+      return value;
+    }
+    if (typeof value === 'string' && value.trim().length) {
+      const parsed = Number(value);
+      return Number.isNaN(parsed) ? undefined : parsed;
+    }
+    return undefined;
+  }
+
+  private toString(value: unknown): string | undefined {
+    if (typeof value === 'string') {
+      return value;
+    }
+    return undefined;
   }
 }

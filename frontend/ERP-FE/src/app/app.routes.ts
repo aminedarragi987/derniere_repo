@@ -101,7 +101,7 @@ export const routes: Routes = [
       {
         path: 'clients',
         canActivate: [roleGuard],
-        data: { roles: ['Gestionnaire', 'Administrateur'] },
+        data: { roles: ['Gestionnaire', 'Comptable', 'Administrateur'] },
         loadComponent: () =>
           import('./features/clients/pages/client-list/client-list.component')
             .then((m) => m.ClientListComponent)
@@ -109,7 +109,7 @@ export const routes: Routes = [
       {
         path: 'commandes',
         canActivate: [roleGuard],
-        data: { roles: ['Gestionnaire', 'Administrateur'] },
+        data: { roles: ['Gestionnaire', 'Comptable', 'Administrateur'] },
         loadComponent: () =>
           import('./features/commandes/pages/commande-list/commande-list.component')
             .then((m) => m.CommandeListComponent)

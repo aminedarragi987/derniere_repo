@@ -5,6 +5,7 @@ import { FooterComponent } from '../../core/layout/footer/footer.component';
 import { SidebarComponent } from '../sidebar/sidebar.component';
 import { AuthService } from '../../core/services/auth.service';
 import { MenuService } from '../../core/services/menu.service';
+import { switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-main-layout',
@@ -22,8 +23,10 @@ export class MainLayoutComponent implements OnInit {
 
   ngOnInit(): void {
     if (this.authService.isAuthenticated()) {
-      this.authService.loadConnectedUser().subscribe({ error: () => undefined });
-      this.menuService.loadMyMenus().subscribe({ error: () => undefined });
+      this.authService
+        .loadConnectedUser()
+        .pipe(switchMap(() => this.menuService.loadMyMenus()))
+        .subscribe({ error: () => undefined });
     }
   }
 

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserIamService } from '../../../../core/services/user-iam.service';
-import { RolesDto } from '../../models/user.models';
+import { ProfileDto, RolesDto } from '../../models/user.models';
 
 @Component({
   selector: 'app-admin-roles',
@@ -13,6 +13,8 @@ import { RolesDto } from '../../models/user.models';
 })
 export class AdminRolesComponent implements OnInit {
   roles: RolesDto[] = [];
+  profiles: ProfileDto[] = [];
+  availableParentRoles: RolesDto[] = [];
   isLoading = false;
   errorMessage = '';
   successMessage = '';
@@ -24,12 +26,29 @@ export class AdminRolesComponent implements OnInit {
       idrole: [0],
       nom: ['', Validators.required],
       description: [''],
-      idprofile: [null as number | null]
+      idprofile: [null as number | null, Validators.required],
+      idroleparent: [null as number | null]
     });
   }
 
   ngOnInit(): void {
+    this.loadProfiles();
     this.loadRoles();
+  }
+
+  loadProfiles(): void {
+    this.userIamService.getProfiles().subscribe({
+      next: (profiles) => {
+        this.profiles = profiles;
+        const currentProfile = this.form.getRawValue().idprofile;
+        if (!currentProfile && profiles.length > 0) {
+          this.form.patchValue({ idprofile: profiles[0].idprofil });
+        }
+      },
+      error: () => {
+        this.errorMessage = 'Erreur lors du chargement des profils.';
+      }
+    });
   }
 
   loadRoles(): void {
@@ -37,6 +56,12 @@ export class AdminRolesComponent implements OnInit {
     this.userIamService.getRoles().subscribe({
       next: (roles) => {
         this.roles = roles;
+        this.availableParentRoles = roles;
+        const currentParent = this.form.getRawValue().idroleparent;
+        const adminRole = roles.find((role) => role.nom?.toLowerCase() === 'administrateur');
+        if (!currentParent && adminRole) {
+          this.form.patchValue({ idroleparent: adminRole.idrole });
+        }
         this.isLoading = false;
       },
       error: () => {
@@ -49,7 +74,14 @@ export class AdminRolesComponent implements OnInit {
   toggleForm(): void {
     this.showForm = !this.showForm;
     if (!this.showForm) {
-      this.form.reset();
+      const adminRole = this.roles.find((role) => role.nom?.toLowerCase() === 'administrateur');
+      this.form.reset({
+        idrole: 0,
+        nom: '',
+        description: '',
+        idprofile: this.profiles[0]?.idprofil ?? null,
+        idroleparent: adminRole?.idrole ?? null
+      });
       this.successMessage = '';
       this.errorMessage = '';
     }
@@ -92,6 +124,12 @@ export class AdminRolesComponent implements OnInit {
 
   edit(role: RolesDto): void {
     this.form.patchValue(role);
+    if (!role.idroleparent) {
+      const adminRole = this.roles.find((item) => item.nom?.toLowerCase() === 'administrateur');
+      if (adminRole) {
+        this.form.patchValue({ idroleparent: adminRole.idrole });
+      }
+    }
     this.showForm = true;
   }
 

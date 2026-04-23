@@ -89,6 +89,21 @@ export class HomeComponent {
     }
   ];
 
+  readonly accountantActions: RoleAction[] = [
+    {
+      title: 'Suivre les commandes',
+      description: 'Verifier les statuts de commandes et les montants.',
+      link: '/commandes',
+      tone: 'rose'
+    },
+    {
+      title: 'Consulter les clients',
+      description: 'Rechercher les clients et verifier leurs coordonnees.',
+      link: '/clients',
+      tone: 'amber'
+    }
+  ];
+
   get displayName(): string {
     return this.userService.getDisplayName();
   }
@@ -109,6 +124,10 @@ export class HomeComponent {
 
     if (user.roles.includes('Gestionnaire')) {
       return 'Gestionnaire';
+    }
+
+    if (user.roles.includes('Comptable')) {
+      return 'Comptable';
     }
 
     return user.roles[0];
@@ -132,6 +151,10 @@ export class HomeComponent {
 
     if (this.userService.isManager()) {
       return [...this.commonActions, ...this.managerActions];
+    }
+
+    if (this.userService.isAccountant()) {
+      return [...this.commonActions, ...this.accountantActions];
     }
 
     return this.commonActions;

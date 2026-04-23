@@ -41,6 +41,14 @@ export class UserService {
     return this.hasAnyRole(['Gestionnaire']);
   }
 
+  isAccountant(): boolean {
+    return this.hasAnyRole(['Comptable']);
+  }
+
+  canManageCommercialFlow(): boolean {
+    return this.hasAnyRole(['Gestionnaire', 'Comptable', 'Administrateur']);
+  }
+
   getDisplayName(): string {
     const user = this.currentUserValue;
     if (!user) {
