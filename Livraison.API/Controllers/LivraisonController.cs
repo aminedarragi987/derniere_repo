@@ -49,4 +49,16 @@ public class LivraisonController : ControllerBase
 
         return Ok(livraison);
     }
+
+    [HttpPost("{idlivraison:int}/Comptabilite")]
+    public async Task<IActionResult> EnvoyerComptabilite(int idlivraison)
+    {
+        var export = await _gestionStockService.EnvoyerLivraisonComptabilite(idlivraison);
+        if (export == null)
+        {
+            return NotFound(new { Message = "Livraison introuvable." });
+        }
+
+        return Ok(export);
+    }
 }

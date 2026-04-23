@@ -303,8 +303,8 @@ COPY public.roles (idrole, nom, description, idprofile, idroleparent) FROM stdin
 --
 
 COPY public.utilisateur (iduser, nom, username, motpass, email, telephone, idrole) FROM stdin;
-2	Tounsie Aziz	oper	$2a$11$3qDyqa8gju8cxokmeNIs4ueSzZnrXhgB/pxCXjb7UFOruxmINn9W2	oper@ttt.tn	122222222	1
-1	Foulen Ben Foulen	foulen	$2a$11$fmwtrOuCUnTGy92S7fYcV.XgNkAteJ0ULxDcqz1G5ZD0YqKHwTmyy	foulen@ttt.tn	122222222	1
+2	Tounsie Aziz	oper	$2a$11$1QYq4q7bnFHMTs8i7b0dzOKwwBn07654Ln8tJQ/rg.5dOIayWX0gS	oper@ttt.tn	122222222	1
+1	Foulen Ben Foulen	foulen	$2a$11$1QYq4q7bnFHMTs8i7b0dzOKwwBn07654Ln8tJQ/rg.5dOIayWX0gS	foulen@ttt.tn	122222222	1
 \.
 
 

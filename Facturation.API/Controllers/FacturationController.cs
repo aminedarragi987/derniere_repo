@@ -51,6 +51,25 @@ public class FacturationController : ControllerBase
         }
     }
 
+    [HttpPost("{idfacture:int}/Paiement/Carte")]
+    public async Task<IActionResult> PayerParCarte(int idfacture, [FromBody] CardPaymentDto paiementCarte)
+    {
+        try
+        {
+            var created = await _gestionStockService.ProcessCardPayment(idfacture, paiementCarte);
+            if (created == null)
+            {
+                return NotFound(new { Message = "Facture introuvable." });
+            }
+
+            return Ok(created);
+        }
+        catch (InvalidOperationException ex)
+        {
+            return BadRequest(new { Message = ex.Message });
+        }
+    }
+
     [HttpGet]
     public async Task<IActionResult> GetFactures([FromQuery] FactureFilterDto filter)
     {

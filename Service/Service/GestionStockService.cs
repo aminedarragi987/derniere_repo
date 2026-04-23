@@ -728,6 +728,55 @@ public class GestionStockService : IGestionStockService
         };
     }
 
+    public async Task<PaiementDto?> ProcessCardPayment(int idfacture, CardPaymentDto paiementCarte)
+    {
+        if (paiementCarte.Montant <= 0)
+        {
+            throw new InvalidOperationException("Le montant du paiement doit être supérieur à zéro.");
+        }
+
+        if (string.IsNullOrWhiteSpace(paiementCarte.CardHolderName))
+        {
+            throw new InvalidOperationException("Le nom du porteur de carte est obligatoire.");
+        }
+
+        var cardNumber = (paiementCarte.CardNumber ?? string.Empty).Replace(" ", string.Empty);
+        if (cardNumber.Length < 13 || cardNumber.Length > 19 || !cardNumber.All(char.IsDigit))
+        {
+            throw new InvalidOperationException("Numéro de carte invalide.");
+        }
+
+        var cvv = paiementCarte.Cvv ?? string.Empty;
+        if ((cvv.Length != 3 && cvv.Length != 4) || !cvv.All(char.IsDigit))
+        {
+            throw new InvalidOperationException("CVV invalide.");
+        }
+
+        if (paiementCarte.ExpiryMonth < 1 || paiementCarte.ExpiryMonth > 12)
+        {
+            throw new InvalidOperationException("Mois d'expiration invalide.");
+        }
+
+        var now = DateTime.UtcNow;
+        var currentYear = now.Year;
+        var currentMonth = now.Month;
+        if (paiementCarte.ExpiryYear < currentYear || (paiementCarte.ExpiryYear == currentYear && paiementCarte.ExpiryMonth < currentMonth))
+        {
+            throw new InvalidOperationException("La carte bancaire est expirée.");
+        }
+
+        var paiement = new PaiementCreateDto
+        {
+            Montant = paiementCarte.Montant,
+            Modepaiement = "CarteBancaire",
+            Reference = string.IsNullOrWhiteSpace(paiementCarte.Reference)
+                ? $"CB-{DateTime.UtcNow:yyyyMMddHHmmss}"
+                : paiementCarte.Reference
+        };
+
+        return await AddPaiement(idfacture, paiement);
+    }
+
     public async Task<LivraisonDto?> GenererLivraison(int idcommande)
     {
         var commande = await _commandeRepository.GetById(idcommande);
@@ -791,6 +840,75 @@ public class GestionStockService : IGestionStockService
             Datelivraison = livraison.Datelivraison,
             Adresse = livraison.Adresse,
             Statut = livraison.Statut
+        };
+    }
+
+    public async Task<ComptabiliteExportDto?> EnvoyerLivraisonComptabilite(int idlivraison)
+    {
+        var livraison = await _livraisonRepository.GetById(idlivraison);
+        if (livraison == null)
+        {
+            return null;
+        }
+
+        return new ComptabiliteExportDto
+        {
+            Idlivraison = livraison.Idlivraison,
+            Idcommande = livraison.Idcommande,
+            Datelivraison = livraison.Datelivraison,
+            Adresse = livraison.Adresse,
+            StatutLivraison = livraison.Statut,
+            EnvoyeLeUtc = DateTime.UtcNow,
+            StatutEnvoi = "Envoyé"
+        };
+    }
+
+    public async Task<DashboardDirectionDto> GetDashboardDirection()
+    {
+        var commandes = await _commandeRepository.GetMuliple();
+        var factures = await _factureRepository.GetMuliple();
+        var paiements = await _paiementRepository.GetMuliple();
+
+        var commandeList = commandes.ToList();
+        var factureList = factures.ToList();
+        var paiementList = paiements.ToList();
+
+        var ventesMensuelles = commandeList
+            .GroupBy(c => new { c.Datecommande.Year, c.Datecommande.Month })
+            .Select(g =>
+            {
+                var totalFacturesMois = factureList
+                    .Where(f => f.Datefacture.Year == g.Key.Year && f.Datefacture.Month == g.Key.Month)
+                    .Sum(f => f.Montantttc);
+
+                var totalPaiementsMois = paiementList
+                    .Where(p => p.Datepaiement.Year == g.Key.Year && p.Datepaiement.Month == g.Key.Month)
+                    .Sum(p => p.Montant);
+
+                return new VenteMensuelleDto
+                {
+                    Annee = g.Key.Year,
+                    Mois = g.Key.Month,
+                    NombreCommandes = g.Count(),
+                    TotalCommandes = g.Sum(x => x.Totalcommande),
+                    TotalFactures = totalFacturesMois,
+                    TotalPaiements = totalPaiementsMois
+                };
+            })
+            .OrderBy(v => v.Annee)
+            .ThenBy(v => v.Mois)
+            .ToList();
+
+        return new DashboardDirectionDto
+        {
+            NombreCommandes = commandeList.Count,
+            NombreCommandesValidees = commandeList.Count(c => string.Equals(c.Statut, "Validée", StringComparison.OrdinalIgnoreCase)),
+            NombreFactures = factureList.Count,
+            NombreFacturesPayees = factureList.Count(f => string.Equals(f.Statut, "Payée", StringComparison.OrdinalIgnoreCase)),
+            ChiffreAffairesCommandes = commandeList.Sum(c => c.Totalcommande),
+            ChiffreAffairesFactures = factureList.Sum(f => f.Montantttc),
+            MontantTotalPaiements = paiementList.Sum(p => p.Montant),
+            VentesMensuelles = ventesMensuelles
         };
     }
 }

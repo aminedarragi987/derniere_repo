@@ -69,11 +69,14 @@ namespace Service.Service
         {
             var accessTkn = new AccessTkn();
 
+            var roleName = user.IdroleNavigation?.Nom ?? string.Empty;
+            var email = string.IsNullOrWhiteSpace(user.Email) ? string.Empty : user.Email;
+
             var claims = new List<Claim>
             {
                 new(JwtRegisteredClaimNames.Sub, user.Iduser.ToString()),
-                new(JwtRegisteredClaimNames.Email, user.Email),
-                new("role", user.IdroleNavigation.Nom),
+                new(JwtRegisteredClaimNames.Email, email),
+                new("role", roleName),
                 new("uid", user.Iduser.ToString())
             };
 

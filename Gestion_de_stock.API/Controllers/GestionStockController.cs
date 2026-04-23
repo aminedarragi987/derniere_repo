@@ -179,11 +179,39 @@ public class GestionStockController : ControllerBase
         }
     }
 
+    [HttpPost("Facture/{idfacture:int}/Paiement/Carte")]
+    [Authorize(Roles = "Comptable")]
+    public async Task<IActionResult> PayerParCarte(int idfacture, [FromBody] CardPaymentDto paiementCarte)
+    {
+        try
+        {
+            var created = await _gestionStockService.ProcessCardPayment(idfacture, paiementCarte);
+            if (created == null)
+            {
+                return NotFound(new { Message = "Facture introuvable." });
+            }
+
+            return Ok(created);
+        }
+        catch (InvalidOperationException ex)
+        {
+            return BadRequest(new { Message = ex.Message });
+        }
+    }
+
     [HttpGet("Dashboard")]
     [Authorize(Roles = "Gestionnaire,DirecteurGeneral")]
     public async Task<IActionResult> Dashboard()
     {
         var dashboard = await _gestionStockService.GetDashboard();
+        return Ok(dashboard);
+    }
+
+    [HttpGet("Dashboard/Direction")]
+    [Authorize(Roles = "DirecteurGeneral")]
+    public async Task<IActionResult> DashboardDirection()
+    {
+        var dashboard = await _gestionStockService.GetDashboardDirection();
         return Ok(dashboard);
     }
 
@@ -388,5 +416,18 @@ public class GestionStockController : ControllerBase
         }
 
         return Ok(livraison);
+    }
+
+    [HttpPost("Livraison/{idlivraison:int}/Comptabilite")]
+    [Authorize(Roles = "Gestionnaire")]
+    public async Task<IActionResult> EnvoyerComptabilite(int idlivraison)
+    {
+        var export = await _gestionStockService.EnvoyerLivraisonComptabilite(idlivraison);
+        if (export == null)
+        {
+            return NotFound(new { Message = "Livraison introuvable." });
+        }
+
+        return Ok(export);
     }
 }

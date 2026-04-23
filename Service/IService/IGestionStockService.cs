@@ -32,6 +32,9 @@ public interface IGestionStockService
     Task<FactureDto?> GenererFacture(int idcommande);
     Task<IEnumerable<FactureDetailDto>> GetFactures(FactureFilterDto filter);
     Task<PaiementDto?> AddPaiement(int idfacture, PaiementCreateDto paiement);
+    Task<PaiementDto?> ProcessCardPayment(int idfacture, CardPaymentDto paiementCarte);
     Task<LivraisonDto?> GenererLivraison(int idcommande);
     Task<LivraisonDto?> GetLivraison(int idlivraison);
+    Task<ComptabiliteExportDto?> EnvoyerLivraisonComptabilite(int idlivraison);
+    Task<DashboardDirectionDto> GetDashboardDirection();
 }
