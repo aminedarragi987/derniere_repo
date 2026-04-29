@@ -1,6 +1,8 @@
+using Core.Entities;
 using DAL;
 using DAL.Config;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Serilog;
 using Service;
@@ -23,8 +25,13 @@ Log.Logger = new LoggerConfiguration()
 
 builder.Services.AddSingleton(Log.Logger);
 
-// DB CONFIG
-builder.Services.Configure<DbContextSettings>(builder.Configuration);
+// DB CONFIG (IMPORTANT FIX ICI)
+builder.Services.AddDbContext<IAMDbContext>(options =>
+{
+    options.UseNpgsql(
+        builder.Configuration.GetConnectionString("DefaultConnection")
+    );
+});
 
 // SERVICES
 builder.Services.AddService(builder.Configuration);

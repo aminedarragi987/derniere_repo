@@ -22,8 +22,13 @@ public class ArticleDto
     [Range(0, int.MaxValue)]
     public int Seuilminimum { get; set; }
 
-    public int? Idcategorie { get; set; }
+    public string? Sexe { get; set; }
+    public string? Typevetement { get; set; }
+    public string? Marque { get; set; }
+    public string? Couleur { get; set; }
+    public string? Taille { get; set; }
 
+    public int? Idcategorie { get; set; }
     public string? CategorieNom { get; set; }
 
     public List<int> FournisseurIds { get; set; } = new();

@@ -33,6 +33,13 @@ public class StockService : IStockService
             Prix = dto.Prix,
             Quantitestock = dto.Quantitestock,
             Seuilminimum = dto.Seuilminimum,
+
+            Sexe = dto.Sexe,
+            Typevetement = dto.Typevetement,
+            Marque = dto.Marque,
+            Couleur = dto.Couleur,
+            Taille = dto.Taille,
+
             Idcategorie = dto.Idcategorie
         };
 
@@ -52,6 +59,13 @@ public class StockService : IStockService
         entity.Prix = dto.Prix;
         entity.Quantitestock = dto.Quantitestock;
         entity.Seuilminimum = dto.Seuilminimum;
+
+        entity.Sexe = dto.Sexe;
+        entity.Typevetement = dto.Typevetement;
+        entity.Marque = dto.Marque;
+        entity.Couleur = dto.Couleur;
+        entity.Taille = dto.Taille;
+
         entity.Idcategorie = dto.Idcategorie;
 
         await _articleRepo.Update(entity);
@@ -69,10 +83,34 @@ public class StockService : IStockService
 
     public async Task<IEnumerable<ArticleDto>> GetArticles(ArticleFilterDto filter)
     {
-        var query = _articleRepo.GetAll().AsQueryable();
+        var query = _articleRepo.GetAll()
+            .Include(a => a.IdcategorieNavigation)
+            .Include(a => a.ArticleFournisseurs)
+            .AsQueryable();
 
-        if (!string.IsNullOrEmpty(filter.Search))
+        if (!string.IsNullOrWhiteSpace(filter.Search))
             query = query.Where(a => a.Nom.Contains(filter.Search));
+
+        if (filter.Idcategorie.HasValue)
+            query = query.Where(a => a.Idcategorie == filter.Idcategorie);
+
+        if (!string.IsNullOrWhiteSpace(filter.Sexe))
+            query = query.Where(a => a.Sexe == filter.Sexe);
+
+        if (!string.IsNullOrWhiteSpace(filter.Typevetement))
+            query = query.Where(a => a.Typevetement == filter.Typevetement);
+
+        if (!string.IsNullOrWhiteSpace(filter.Marque))
+            query = query.Where(a => a.Marque == filter.Marque);
+
+        if (!string.IsNullOrWhiteSpace(filter.Taille))
+            query = query.Where(a => a.Taille == filter.Taille);
+
+        if (filter.PrixMin.HasValue)
+            query = query.Where(a => a.Prix >= filter.PrixMin.Value);
+
+        if (filter.PrixMax.HasValue)
+            query = query.Where(a => a.Prix <= filter.PrixMax.Value);
 
         var list = await query.ToListAsync();
 
@@ -84,7 +122,22 @@ public class StockService : IStockService
             Prix = a.Prix,
             Quantitestock = a.Quantitestock,
             Seuilminimum = a.Seuilminimum,
-            Idcategorie = a.Idcategorie
+
+            Sexe = a.Sexe,
+            Typevetement = a.Typevetement,
+            Marque = a.Marque,
+            Couleur = a.Couleur,
+            Taille = a.Taille,
+
+            Idcategorie = a.Idcategorie,
+
+            CategorieNom = a.IdcategorieNavigation != null
+                ? a.IdcategorieNavigation.Nom
+                : null,
+
+            FournisseurIds = a.ArticleFournisseurs != null
+                ? a.ArticleFournisseurs.Select(f => f.Idfournisseur).ToList()
+                : new List<int>()
         });
     }
 
@@ -211,7 +264,11 @@ public class StockService : IStockService
         return new DashboardStockDto
         {
             NombreArticles = await _articleRepo.Count(),
-            NombreFournisseurs = await _fournisseurRepo.Count()
+            NombreFournisseurs = await _fournisseurRepo.Count(),
+            NombreCommandes = 0,
+            NombreCommandesValidees = 0,
+            NombreArticlesEnAlerte = 0,
+            ChiffreAffaires = 0
         };
     }
 }

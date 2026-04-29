@@ -58,20 +58,50 @@ public partial class IAMDbContext : DbContext
             entity.ToTable("article");
 
             entity.Property(e => e.Idarticle).HasColumnName("idarticle");
-            entity.Property(e => e.Description)
-                .HasColumnType("character varying")
-                .HasColumnName("description");
-            entity.Property(e => e.Idcategorie).HasColumnName("idcategorie");
+
             entity.Property(e => e.Nom)
                 .HasColumnType("character varying")
                 .HasColumnName("nom");
+
+            entity.Property(e => e.Description)
+                .HasColumnType("character varying")
+                .HasColumnName("description");
+
             entity.Property(e => e.Prix)
                 .HasPrecision(18, 2)
                 .HasColumnName("prix");
-            entity.Property(e => e.Quantitestock).HasColumnName("quantitestock");
-            entity.Property(e => e.Seuilminimum).HasColumnName("seuilminimum");
 
-            entity.HasOne(d => d.IdcategorieNavigation).WithMany(p => p.Articles)
+            entity.Property(e => e.Quantitestock)
+                .HasColumnName("quantitestock");
+
+            entity.Property(e => e.Seuilminimum)
+                .HasColumnName("seuilminimum");
+
+            entity.Property(e => e.Sexe)
+                .HasMaxLength(30)
+                .HasColumnName("sexe");
+
+            entity.Property(e => e.Typevetement)
+                .HasMaxLength(50)
+                .HasColumnName("typevetement");
+
+            entity.Property(e => e.Marque)
+                .HasMaxLength(80)
+                .HasColumnName("marque");
+
+            entity.Property(e => e.Couleur)
+                .HasMaxLength(50)
+                .HasColumnName("couleur");
+
+            entity.Property(e => e.Taille)
+                .HasMaxLength(20)
+                .HasColumnName("taille");
+
+            entity.Property(e => e.Idcategorie)
+                .HasColumnName("idcategorie");
+
+            entity.HasOne(d => d.IdcategorieNavigation)
+                .WithMany(p => p.Articles)
                 .HasForeignKey(d => d.Idcategorie)
                 .OnDelete(DeleteBehavior.SetNull)
                 .HasConstraintName("article_idcategorie_fkey");
