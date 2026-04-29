@@ -1,70 +1,101 @@
 <section class="articles-page">
-<section class="articles-page">
   <header class="page-header">
-    <div>
-      <h1 style="font-size:2.2rem;font-weight:800;letter-spacing:-1px;margin-bottom:0;">Catalogue vêtements</h1>
-      <p style="margin:0 0 8px 0;">Consulte, modifie et supprime les articles de ta boutique de mode.</p>
+    <div class="page-titles">
+      <h1 class="title">Catalogue vêtements</h1>
+      <p class="subtitle">Consultez, modifiez et gérez les articles de votre boutique.</p>
       <p class="permission-hint" *ngIf="!canManageArticles">
-        Vous êtes connecté en lecture seule sur ce module. Le rôle Gestionnaire est requis pour ajouter, modifier ou supprimer.
+        Vous êtes en lecture seule pour ce module. Rôle requis: Gestionnaire.
       </p>
     </div>
+
     <div class="header-actions">
-      <button class="btn-secondary" type="button" (click)="goToFournisseurs()">Fournisseurs</button>
+      <div class="search-short">
+        <input type="text" placeholder="Recherche rapide..." (input)="filterForm.patchValue({ search: $any($event.target).value })" />
+      </div>
+      <div class="header-buttons">
+        <button class="btn-outline" type="button" (click)="goToFournisseurs()">Fournisseurs</button>
+        <button class="btn-primary" type="button" [disabled]="!canManageArticles" (click)="create()">Nouvel article</button>
+      </div>
     </div>
   </header>
 
-
-  <div class="filter-card modern-filters">
-    <form [formGroup]="filterForm">
-      <div class="modern-filter-row">
-        <input type="text" formControlName="search" class="form-control" placeholder="🔎 Recherche (ex: Robe, T-shirt)" />
-        <select formControlName="idcategorie" class="form-control">
-          <option value="">Catégorie</option>
+  <section class="filters" *ngIf="filterForm">
+    <form [formGroup]="filterForm" class="filters-row">
+      <div class="row-left">
+        <select formControlName="idcategorie">
+          <option value="">Toutes catégories</option>
           <option *ngFor="let c of categories" [value]="c.idcategorie">{{ c.nom }}</option>
         </select>
-        <select formControlName="idfournisseur" class="form-control">
-          <option value="">Fournisseur</option>
+
+        <select formControlName="idfournisseur">
+          <option value="">Tous fournisseurs</option>
           <option *ngFor="let f of fournisseurs" [value]="f.idfournisseur">{{ f.nom }}</option>
         </select>
-        <input type="number" formControlName="prixMin" class="form-control" step="0.01" placeholder="Prix Min" />
-        <input type="number" formControlName="prixMax" class="form-control" step="0.01" placeholder="Prix Max" />
-        <button type="button" class="btn-secondary" (click)="clearFilter()">Réinitialiser</button>
+
+        <input type="number" formControlName="prixMin" placeholder="Prix min" />
+        <input type="number" formControlName="prixMax" placeholder="Prix max" />
+      </div>
+      <div class="row-right">
+        <button class="btn-secondary" type="button" (click)="clearFilter()">Réinitialiser</button>
       </div>
     </form>
-  </div>
+  </section>
 
   <div class="feedback loading" *ngIf="isLoading">Chargement des articles...</div>
   <div class="feedback error" *ngIf="errorMessage">{{ errorMessage }}</div>
 
   <div class="table-card" *ngIf="!isLoading && !errorMessage">
-    <table>
+    <table class="article-table" aria-label="Liste des articles">
       <thead>
         <tr>
-          <th>Nom</th>
-          <th>Description</th>
-          <th>Prix</th>
-          <th>Stock</th>
-          <th>Seuil Min</th>
-          <th>Alerte</th>
-          <th class="actions-col">Actions</th>
+          <th class="col-icon"></th>
+          <th class="col-name">Nom</th>
+          <th class="col-desc">Description</th>
+          <th class="col-price">Prix</th>
+          <th class="col-stock">Stock</th>
+          <th class="col-threshold">Seuil Min</th>
+          <th class="col-alert">Alerte</th>
+          <th class="col-actions">Actions</th>
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let a of articles">
-          <td><strong>{{ a.nom }}</strong></td>
-          <td>{{ a.description || '-' }}</td>
-          <td>{{ a.prix | number:'1.2-2' }} DH</td>
-          <td>{{ a.quantitestock }}</td>
-          <td>{{ a.seuilminimum }}</td>
-          <td>
-            <span class="alert-badge" [class.bad]="isInAlert(a)" [class.ok]="!isInAlert(a)">
-              {{ isInAlert(a) ? 'Sous seuil' : 'Normal' }}
+        <tr *ngFor="let a of articles" class="article-row">
+          <td class="col-icon">
+            <div class="row-icon">
+              <span class="material-icons">inventory_2</span>
+            </div>
+          </td>
+          <td class="col-name">
+            <div class="name-wrap">
+              <div class="name-text">
+                <strong>{{ a.nom }}</strong>
+              </div>
+            </div>
+          </td>
+          <td class="col-desc">{{ a.description || '-' }}</td>
+          <td class="col-price">
+            <div class="price-val">{{ a.prix | number:'1.2-2' }}</div>
+            <div class="price-currency">DH</div>
+          </td>
+          <td class="col-stock" [ngClass]="{ 'low': isInAlert(a) }">{{ a.quantitestock }}</td>
+          <td class="col-threshold">{{ a.seuilminimum }}</td>
+          <td class="col-alert">
+            <span class="alert-badge" [ngClass]="{ 'bad': isInAlert(a), 'ok': !isInAlert(a) }">
+              {{ isInAlert(a) ? 'SOUS SEUIL' : 'NORMAL' }}
             </span>
           </td>
-          <td class="actions">
-            <button class="btn-sm btn-warning" [disabled]="!canManageArticles" (click)="defineAlertThreshold(a)">Seuil alerte</button>
-            <button class="btn-sm btn-secondary" [disabled]="!canManageArticles" (click)="edit(a.idarticle)">Modifier</button>
-            <button class="btn-sm btn-danger" [disabled]="!canManageArticles" (click)="delete(a.idarticle)">Supprimer</button>
+          <td class="col-actions">
+            <div class="icon-actions">
+              <button class="icon-btn" title="Alerte" (click)="defineAlertThreshold(a)" [disabled]="!canManageArticles">
+                <span class="material-icons">warning_amber</span>
+              </button>
+              <button class="icon-btn" title="Modifier" (click)="edit(a.idarticle)" [disabled]="!canManageArticles">
+                <span class="material-icons">edit</span>
+              </button>
+              <button class="icon-btn danger" title="Supprimer" (click)="delete(a.idarticle)" [disabled]="!canManageArticles">
+                <span class="material-icons">delete</span>
+              </button>
+            </div>
           </td>
         </tr>
         <tr *ngIf="articles.length === 0">
@@ -74,6 +105,4 @@
     </table>
   </div>
 
-  <button class="fab-add" [disabled]="!canManageArticles" (click)="create()" title="Ajouter un article">
-    <span aria-hidden="true">+</span>
-  </button>
+  <button class="fab-add" [disabled]="!canManageArticles" (click)="create()" title="Ajouter un article">+</button>

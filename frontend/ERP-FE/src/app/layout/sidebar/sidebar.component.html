@@ -3,7 +3,8 @@
 
 	<nav>
 		<a *ngFor="let menu of (menus$ | async)" [routerLink]="menu.memRouterlink" routerLinkActive="active" class="menu-item">
-			{{ menu.titre }}
+			<span class="menu-icon material-icons">{{ menu.memIcon }}</span>
+			<span class="menu-title">{{ menu.titre }}</span>
 		</a>
 	</nav>
 </aside>

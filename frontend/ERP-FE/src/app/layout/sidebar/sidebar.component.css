@@ -25,11 +25,14 @@ nav {
 .menu-item {
 	color: #334155;
 	text-decoration: none;
-	padding: 10px 12px;
-	border-radius: 8px;
+	padding: 8px 10px;
+	border-radius: 12px;
 	font-weight: 600;
-	font-size: 0.94rem;
+	font-size: 0.96rem;
 	transition: background 0.15s ease, color 0.15s ease;
+	display: flex;
+	align-items: center;
+	gap: 12px;
 }
 
 .menu-item:hover,
@@ -37,6 +40,21 @@ nav {
 	background: #eef2ff;
 	color: #2563eb;
 }
+
+.menu-icon {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 36px;
+	height: 36px;
+	border-radius: 8px;
+	background: #f6fbff;
+	color: #2563eb;
+	box-shadow: 0 2px 6px rgba(11,43,64,0.04);
+	font-size: 18px;
+}
+
+.menu-title { display: inline-block; }
 
 @media (max-width: 920px) {
 	.sidebar {

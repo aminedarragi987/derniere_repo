@@ -69,6 +69,14 @@ export const routes: Routes = [
           import('./features/articles/pages/article-form/article-form.component')
             .then(m => m.ArticleFormComponent)
       },
+      {
+        path: 'articles/edit/:id',
+        canActivate: [roleGuard],
+        data: { roles: ['Gestionnaire', 'Administrateur'] },
+        loadComponent: () =>
+          import('./features/articles/pages/article-form/article-form.component')
+            .then(m => m.ArticleFormComponent)
+      },
 
       // ================= FOURNISSEURS =================
       {
@@ -81,6 +89,14 @@ export const routes: Routes = [
       },
       {
         path: 'fournisseurs/new',
+        canActivate: [roleGuard],
+        data: { roles: ['Gestionnaire', 'Administrateur'] },
+        loadComponent: () =>
+          import('./features/articles/pages/fournisseur-form/fournisseur-form.component')
+            .then(m => m.FournisseurFormComponent)
+      },
+      {
+        path: 'fournisseurs/edit/:id',
         canActivate: [roleGuard],
         data: { roles: ['Gestionnaire', 'Administrateur'] },
         loadComponent: () =>
