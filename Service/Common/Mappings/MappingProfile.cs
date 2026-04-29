@@ -45,9 +45,10 @@ namespace Service.Common.Mappings
             foreach (var type in types)
             {
                 var instance = Activator.CreateInstance(type);
+                var interfaceType = type.GetInterface("IMapFrom`1");
 
                 var methodInfo = type.GetMethod("Mapping") ??
-                             type.GetInterface("IMapFrom`1").GetMethod("Mapping");
+                             interfaceType?.GetMethod("Mapping");
 
                 methodInfo?.Invoke(instance, new object[] { this });
             }

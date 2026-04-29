@@ -1,0 +1,33 @@
+.livraison-page {
+  padding: 20px;
+}
+
+.card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 16px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+input {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+}
+
+button {
+  padding: 10px 16px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.error {
+  color: red;
+  margin-bottom: 15px;
+}
+
+.result {
+  border-left: 4px solid #1976d2;
+}

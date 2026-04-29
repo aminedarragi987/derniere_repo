@@ -12,7 +12,7 @@ import { AuthService } from '../../../core/services/auth.service';
   styleUrl: './login.component.css'
 })
 export class LoginComponent {
-  form!: FormGroup;
+  form: FormGroup;
   isSubmitting = false;
   errorMessage = '';
   infoMessage = '';
@@ -23,16 +23,17 @@ export class LoginComponent {
     private router: Router,
     private route: ActivatedRoute
   ) {
-    this.form = this.fb.nonNullable.group({
+    this.form = this.fb.group({
       Username: ['', [Validators.required]],
       Password: ['', [Validators.required, Validators.minLength(6)]],
       rememberMe: [false]
     });
 
-    const expired = this.route.snapshot.queryParamMap.get('expired');
-    if (expired) {
-      this.infoMessage = 'Session expiree, reconnecte-toi.';
-    }
+    this.route.queryParams.subscribe(params => {
+      if (params['expired']) {
+        this.infoMessage = 'Votre session a expiré.';
+      }
+    });
   }
 
   submit(): void {
@@ -44,33 +45,23 @@ export class LoginComponent {
     this.errorMessage = '';
     this.isSubmitting = true;
 
-    const formValue = this.form.getRawValue();
-    const loginPayload = { Username: formValue.Username, Password: formValue.Password };
-    const rememberMe = formValue.rememberMe ?? false;
+    const { Username, Password, rememberMe } = this.form.getRawValue();
 
-    this.authService.login(loginPayload, rememberMe).subscribe({
+    this.authService.login({ Username, Password }, rememberMe).subscribe({
       next: () => {
         const returnUrl = this.route.snapshot.queryParamMap.get('returnUrl') ?? '/articles';
         this.router.navigateByUrl(returnUrl);
       },
-      error: (error: { status?: number }) => {
-        this.errorMessage =
-          error?.status === 404 || error?.status === 401
-            ? 'Identifiants invalides.'
-            : 'Erreur serveur. Reessaie dans quelques instants.';
+      error: (err) => {
         this.isSubmitting = false;
+        this.errorMessage = (err.status === 401 || err.status === 404) 
+          ? 'Utilisateur ou mot de passe incorrect.' 
+          : 'Le serveur est inaccessible.';
       },
-      complete: () => {
-        this.isSubmitting = false;
-      }
+      complete: () => this.isSubmitting = false
     });
   }
 
-  get emailControl() {
-    return this.form.controls['Username'];
-  }
-
-  get passwordControl() {
-    return this.form.controls['Password'];
-  }
+  get emailControl() { return this.form.controls['Username']; }
+  get passwordControl() { return this.form.controls['Password']; }
 }

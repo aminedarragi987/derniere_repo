@@ -11,9 +11,11 @@ export class ArticleService {
 
   constructor(private http: HttpClient) {}
 
+  // ================= ARTICLES =================
+
   getArticles(filter?: ArticleFilterDto): Observable<ArticleDto[]> {
     let params = new HttpParams();
-    
+
     if (filter) {
       if (filter.search) params = params.set('search', filter.search);
       if (filter.idcategorie) params = params.set('idcategorie', filter.idcategorie.toString());
@@ -26,34 +28,41 @@ export class ArticleService {
   }
 
   getAll(): Observable<ArticleDto[]> {
-    return this.getArticles();
+    return this.http.get<ArticleDto[]>(`${this.api}/Articles`);
+  }
+
+  create(data: ArticleDto): Observable<any> {
+    return this.http.post(`${this.api}/Article`, data);
+  }
+
+  update(id: number, data: ArticleDto): Observable<any> {
+    return this.http.put(`${this.api}/Article/${id}`, data);
+  }
+
+  delete(id: number): Observable<any> {
+    return this.http.delete(`${this.api}/Article/${id}`);
   }
 
   getStock(id: number): Observable<number> {
-    return this.http.get<number>(`${this.api}/Article/${id}/NiveauStock`);
+    return this.http.get<number>(`${this.api}/Article/${id}/Stock`);
   }
 
-  create(data: ArticleDto): Observable<{ Message: string }> {
-    return this.http.post<{ Message: string }>(`${this.api}/Article`, data);
-  }
-
-  update(id: number, data: ArticleDto): Observable<{ Message: string }> {
-    return this.http.put<{ Message: string }>(`${this.api}/Article/${id}`, data);
-  }
-
-  delete(id: number): Observable<{ Message: string }> {
-    return this.http.delete<{ Message: string }>(`${this.api}/Article/${id}`);
-  }
+  // ================= CATEGORIES =================
 
   getCategories(): Observable<CategorieDto[]> {
     return this.http.get<CategorieDto[]>(`${this.api}/Categories`);
   }
 
+  // ================= FOURNISSEURS =================
+
   getFournisseurs(): Observable<FournisseurDto[]> {
     return this.http.get<FournisseurDto[]>(`${this.api}/Fournisseurs`);
   }
 
-  associateFournisseur(idarticle: number, idfournisseur: number): Observable<{ Message: string }> {
-    return this.http.post<{ Message: string }>(`${this.api}/Article/${idarticle}/Fournisseur/${idfournisseur}`, {});
+  associateFournisseur(idarticle: number, idfournisseur: number): Observable<any> {
+    return this.http.post(
+      `${this.api}/Article/${idarticle}/Fournisseur/${idfournisseur}`,
+      {}
+    );
   }
 }

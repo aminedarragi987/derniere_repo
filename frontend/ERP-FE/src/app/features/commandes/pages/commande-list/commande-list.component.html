@@ -4,19 +4,19 @@
       <h1>Commandes</h1>
       <p>Suivi des commandes clients et de leur état d'avancement.</p>
     </div>
-    <button type="button" class="btn-outline" (click)="loadCommandes()">Actualiser</button>
+    <div class="header-actions">
+      <button *ngIf="canCreateCommande" type="button" class="btn-primary" (click)="openCreateCommandeDialog()">Nouvelle commande</button>
+      <button type="button" class="btn-outline" (click)="loadCommandes()">Actualiser</button>
+    </div>
   </header>
 
   <div class="toolbar">
     <label>
-      Filtre statut
-      <select [(ngModel)]="statusFilter" (change)="loadCommandes()">
-        <option value="">Tous</option>
-        <option value="Brouillon">Brouillon</option>
-        <option value="Validee">Validee</option>
-        <option value="Livree">Livree</option>
-      </select>
+      Filtre ID commande
+      <input type="number" [(ngModel)]="idFilter" min="1" placeholder="Ex: 12" />
     </label>
+    <button type="button" class="btn-outline" (click)="loadCommandes()">Filtrer</button>
+    <button type="button" class="btn-light" (click)="idFilter = null; loadCommandes()">Reinitialiser</button>
   </div>
 
   <p class="loading" *ngIf="isLoading">Chargement des commandes...</p>
@@ -36,12 +36,91 @@
       <tr *ngFor="let commande of commandes">
         <td>#{{ commande.idcommande }}</td>
         <td>{{ commande.datecommande | date: 'dd/MM/yyyy HH:mm' }}</td>
-        <td>{{ commande.idclient || '-' }}</td>
-        <td>{{ commande.statut || 'N/A' }}</td>
-        <td>{{ commande.total || 0 | number: '1.2-2' }}</td>
+        <td>{{ commande.idclient }}</td>
+        <td>{{ commande.statut }}</td>
+        <td>{{ commande.totalcommande | number: '1.2-2' }}</td>
       </tr>
     </tbody>
   </table>
 
   <p class="empty" *ngIf="!isLoading && !errorMessage && commandes.length === 0">Aucune commande trouvée.</p>
+
+  <div class="dialog-backdrop" *ngIf="isDialogOpen" (click)="closeCreateCommandeDialog()"></div>
+  <section class="dialog" *ngIf="isDialogOpen" aria-modal="true" role="dialog">
+    <header class="dialog-header">
+      <h2>Ajouter une commande</h2>
+      <button type="button" class="btn-icon" (click)="closeCreateCommandeDialog()">X</button>
+    </header>
+
+    <p class="error" *ngIf="dialogErrorMessage">{{ dialogErrorMessage }}</p>
+    <p class="success" *ngIf="dialogSuccessMessage">{{ dialogSuccessMessage }}</p>
+
+    <div class="dialog-grid">
+      <label>
+        Client *
+        <select [(ngModel)]="selectedClientId" [disabled]="isLoadingClients || isSubmittingCommande">
+          <option [ngValue]="null">-- Selectionner un client --</option>
+          <option *ngFor="let client of clients" [ngValue]="client.idclient">
+            {{ client.nom }} (ID: {{ client.idclient }})
+          </option>
+        </select>
+      </label>
+
+      <div class="line-editor">
+        <label>
+          Article
+          <select [(ngModel)]="selectedArticleId" [disabled]="isLoadingArticles || isSubmittingCommande">
+            <option [ngValue]="null">-- Selectionner un article --</option>
+            <option *ngFor="let article of articles" [ngValue]="article.idarticle">
+              {{ article.nom }} - {{ article.prix | number: '1.2-2' }} DH
+            </option>
+          </select>
+        </label>
+
+        <label>
+          Quantite
+          <input type="number" min="1" [(ngModel)]="selectedQuantity" [disabled]="isSubmittingCommande" />
+        </label>
+
+        <button type="button" class="btn-light" (click)="addLigne()" [disabled]="isSubmittingCommande">Ajouter ligne</button>
+      </div>
+
+      <div class="line-list">
+        <h3>Lignes de commande</h3>
+        <table class="table" *ngIf="lignes.length > 0; else noLine">
+          <thead>
+            <tr>
+              <th>Article</th>
+              <th>Quantite</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let ligne of lignes">
+              <td>{{ ligne.nom }}</td>
+              <td>{{ ligne.quantite }}</td>
+              <td>
+                <button type="button" class="btn-danger" (click)="removeLigne(ligne.idarticle)">Supprimer</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <ng-template #noLine>
+          <p class="empty">Aucune ligne ajoutee.</p>
+        </ng-template>
+      </div>
+
+      <label class="checkbox">
+        <input type="checkbox" [(ngModel)]="validateAfterCreate" [disabled]="isSubmittingCommande" />
+        Valider automatiquement apres creation
+      </label>
+    </div>
+
+    <footer class="dialog-actions">
+      <button type="button" class="btn-outline" (click)="closeCreateCommandeDialog()">Annuler</button>
+      <button type="button" class="btn-primary" [disabled]="isSubmittingCommande" (click)="createCommandeFromDialog()">
+        {{ isSubmittingCommande ? 'Creation...' : 'Creer la commande' }}
+      </button>
+    </footer>
+  </section>
 </section>

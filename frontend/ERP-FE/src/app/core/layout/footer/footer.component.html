@@ -1,16 +1,3 @@
-<footer class="site-footer">
-	<div>
-		<strong>ERP Microservices</strong>
-		<p>Gestion centralisee des utilisateurs, articles, commandes et menus.</p>
-	</div>
-
-	<div class="footer-links">
-		<a routerLink="/dashboard">Accueil</a>
-		<a routerLink="/auth/change-password">Mot de passe</a>
-		<a routerLink="/auth/login">Connexion</a>
-	</div>
-
-	<div class="footer-role" *ngIf="userService.currentUser$ | async as user">
-		<span>{{ user.roles.join(', ') || 'Aucun role' }}</span>
-	</div>
+<footer class="footer">
+  <p>© 2026 ModeShop - Boutique en ligne de vetements</p>
 </footer>

@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { UserService } from '../../services/user.service';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-navbar',
@@ -11,10 +12,12 @@ import { UserService } from '../../services/user.service';
   styleUrl: './navbar.component.css'
 })
 export class NavbarComponent {
-  constructor(public userService: UserService) {}
+  constructor(
+    public userService: UserService,
+    private authService: AuthService
+  ) {}
 
   logout(): void {
-    this.userService.logout();
+    this.authService.logout();
   }
-
 }

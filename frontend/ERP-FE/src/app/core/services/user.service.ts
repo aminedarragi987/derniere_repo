@@ -45,6 +45,10 @@ export class UserService {
     return this.hasAnyRole(['Comptable']);
   }
 
+  isDirector(): boolean {
+    return this.hasAnyRole(['Directeur Général']);
+  }
+
   canManageCommercialFlow(): boolean {
     return this.hasAnyRole(['Gestionnaire', 'Comptable', 'Administrateur']);
   }

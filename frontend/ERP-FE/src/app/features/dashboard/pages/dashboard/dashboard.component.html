@@ -41,14 +41,21 @@
 		<article class="chart-card">
 			<header>
 				<h2>Tendance utilisateurs (7 jours)</h2>
+				<p>Courbe d'evolution des comptes actifs</p>
 			</header>
-			<div class="bars" *ngIf="userTrend.length > 0">
-				<div class="bar-item" *ngFor="let point of userTrend">
-					<div
-						class="bar"
-						[style.height.%]="(point.value / maxTrendValue(userTrend)) * 100">
-					</div>
-					<span>{{ point.label }}</span>
+			<div class="line-chart" *ngIf="userTrend.length > 0">
+				<svg viewBox="0 0 420 170" preserveAspectRatio="none" aria-label="Courbe utilisateurs">
+					<polyline class="grid" points="18,152 402,152"></polyline>
+					<path class="line" [attr.d]="trendPath(userTrend)"></path>
+					<circle
+						*ngFor="let dot of trendDots(userTrend)"
+						[attr.cx]="dot.x"
+						[attr.cy]="dot.y"
+						r="4">
+					</circle>
+				</svg>
+				<div class="line-labels">
+					<span *ngFor="let point of userTrend">{{ point.label }}</span>
 				</div>
 			</div>
 		</article>
@@ -56,6 +63,7 @@
 		<article class="chart-card">
 			<header>
 				<h2>Tendance articles (7 jours)</h2>
+				<p>Variation du volume catalogue</p>
 			</header>
 			<div class="bars" *ngIf="articleTrend.length > 0">
 				<div class="bar-item" *ngFor="let point of articleTrend">
@@ -63,8 +71,33 @@
 						class="bar accent"
 						[style.height.%]="(point.value / maxTrendValue(articleTrend)) * 100">
 					</div>
+					<small>{{ point.value }}</small>
 					<span>{{ point.label }}</span>
 				</div>
+			</div>
+		</article>
+
+		<article class="chart-card donut-card">
+			<header>
+				<h2>Repartition stock</h2>
+				<p>Normal vs sous seuil minimum</p>
+			</header>
+
+			<div class="donut-wrap">
+				<div class="donut" [style.background]="stockDonutGradient">
+					<div class="donut-center">
+						<strong>{{ articlesCount }}</strong>
+						<span>Articles</span>
+					</div>
+				</div>
+
+				<ul class="legend">
+					<li *ngFor="let segment of stockSegments">
+						<span class="dot" [style.background]="segment.color"></span>
+						<span>{{ segment.label }}</span>
+						<strong>{{ segment.value }}</strong>
+					</li>
+				</ul>
 			</div>
 		</article>
 	</section>

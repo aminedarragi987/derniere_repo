@@ -7,9 +7,13 @@ export const roleGuard: CanActivateFn = (route, state) => {
   const router = inject(Router);
 
   const expectedRoles = (route.data?.['roles'] as string[] | undefined) ?? [];
-  if (!expectedRoles.length || authService.hasAnyRole(expectedRoles)) {
-    return true;
-  }
+
+  // Si aucune restriction → accès OK
+  if (expectedRoles.length === 0) return true;
+
+  const hasRole = authService.hasAnyRole(expectedRoles);
+
+  if (hasRole) return true;
 
   return router.createUrlTree(['/auth/login'], {
     queryParams: { returnUrl: state.url, denied: 'role' }

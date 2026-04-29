@@ -1,14 +1,30 @@
- :host {
-	font-family: Arial, Helvetica, sans-serif;
+:host {
+  display: block;
+  min-height: 100vh;
 }
 
-.main {
-	min-height: 100vh;
-	display: flex;
-	align-items: center;
-	justify-content: center;
+/* Layout privé */
+.layout {
+  display: flex;
+  min-height: calc(100vh - 64px - 56px); /* hauteur écran - navbar - footer */
 }
 
+/* Sidebar gauche */
+app-sidebar {
+  width: 260px;
+  flex-shrink: 0;
+  display: block;
+}
+
+/* Zone de contenu */
 .content {
-	text-align: center;
+  flex: 1;
+  padding: 24px;
+  background: #f8fafc;
+  overflow-x: auto;
+}
+
+/* Footer reste en bas */
+app-footer {
+  display: block;
 }

@@ -1,62 +1,106 @@
-<section class="landing-page">
-	<header class="hero">
-		<div class="hero-copy">
-			<p class="eyebrow">Page de garde</p>
-			<h1>Bienvenue, {{ displayName }}</h1>
-			<p class="subtitle">
-				{{ primaryRole }} : voici les espaces et actions disponibles pour ton profil.
-			</p>
-		</div>
+<section class="dashboard-page">
+  <header class="hero">
+    <div>
+      <p class="eyebrow">Vue d'ensemble</p>
+      <h1>Dashboard operationnel</h1>
+      <p class="subtitle">Suivi des commandes, stock et performance commerciale.</p>
+    </div>
+  </header>
 
-		<div class="hero-panel">
-			<div class="role-chip">{{ primaryRole }}</div>
-			<p>La navigation adapte les menus selon ton role.</p>
-			<a routerLink="/dashboard/overview" class="btn-primary">Voir le tableau de bord</a>
-		</div>
-	</header>
+  <p class="loading" *ngIf="loading">Chargement des indicateurs...</p>
+  <p class="error" *ngIf="error">{{ error }}</p>
 
-	<section class="summary-grid">
-		<article class="summary-card">
-			<span>Roles visibles</span>
-			<strong>{{ userService.currentUserValue?.roles?.length || 0 }}</strong>
-			<p>Les acces sont filtres par role serveur et menu.</p>
-		</article>
-		<article class="summary-card">
-			<span>Actions rapides</span>
-			<strong>{{ visibleActions.length }}</strong>
-			<p>Les cartes ci-dessous montrent quoi faire dans l’application.</p>
-		</article>
-		<article class="summary-card">
-			<span>Acces commun</span>
-			<strong>2</strong>
-			<p>Mot de passe et tableau de bord restent disponibles pour tous.</p>
-		</article>
-	</section>
+  <section class="kpi-grid" *ngIf="!loading && dashboard">
+    <article class="kpi-card">
+      <p class="kpi-title">Commandes</p>
+      <p class="kpi-value">{{ dashboard.nombreCommandes }}</p>
+    </article>
 
-	<section class="role-section" *ngIf="userService.isAdmin()">
-		<header>
-			<p class="eyebrow">{{ primaryRole }}</p>
-			<h2>Ce role gere</h2>
-			<p>Les utilisateurs, les roles, les profils et les menus visibles par chaque compte.</p>
-		</header>
-	</section>
+    <article class="kpi-card">
+      <p class="kpi-title">Commandes validees</p>
+      <p class="kpi-value">{{ dashboard.nombreCommandesValidees }}</p>
+    </article>
 
-	<section class="role-section" *ngIf="userService.isManager()">
-		<header>
-			<p class="eyebrow">Gestionnaire</p>
-			<h2>Ce role travaille sur</h2>
-			<p>Le catalogue, les clients et le suivi des commandes.</p>
-		</header>
-	</section>
+    <article class="kpi-card">
+      <p class="kpi-title">Articles</p>
+      <p class="kpi-value">{{ dashboard.nombreArticles }}</p>
+    </article>
 
-	<section class="actions-grid">
-		<article
-			class="action-card"
-			*ngFor="let action of visibleActions"
-			[ngClass]="action.tone">
-			<p class="action-title">{{ action.title }}</p>
-			<p class="action-description">{{ action.description }}</p>
-			<a [routerLink]="action.link">Ouvrir</a>
-		</article>
-	</section>
+    <article class="kpi-card">
+      <p class="kpi-title">Chiffre d'affaires</p>
+      <p class="kpi-value">{{ dashboard.chiffreAffaires | number:'1.0-2' }} TND</p>
+    </article>
+  </section>
+
+  <section class="insights" *ngIf="!loading && dashboard">
+    <article class="chart-card">
+      <header>
+        <h2>Courbe des commandes (7 jours)</h2>
+        <p>Tendance simulee a partir du volume actuel</p>
+      </header>
+      <div class="line-chart" *ngIf="ordersTrend.length > 0">
+        <svg viewBox="0 0 420 170" preserveAspectRatio="none" aria-label="Courbe commandes">
+          <polyline class="grid" points="18,152 402,152"></polyline>
+          <path class="line" [attr.d]="trendPath(ordersTrend)"></path>
+          <circle
+            *ngFor="let dot of trendDots(ordersTrend)"
+            [attr.cx]="dot.x"
+            [attr.cy]="dot.y"
+            r="4">
+          </circle>
+        </svg>
+        <div class="line-labels">
+          <span *ngFor="let point of ordersTrend">{{ point.label }}</span>
+        </div>
+      </div>
+    </article>
+
+    <article class="chart-card">
+      <header>
+        <h2>Etat du stock</h2>
+        <p>Comparatif articles, fournisseurs et alertes</p>
+      </header>
+
+      <div class="bars" *ngIf="stockMetrics.length > 0">
+        <div class="bar-item" *ngFor="let metric of stockMetrics">
+          <div
+            class="bar"
+            [style.height.%]="(metric.value / maxStockMetric) * 100"
+            [style.background]="metric.color">
+          </div>
+          <small>{{ metric.value }}</small>
+          <span>{{ metric.label }}</span>
+        </div>
+      </div>
+    </article>
+
+    <article class="chart-card donut-card">
+      <header>
+        <h2>Taux de validation</h2>
+        <p>Part des commandes validees</p>
+      </header>
+
+      <div class="donut-wrap">
+        <div class="donut" [style.background]="ordersDonutGradient">
+          <div class="donut-center">
+            <strong>{{ validationRate }}%</strong>
+            <span>Validees</span>
+          </div>
+        </div>
+
+        <ul class="legend">
+          <li>
+            <span class="dot ok"></span>
+            <span>Validees</span>
+            <strong>{{ dashboard.nombreCommandesValidees }}</strong>
+          </li>
+          <li>
+            <span class="dot pending"></span>
+            <span>En attente</span>
+            <strong>{{ dashboard.nombreCommandes - dashboard.nombreCommandesValidees }}</strong>
+          </li>
+        </ul>
+      </div>
+    </article>
+  </section>
 </section>

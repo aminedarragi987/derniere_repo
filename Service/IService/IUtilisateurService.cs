@@ -1,6 +1,5 @@
 ﻿using Core.Entities;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Identity.Data;
 using Service.DTO;
 using Service.Models;
 using System;

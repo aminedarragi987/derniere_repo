@@ -36,7 +36,7 @@ export class MenuService {
   }
 
   private createFallbackMenus(): MenuDto[] {
-    const menus: MenuDto[] = [
+    return [
       {
         idmenu: 0,
         titre: 'Dashboard',
@@ -48,16 +48,26 @@ export class MenuService {
         hassubmenu: false
       }
     ];
-
-    return menus;
   }
 
   private ensureRoleMenus(menus: MenuDto[]): MenuDto[] {
     const merged = [...menus];
 
+    // Dashboard Gestionnaire / Admin
     if (this.authService.hasAnyRole(['Gestionnaire', 'Administrateur'])) {
       this.pushIfMissing(merged, {
         idmenu: 1,
+        titre: 'Dashboard',
+        description: 'Vue opérationnelle',
+        memRouterlink: '/dashboard',
+        memHref: '',
+        memIcon: 'dashboard',
+        memTarget: '',
+        hassubmenu: false
+      });
+
+      this.pushIfMissing(merged, {
+        idmenu: 2,
         titre: 'Articles',
         description: 'Gestion des articles',
         memRouterlink: '/articles',
@@ -66,8 +76,9 @@ export class MenuService {
         memTarget: '',
         hassubmenu: false
       });
+
       this.pushIfMissing(merged, {
-        idmenu: 2,
+        idmenu: 3,
         titre: 'Fournisseurs',
         description: 'Gestion des fournisseurs',
         memRouterlink: '/fournisseurs',
@@ -78,9 +89,10 @@ export class MenuService {
       });
     }
 
+    // Flux commercial
     if (this.authService.hasAnyRole(['Gestionnaire', 'Comptable', 'Administrateur'])) {
       this.pushIfMissing(merged, {
-        idmenu: 6,
+        idmenu: 4,
         titre: 'Clients',
         description: 'Gestion des clients',
         memRouterlink: '/clients',
@@ -89,8 +101,9 @@ export class MenuService {
         memTarget: '',
         hassubmenu: false
       });
+
       this.pushIfMissing(merged, {
-        idmenu: 7,
+        idmenu: 5,
         titre: 'Commandes',
         description: 'Suivi des commandes',
         memRouterlink: '/commandes',
@@ -99,8 +112,48 @@ export class MenuService {
         memTarget: '',
         hassubmenu: false
       });
+
+      this.pushIfMissing(merged, {
+        idmenu: 55,
+        titre: 'Livraisons',
+        description: 'Gestion des livraisons',
+        memRouterlink: '/livraisons',
+        memHref: '',
+        memIcon: 'local_shipping',
+        memTarget: '',
+        hassubmenu: false
+      });
     }
 
+    // Comptabilité
+    if (this.authService.hasAnyRole(['Comptable', 'Administrateur'])) {
+      this.pushIfMissing(merged, {
+        idmenu: 6,
+        titre: 'Factures',
+        description: 'Gestion des factures',
+        memRouterlink: '/factures',
+        memHref: '',
+        memIcon: 'request_quote',
+        memTarget: '',
+        hassubmenu: false
+      });
+
+      this.pushIfMissing(merged, {
+        idmenu: 7,
+        titre: 'Paiements',
+        description: 'Gestion des paiements',
+        memRouterlink: '/paiements',
+        memHref: '',
+        memIcon: 'payments',
+        memTarget: '',
+        hassubmenu: false
+      });
+    }
+
+
+    // Dashboard Direction supprimé volontairement
+
+    // IAM Admin
     if (this.authService.hasAnyRole(['Administrateur'])) {
       this.pushIfMissing(merged, {
         idmenu: 20,
@@ -112,6 +165,7 @@ export class MenuService {
         memTarget: '',
         hassubmenu: false
       });
+
       this.pushIfMissing(merged, {
         idmenu: 21,
         titre: 'Rôles',
@@ -122,6 +176,7 @@ export class MenuService {
         memTarget: '',
         hassubmenu: false
       });
+
       this.pushIfMissing(merged, {
         idmenu: 22,
         titre: 'Profils',
@@ -132,6 +187,7 @@ export class MenuService {
         memTarget: '',
         hassubmenu: false
       });
+
       this.pushIfMissing(merged, {
         idmenu: 23,
         titre: 'Menus',
@@ -149,7 +205,11 @@ export class MenuService {
 
   private pushIfMissing(menus: MenuDto[], menu: MenuDto): void {
     const route = (menu.memRouterlink ?? '').trim().toLowerCase();
-    const alreadyExists = menus.some((item) => (item.memRouterlink ?? '').trim().toLowerCase() === route);
+
+    const alreadyExists = menus.some(
+      (item) => (item.memRouterlink ?? '').trim().toLowerCase() === route
+    );
+
     if (!alreadyExists) {
       menus.push(menu);
     }

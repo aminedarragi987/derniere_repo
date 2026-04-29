@@ -159,6 +159,56 @@ export class ArticleListComponent implements OnInit, OnDestroy {
     }
   }
 
+  defineAlertThreshold(article: ArticleDto): void {
+    if (!this.canManageArticles) {
+      this.errorMessage = "Action refusee: le role Gestionnaire est requis pour definir le seuil d'alerte.";
+      return;
+    }
+
+    if (!article.idarticle) {
+      this.errorMessage = "Impossible de definir le seuil pour cet article.";
+      return;
+    }
+
+    const current = article.seuilminimum ?? 0;
+    const input = prompt(`Definir le seuil d'alerte pour ${article.nom}:`, String(current));
+
+    if (input === null) {
+      return;
+    }
+
+    const next = Number(input);
+    if (!Number.isFinite(next) || next < 0) {
+      this.errorMessage = 'Le seuil doit etre un nombre positif ou nul.';
+      return;
+    }
+
+    this.isLoading = true;
+    this.errorMessage = '';
+
+    const payload: ArticleDto = {
+      ...article,
+      seuilminimum: next,
+      fournisseurIds: article.fournisseurIds ?? []
+    };
+
+    this.service.update(article.idarticle, payload).subscribe({
+      next: () => {
+        this.load();
+      },
+      error: (error: HttpErrorResponse) => {
+        this.errorMessage = error.status === 403
+          ? "Action refusee: le role Gestionnaire est requis pour definir le seuil d'alerte."
+          : 'Erreur lors de la mise a jour du seuil d alerte.';
+        this.isLoading = false;
+      }
+    });
+  }
+
+  isInAlert(article: ArticleDto): boolean {
+    return article.quantitestock <= article.seuilminimum;
+  }
+
   delete(id: number | undefined): void {
     if (!this.canManageArticles) {
       this.errorMessage = "Action refusee: le role Gestionnaire est requis pour supprimer un article.";
@@ -177,6 +227,6 @@ export class ArticleListComponent implements OnInit, OnDestroy {
   }
 
   get canManageArticles(): boolean {
-    return this.authService.hasAnyRole(['Gestionnaire']);
+    return this.authService.hasAnyRole(['Gestionnaire', 'Administrateur']);
   }
 }

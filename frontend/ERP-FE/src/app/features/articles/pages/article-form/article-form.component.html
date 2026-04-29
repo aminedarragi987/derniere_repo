@@ -1,73 +1,100 @@
-<section class="article-form-page">
-  <div class="form-card">
-    <header>
-      <h1>{{ isEdit ? 'Modifier' : 'Créer' }} un article</h1>
-      <p>Renseigne les informations nécessaires pour le stock.</p>
-      <p class="permission-hint" *ngIf="!canManageArticles">
-        Votre profil ne permet pas d'enregistrer des articles. Le role Gestionnaire est requis.
-      </p>
+<section class="article-container">
+  <div class="article-card">
+    <header class="form-header">
+      <div class="header-icon">
+        <i class="material-icons">{{ isEdit ? 'edit' : 'add_box' }}</i>
+      </div>
+      <div class="header-text">
+        <h1>{{ isEdit ? 'Modifier' : 'Nouvel' }} Article</h1>
+        <p>Renseignez les spécifications techniques et les niveaux de stock.</p>
+      </div>
     </header>
 
-    <div *ngIf="errorMessage" class="alert alert-danger">{{ errorMessage }}</div>
-    <div *ngIf="successMessage" class="alert alert-success">{{ successMessage }}</div>
+    <!-- Messages de statut -->
+    <div class="alert danger" *ngIf="errorMessage">
+      <i class="material-icons">error_outline</i> {{ errorMessage }}
+    </div>
+    <div class="alert success" *ngIf="successMessage">
+      <i class="material-icons">check_circle_outline</i> {{ successMessage }}
+    </div>
+    
+    <div class="alert warning" *ngIf="!canManageArticles">
+      <i class="material-icons">lock</i>
+      <span>Accès restreint : Le rôle <strong>Gestionnaire</strong> est requis pour enregistrer.</span>
+    </div>
 
-    <form [formGroup]="form" (ngSubmit)="save()" class="form-grid">
-      <label>
-        <span>Nom *</span>
-        <input formControlName="nom" placeholder="Ex: Clavier mécanique" />
-        <small *ngIf="form.get('nom')?.touched && form.get('nom')?.invalid" class="error">Nom requis</small>
-      </label>
+    <form [formGroup]="form" (ngSubmit)="save()" class="modern-form">
+      <div class="form-grid">
+        <!-- Nom de l'article -->
+        <div class="form-group wide">
+          <label><i class="material-icons">label</i> Nom de l'article *</label>
+          <input formControlName="nom" placeholder="Ex: Chemise en lin bleue" [class.invalid]="form.get('nom')?.touched && form.get('nom')?.invalid" />
+          <small class="error-msg" *ngIf="form.get('nom')?.touched && form.get('nom')?.invalid">Le nom est obligatoire.</small>
+        </div>
 
-      <label>
-        <span>Description</span>
-        <input formControlName="description" placeholder="Ex: RGB, AZERTY" />
-      </label>
+        <!-- Description -->
+        <div class="form-group wide">
+          <label><i class="material-icons">description</i> Description</label>
+          <textarea formControlName="description" placeholder="Détails, matière, coupe..." rows="2"></textarea>
+        </div>
 
-      <label>
-        <span>Prix (DH) *</span>
-        <input type="number" formControlName="prix" placeholder="0" step="0.01" />
-        <small *ngIf="form.get('prix')?.touched && form.get('prix')?.invalid" class="error">Prix requis</small>
-      </label>
+        <!-- Prix -->
+        <div class="form-group">
+          <label><i class="material-icons">payments</i> Prix de vente (DH) *</label>
+          <div class="input-with-icon">
+            <input type="number" formControlName="prix" placeholder="0.00" step="0.01" />
+          </div>
+          <small class="error-msg" *ngIf="form.get('prix')?.touched && form.get('prix')?.invalid">Prix requis.</small>
+        </div>
 
-      <label>
-        <span>Quantité en stock *</span>
-        <input type="number" formControlName="quantitestock" placeholder="0" />
-        <small *ngIf="form.get('quantitestock')?.touched && form.get('quantitestock')?.invalid" class="error">Quantité requise</small>
-      </label>
+        <!-- Catégorie -->
+        <div class="form-group">
+          <label><i class="material-icons">category</i> Catégorie</label>
+          <select formControlName="idcategorie">
+            <option [ngValue]="null">-- Sélectionner --</option>
+            <option *ngFor="let c of categories" [ngValue]="c.idcategorie">{{ c.nom }}</option>
+          </select>
+        </div>
 
-      <label>
-        <span>Seuil minimum *</span>
-        <input type="number" formControlName="seuilminimum" placeholder="0" />
-        <small *ngIf="form.get('seuilminimum')?.touched && form.get('seuilminimum')?.invalid" class="error">Seuil requis</small>
-      </label>
+        <!-- Stock Actuel -->
+        <div class="form-group">
+          <label><i class="material-icons">inventory_2</i> Quantité en stock *</label>
+          <input type="number" formControlName="quantitestock" placeholder="0" />
+          <small class="error-msg" *ngIf="form.get('quantitestock')?.touched && form.get('quantitestock')?.invalid">Quantité requise.</small>
+        </div>
 
-      <label>
-        <span>Catégorie</span>
-        <select formControlName="idcategorie">
-          <option [ngValue]="null">-- Aucune --</option>
-          <option *ngFor="let c of categories" [ngValue]="c.idcategorie">{{ c.nom }}</option>
-        </select>
-      </label>
+        <!-- Seuil d'alerte -->
+        <div class="form-group">
+          <label><i class="material-icons">notification_important</i> Seuil minimum *</label>
+          <input type="number" formControlName="seuilminimum" placeholder="5" />
+          <small class="error-msg" *ngIf="form.get('seuilminimum')?.touched && form.get('seuilminimum')?.invalid">Seuil requis.</small>
+        </div>
 
-      <label class="wide">
-        <span>Fournisseurs</span>
-        <select multiple (change)="onSelectFournisseurs($event)">
-          <option
-            *ngFor="let f of fournisseurs"
-            [value]="f.idfournisseur"
-            [selected]="isSelectedFournisseur(f.idfournisseur)">
-            {{ f.nom }}
-          </option>
-        </select>
-        <small class="hint">Maintiens Ctrl (ou Cmd) pour sélectionner plusieurs fournisseurs.</small>
-      </label>
-
-      <div class="actions">
-        <button type="button" class="btn-light" (click)="cancel()">Retour</button>
-        <button type="submit" class="btn-primary" [disabled]="isSubmitting || !canManageArticles">
-          {{ isSubmitting ? 'Enregistrement...' : 'Enregistrer' }}
-        </button>
+        <!-- Fournisseurs -->
+        <div class="form-group wide">
+          <label><i class="material-icons">local_shipping</i> Fournisseurs associés</label>
+          <div class="multi-select-wrapper">
+            <select multiple (change)="onSelectFournisseurs($event)" class="multi-select">
+              <option *ngFor="let f of fournisseurs" [value]="f.idfournisseur" [selected]="isSelectedFournisseur(f.idfournisseur)">
+                {{ f.nom }}
+              </option>
+            </select>
+            <span class="hint">Maintenez <strong>Ctrl</strong> pour sélectionner plusieurs fournisseurs.</span>
+          </div>
+        </div>
       </div>
+
+      <footer class="form-actions">
+        <button type="button" class="btn-secondary" (click)="cancel()">
+          <i class="material-icons">arrow_back</i> Retour
+        </button>
+        <button type="submit" class="btn-primary" [disabled]="isSubmitting || !canManageArticles">
+          <span *ngIf="!isSubmitting">
+            <i class="material-icons">save</i> Enregistrer l'article
+          </span>
+          <span *ngIf="isSubmitting" class="spinner"></span>
+        </button>
+      </footer>
     </form>
   </div>
 </section>

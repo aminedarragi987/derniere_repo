@@ -41,7 +41,9 @@ export class UserIamService {
   }
 
   getRoles(): Observable<RolesDto[]> {
-    return this.http.get<RolesDto[]>(`${environment.gatewayUrl}/User/Roles`);
+    return this.http
+      .get<unknown>(`${environment.gatewayUrl}/User/Roles`)
+      .pipe(map((payload) => this.normalizeRolesResponse(payload)));
   }
 
   addRole(role: RolesDto): Observable<{ Message: string }> {
@@ -65,7 +67,9 @@ export class UserIamService {
   }
 
   getProfiles(): Observable<ProfileDto[]> {
-    return this.http.get<ProfileDto[]>(`${environment.gatewayUrl}/User/Profiles`);
+    return this.http
+      .get<unknown>(`${environment.gatewayUrl}/User/Profiles`)
+      .pipe(map((payload) => this.normalizeProfilesResponse(payload)));
   }
 
   addProfile(profile: ProfileDto): Observable<{ Message: string }> {
@@ -81,7 +85,9 @@ export class UserIamService {
   }
 
   getMenus(): Observable<MenuDto[]> {
-    return this.http.get<MenuDto[]>(`${environment.gatewayUrl}/User/Menus`);
+    return this.http
+      .get<unknown>(`${environment.gatewayUrl}/User/Menus`)
+      .pipe(map((payload) => this.normalizeMenusResponse(payload)));
   }
 
   addMenu(menu: MenuDto): Observable<{ Message: string }> {
@@ -134,6 +140,82 @@ export class UserIamService {
       idprofil: this.toNumber(user['idprofil']),
       profileNom: this.toString(user['profileNom'])
     };
+  }
+
+  private normalizeRolesResponse(payload: unknown): RolesDto[] {
+    const list = this.unwrapToArray(payload);
+    return list
+      .map((item) => this.normalizeRoleDto(item))
+      .filter((role) => typeof role.idrole === 'number' && !!role.nom);
+  }
+
+  private normalizeRoleDto(payload: unknown): RolesDto {
+    const role = (payload as Record<string, unknown>) ?? {};
+    return {
+      idrole: this.toNumber(role['idrole'] ?? role['idRole'] ?? role['Idrole'] ?? role['IdRole']) ?? 0,
+      nom: this.toString(role['nom'] ?? role['name'] ?? role['libelle'] ?? role['Nom']) ?? '',
+      description: this.toString(role['description'] ?? role['Description']),
+      idprofile: this.toNumber(role['idprofile'] ?? role['idProfile'] ?? role['idprofil'] ?? role['Idprofile']),
+      idroleparent: this.toNumber(role['idroleparent'] ?? role['idRoleParent'] ?? role['Idroleparent'])
+    };
+  }
+
+  private normalizeProfilesResponse(payload: unknown): ProfileDto[] {
+    const list = this.unwrapToArray(payload);
+    return list
+      .map((item) => this.normalizeProfileDto(item))
+      .filter((profile) => typeof profile.idprofil === 'number' && !!profile.nom);
+  }
+
+  private normalizeProfileDto(payload: unknown): ProfileDto {
+    const profile = (payload as Record<string, unknown>) ?? {};
+    return {
+      idprofil: this.toNumber(profile['idprofil'] ?? profile['idprofile'] ?? profile['Idprofil'] ?? profile['IdProfile']) ?? 0,
+      nom: this.toString(profile['nom'] ?? profile['name'] ?? profile['libelle'] ?? profile['Nom']) ?? '',
+      description: this.toString(profile['description'] ?? profile['Description'])
+    };
+  }
+
+  private normalizeMenusResponse(payload: unknown): MenuDto[] {
+    const list = this.unwrapToArray(payload);
+    return list
+      .map((item) => this.normalizeMenuDto(item))
+      .filter((menu) => typeof menu.idmenu === 'number' && !!menu.titre);
+  }
+
+  private normalizeMenuDto(payload: unknown): MenuDto {
+    const menu = (payload as Record<string, unknown>) ?? {};
+    return {
+      idmenu: this.toNumber(menu['idmenu'] ?? menu['idMenu'] ?? menu['Idmenu'] ?? menu['IdMenu']) ?? 0,
+      titre: this.toString(menu['titre'] ?? menu['title'] ?? menu['Titre']) ?? '',
+      description: this.toString(menu['description'] ?? menu['Description']),
+      memRouterlink: this.toString(menu['memRouterlink'] ?? menu['routerLink']),
+      memHref: this.toString(menu['memHref'] ?? menu['href']),
+      memIcon: this.toString(menu['memIcon'] ?? menu['icon']),
+      memTarget: this.toString(menu['memTarget'] ?? menu['target']),
+      hassubmenu: typeof menu['hassubmenu'] === 'boolean' ? menu['hassubmenu'] : undefined,
+      parentid: this.toNumber(menu['parentid'] ?? menu['parentId'])
+    };
+  }
+
+  private unwrapToArray(payload: unknown): unknown[] {
+    if (Array.isArray(payload)) {
+      return payload;
+    }
+
+    if (payload && typeof payload === 'object') {
+      const record = payload as Record<string, unknown>;
+      const candidate = record['value'] ?? record['items'] ?? record['data'] ?? record['result'];
+      if (Array.isArray(candidate)) {
+        return candidate;
+      }
+      if (candidate && typeof candidate === 'object') {
+        return [candidate];
+      }
+      return [record];
+    }
+
+    return [];
   }
 
   private toBackendUserPayload(user: UtilisateurDto): Record<string, unknown> {

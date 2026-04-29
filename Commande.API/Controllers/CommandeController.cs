@@ -1,103 +1,57 @@
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using Service.DTO;
 using Service.IService;
 
 namespace Commande.API.Controllers;
 
-[Produces("application/json")]
 [Route("Commande")]
-[EnableCors("CORSPolicy")]
-[Authorize(Roles = "Gestionnaire")]
+// Autorise les deux rôles
+[Authorize(Roles = "Administrateur,Gestionnaire")]
+
 [ApiController]
 public class CommandeController : ControllerBase
 {
-    private readonly IGestionStockService _gestionStockService;
+    private readonly ICommandeService _service;
 
-    public CommandeController(IGestionStockService gestionStockService)
+    public CommandeController(ICommandeService service)
     {
-        _gestionStockService = gestionStockService;
+        _service = service;
     }
 
     [HttpPost]
-    public async Task<IActionResult> CreerCommande([FromBody] CommandeCreateDto commande)
+    public async Task<IActionResult> Create(CommandeCreateDto dto)
     {
-        var created = await _gestionStockService.CreateCommande(commande);
-        if (created == null)
-        {
-            return NotFound(new { Message = "Client introuvable." });
-        }
-
-        return Ok(created);
+        var res = await _service.CreateCommande(dto);
+        return res == null ? NotFound() : Ok(res);
     }
 
-    [HttpPost("{idcommande:int}/Article")]
-    public async Task<IActionResult> AjouterArticleCommande(int idcommande, [FromBody] LigneCommandeDto ligne)
+    [HttpPost("{id:int}/Article")]
+    public async Task<IActionResult> AddArticle(int id, LigneCommandeDto dto)
     {
-        try
-        {
-            var updated = await _gestionStockService.AddLigneCommande(idcommande, ligne);
-            if (updated == null)
-            {
-                return NotFound(new { Message = "Commande introuvable." });
-            }
-
-            return Ok(updated);
-        }
-        catch (InvalidOperationException ex)
-        {
-            return BadRequest(new { Message = ex.Message });
-        }
+        var res = await _service.AddLigneCommande(id, dto);
+        return res == null ? NotFound() : Ok(res);
     }
 
-    [HttpPatch("{idcommande:int}/Valider")]
-    public async Task<IActionResult> ValiderCommande(int idcommande)
+    [HttpPatch("{id:int}/Valider")]
+    public async Task<IActionResult> Valider(int id)
     {
-        try
-        {
-            var updated = await _gestionStockService.ValiderCommande(idcommande);
-            if (updated == null)
-            {
-                return NotFound(new { Message = "Commande introuvable." });
-            }
-
-            return Ok(updated);
-        }
-        catch (InvalidOperationException ex)
-        {
-            return BadRequest(new { Message = ex.Message });
-        }
+        var res = await _service.ValiderCommande(id);
+        return res == null ? NotFound() : Ok(res);
     }
 
     [HttpGet]
-    public async Task<IActionResult> GetCommandes([FromQuery] CommandeFilterDto filter)
+    public async Task<IActionResult> Get([FromQuery] CommandeFilterDto filter)
+        => Ok(await _service.GetCommandes(filter));
+
+    [HttpGet("{id:int}/Statut")]
+    public async Task<IActionResult> Status(int id)
     {
-        var commandes = await _gestionStockService.GetCommandes(filter);
-        return Ok(commandes);
+        var res = await _service.GetCommandeStatus(id);
+        return res == null ? NotFound() : Ok(res);
     }
 
-    [HttpGet("{idcommande:int}/Statut")]
-    public async Task<IActionResult> GetStatutCommande(int idcommande)
-    {
-        var statut = await _gestionStockService.GetCommandeStatus(idcommande);
-        if (statut == null)
-        {
-            return NotFound(new { Message = "Commande introuvable." });
-        }
-
-        return Ok(statut);
-    }
-
-    [HttpDelete("{idcommande:int}")]
-    public async Task<IActionResult> SupprimerCommande(int idcommande)
-    {
-        var deleted = await _gestionStockService.DeleteCommande(idcommande);
-        if (!deleted)
-        {
-            return NotFound(new { Message = "Commande introuvable." });
-        }
-
-        return Ok(new { Message = "Commande supprimée." });
-    }
+    [HttpDelete("{id:int}")]
+    public async Task<IActionResult> Delete(int id)
+        => (await _service.DeleteCommande(id)) ? Ok() : NotFound();
 }

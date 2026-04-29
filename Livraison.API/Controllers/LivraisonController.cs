@@ -1,64 +1,40 @@
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using Service.IService;
+using Service.Service;
 
 namespace Livraison.API.Controllers;
 
-[Produces("application/json")]
 [Route("Livraison")]
-[EnableCors("CORSPolicy")]
-[Authorize(Roles = "Gestionnaire")]
+[Authorize(Roles = "Gestionnaire,Administrateur")]
 [ApiController]
 public class LivraisonController : ControllerBase
 {
-    private readonly IGestionStockService _gestionStockService;
+    private readonly ILivraisonService _service;
 
-    public LivraisonController(IGestionStockService gestionStockService)
+    public LivraisonController(ILivraisonService service)
     {
-        _gestionStockService = gestionStockService;
+        _service = service;
     }
 
-    [HttpPost("Commande/{idcommande:int}")]
-    public async Task<IActionResult> GenererLivraison(int idcommande)
+    [HttpPost("Commande/{id:int}")]
+    public async Task<IActionResult> Generer(int id)
     {
-        try
-        {
-            var livraison = await _gestionStockService.GenererLivraison(idcommande);
-            if (livraison == null)
-            {
-                return NotFound(new { Message = "Commande introuvable." });
-            }
-
-            return Ok(livraison);
-        }
-        catch (InvalidOperationException ex)
-        {
-            return BadRequest(new { Message = ex.Message });
-        }
+        var res = await _service.GenererLivraison(id);
+        return res == null ? NotFound() : Ok(res);
     }
 
-    [HttpGet("{idlivraison:int}")]
-    public async Task<IActionResult> GetLivraison(int idlivraison)
+    [HttpGet("{id:int}")]
+    public async Task<IActionResult> Get(int id)
     {
-        var livraison = await _gestionStockService.GetLivraison(idlivraison);
-        if (livraison == null)
-        {
-            return NotFound(new { Message = "Livraison introuvable." });
-        }
-
-        return Ok(livraison);
+        var res = await _service.GetLivraison(id);
+        return res == null ? NotFound() : Ok(res);
     }
 
-    [HttpPost("{idlivraison:int}/Comptabilite")]
-    public async Task<IActionResult> EnvoyerComptabilite(int idlivraison)
+    [HttpPost("{id:int}/Comptabilite")]
+    public async Task<IActionResult> Export(int id)
     {
-        var export = await _gestionStockService.EnvoyerLivraisonComptabilite(idlivraison);
-        if (export == null)
-        {
-            return NotFound(new { Message = "Livraison introuvable." });
-        }
-
-        return Ok(export);
+        var res = await _service.EnvoyerComptabilite(id);
+        return res == null ? NotFound() : Ok(res);
     }
 }

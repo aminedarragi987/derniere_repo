@@ -1,19 +1,6 @@
 .shell {
 	display: flex;
 	min-height: calc(100vh - 144px);
+	background: #f3f7ff;
 }
 
-main {
-	flex: 1;
-	background: #f8fafc;
-}
-
-app-footer {
-	display: block;
-}
-
-@media (max-width: 920px) {
-	.shell {
-		flex-direction: column;
-	}
-}

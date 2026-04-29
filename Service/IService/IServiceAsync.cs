@@ -27,24 +27,24 @@ namespace Service.IService
         Task<TDto> GetById(params object[] keyValues);
 
         
-        Task<TDto> GetFirstOrDefault(Expression<Func<TEntity, bool>> predicate = null,
-                                  Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null,
-                                  Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>> include = null,
+        Task<TDto> GetFirstOrDefault(Expression<Func<TEntity, bool>>? predicate = null,
+                                  Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>>? orderBy = null,
+                                  Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>>? include = null,
                                   bool disableTracking = true);
 
         IQueryable<TDto> GetAll();
 
         
-        Task<IEnumerable<TDto>> GetMuliple(Expression<Func<TEntity, bool>> predicate = null,
-                                  Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null,
-                                  Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>> include = null,
+        Task<IEnumerable<TDto>> GetMuliple(Expression<Func<TEntity, bool>>? predicate = null,
+                                  Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>>? orderBy = null,
+                                  Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>>? include = null,
                                   bool disableTracking = true);
 
         
         IQueryable<TDto> FromSql(string sql, params object[] parameters);
 
         
-        Task<int> Count(Expression<Func<TDto, bool>> predicate = null);
+        Task<int> Count(Expression<Func<TDto, bool>>? predicate = null);
         Task<bool> Exists(Expression<Func<TDto, bool>> predicate);
         Task Save();
 

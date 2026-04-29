@@ -145,6 +145,6 @@ export class ArticleFormComponent implements OnInit {
   }
 
   get canManageArticles(): boolean {
-    return this.authService.hasAnyRole(['Gestionnaire']);
+    return this.authService.hasAnyRole(['Gestionnaire', 'Administrateur']);
   }
 }

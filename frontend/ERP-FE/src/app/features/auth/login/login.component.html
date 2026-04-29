@@ -1,39 +1,75 @@
-<section class="login-page">
-	<div class="login-card">
-		<h1>Connexion ERP</h1>
-		<p>Connecte-toi pour acceder aux modules metier.</p>
+<section class="auth-container">
+  <div class="auth-box">
+    <!-- Colonne Visuelle -->
+    <div class="auth-visual">
+      <div class="visual-content">
+        <div class="logo-circle">
+          <i class="material-icons">shopping_bag</i>
+        </div>
+        <h2>ModeShop ERP</h2>
+        <p>Gérez votre boutique, vos stocks et vos commandes en toute simplicité sur une plateforme centralisée.</p>
+      </div>
+      <div class="blob blob-1"></div>
+      <div class="blob blob-2"></div>
+    </div>
 
-		<div class="info" *ngIf="infoMessage">{{ infoMessage }}</div>
-		<div class="error" *ngIf="errorMessage">{{ errorMessage }}</div>
+    <!-- Colonne Formulaire -->
+    <div class="auth-form-section">
+      <div class="form-header">
+        <h1>Content de vous revoir</h1>
+        <p>Entrez vos accès pour accéder à votre tableau de bord</p>
+      </div>
 
-		<form [formGroup]="form" (ngSubmit)="submit()" novalidate>
-			<label>
-				<span>Nom d'utilisateur</span>
-				<input type="text" formControlName="Username" placeholder="foulen" />
-				<small class="validation" *ngIf="emailControl.touched && emailControl.invalid">
-					Nom d'utilisateur obligatoire.
-				</small>
-			</label>
+      <!-- Messages d'alerte -->
+      <div class="alert info-alert" *ngIf="infoMessage">
+        <i class="material-icons">info</i> {{ infoMessage }}
+      </div>
+      
+      <div class="alert error-alert" *ngIf="errorMessage">
+        <i class="material-icons">error_outline</i> {{ errorMessage }}
+      </div>
 
-			<label>
-				<span>Mot de passe</span>
-				<input type="password" formControlName="Password" placeholder="••••••••" />
-				<small class="validation" *ngIf="passwordControl.touched && passwordControl.invalid">
-					Minimum 6 caracteres.
-				</small>
-			</label>
+      <form [formGroup]="form" (ngSubmit)="submit()">
+        <div class="input-group">
+          <label for="username">Nom d'utilisateur</label>
+          <div class="input-field">
+            <i class="material-icons">person_outline</i>
+            <input type="text" id="username" formControlName="Username" placeholder="Ex: amine_admin" [class.is-invalid]="emailControl.touched && emailControl.invalid" />
+          </div>
+          <small class="error-text" *ngIf="emailControl.touched && emailControl.invalid">
+            Utilisateur obligatoire.
+          </small>
+        </div>
 
-			<label class="remember">
-				<input type="checkbox" formControlName="rememberMe" />
-				<span>Rester connecte</span>
-			</label>
+        <div class="input-group">
+          <label for="password">Mot de passe</label>
+          <div class="input-field">
+            <i class="material-icons">lock_outline</i>
+            <input type="password" id="password" formControlName="Password" placeholder="••••••••" [class.is-invalid]="passwordControl.touched && passwordControl.invalid" />
+          </div>
+          <small class="error-text" *ngIf="passwordControl.touched && passwordControl.invalid">
+            Minimum 6 caractères requis.
+          </small>
+        </div>
 
-			<button class="btn-primary" [disabled]="isSubmitting" type="submit">
-				{{ isSubmitting ? 'Connexion...' : 'Se connecter' }}
-			</button>
-		</form>
+        <div class="form-actions">
+          <label class="remember-me">
+            <input type="checkbox" formControlName="rememberMe" />
+            <span class="custom-checkbox"></span>
+            Rester connecté
+          </label>
+          <a routerLink="/auth/forgot-password" class="forgot-link">Oublié ?</a>
+        </div>
 
-		<a routerLink="/auth/change-password" class="link">Changer mot de passe</a>
-		<a routerLink="/auth/forgot-password" class="link">Mot de passe oublie ?</a>
-	</div>
+        <button class="btn-login" [disabled]="isSubmitting" type="submit">
+          <span *ngIf="!isSubmitting">Se connecter</span>
+          <div *ngIf="isSubmitting" class="spinner"></div>
+        </button>
+      </form>
+
+      <div class="form-footer">
+        <p>Un problème ? <a routerLink="/auth/change-password">Contactez le support</a></p>
+      </div>
+    </div>
+  </div>
 </section>

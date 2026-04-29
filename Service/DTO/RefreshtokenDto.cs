@@ -9,7 +9,7 @@ public partial class RefreshtokenDto : IMapFrom<Refreshtoken>
 {
     public int Id { get; set; }
 
-    public string Token { get; set; }
+    public string Token { get; set; } = string.Empty;
 
     public DateTime? Expiresatutc { get; set; }
 
@@ -17,7 +17,7 @@ public partial class RefreshtokenDto : IMapFrom<Refreshtoken>
 
     public int? Iduser { get; set; }
 
-    public virtual UtilisateurDto IduserNavigation { get; set; }
+    public virtual UtilisateurDto? IduserNavigation { get; set; }
 
     public void Mapping(AutoMapper.Profile profile)
     {

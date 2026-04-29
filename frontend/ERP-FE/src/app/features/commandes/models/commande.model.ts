@@ -8,16 +8,16 @@ export interface CommandeCreateDto {
 }
 
 export interface CommandeFilterDto {
-  idclient?: number;
-  statut?: string;
+  idcommande?: number;
+  datecommande?: string;
 }
 
 export interface CommandeDto {
   idcommande: number;
+  idclient: number;
   datecommande: string;
-  statut?: string;
-  idclient?: number;
-  total?: number;
+  totalcommande: number;
+  statut: string;
 }
 
 export interface CommandeStatusDto {

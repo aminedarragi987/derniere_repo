@@ -53,7 +53,7 @@ namespace Service.Service
 
 
 
-        public async Task<int> Count(Expression<Func<TDto, bool>> predicate = null)
+        public async Task<int> Count(Expression<Func<TDto, bool>>? predicate = null)
         {
             var predicates = _mapper.Map<Expression<Func<TEntity, bool>>>(predicate);
             return await _repository.Count(predicates);
@@ -114,9 +114,9 @@ namespace Service.Service
 
 
 
-        public async Task<TDto> GetFirstOrDefault(Expression<Func<TEntity, bool>> predicate = null,
-                                  Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null,
-                                  Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>> include = null,
+        public async Task<TDto> GetFirstOrDefault(Expression<Func<TEntity, bool>>? predicate = null,
+                                  Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>>? orderBy = null,
+                                  Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>>? include = null,
                                   bool disableTracking = true)
         {
 
@@ -128,9 +128,9 @@ namespace Service.Service
 
 
 
-        public async Task<IEnumerable<TDto>> GetMuliple(Expression<Func<TEntity, bool>> predicate = null,
-                                  Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null,
-                                  Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>> include = null,
+        public async Task<IEnumerable<TDto>> GetMuliple(Expression<Func<TEntity, bool>>? predicate = null,
+                                  Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>>? orderBy = null,
+                                  Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>>? include = null,
                                   bool disableTracking = true)
         {
 

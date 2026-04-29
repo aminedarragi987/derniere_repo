@@ -19,8 +19,12 @@ namespace Service
         internal static IServiceCollection AddAllService(this IServiceCollection services)
         {
 
-            var allProviderTypes = Assembly.GetAssembly(typeof(IUtilisateurService))
-             .GetTypes().Where(t => t.Namespace != null).ToList();
+            var assembly = Assembly.GetAssembly(typeof(IUtilisateurService));
+            if (assembly == null)
+                return services;
+
+            var allProviderTypes = assembly
+                .GetTypes().Where(t => t.Namespace != null).ToList();
             foreach (var intfc in allProviderTypes.Where(t => t.IsInterface))
             {
                 var impl = allProviderTypes.FirstOrDefault(c => c.IsClass && intfc.Name.Substring(1) == c.Name);

@@ -1,0 +1,37 @@
+<div class="livraison-page">
+  <h2>Gestion des livraisons</h2>
+  <p>Génération, consultation et export comptable des livraisons.</p>
+
+  <div class="card">
+    <h3>Générer une livraison</h3>
+    <input type="number" [(ngModel)]="idCommande" placeholder="ID Commande" />
+    <button (click)="genererLivraison()">Générer</button>
+  </div>
+
+  <div class="card">
+    <h3>Rechercher une livraison</h3>
+    <input type="number" [(ngModel)]="idLivraison" placeholder="ID Livraison" />
+    <button (click)="rechercherLivraison()">Rechercher</button>
+  </div>
+
+  <div class="error" *ngIf="errorMessage">
+    {{ errorMessage }}
+  </div>
+
+  <div class="card result" *ngIf="livraison">
+    <h3>Détail Livraison</h3>
+    <p><strong>ID Livraison :</strong> {{ livraison.idlivraison }}</p>
+    <p><strong>ID Commande :</strong> {{ livraison.idcommande }}</p>
+    <p><strong>Date :</strong> {{ livraison.datelivraison | date:'short' }}</p>
+    <p><strong>Adresse :</strong> {{ livraison.adresse }}</p>
+    <p><strong>Statut :</strong> {{ livraison.statut }}</p>
+
+    <button (click)="exporterComptabilite()">Exporter vers Comptabilité</button>
+  </div>
+
+  <div class="card result" *ngIf="exportResult">
+    <h3>Export Comptabilité</h3>
+    <p><strong>Statut :</strong> {{ exportResult.statutEnvoi }}</p>
+    <p><strong>Envoyé le :</strong> {{ exportResult.envoyeLeUtc | date:'short' }}</p>
+  </div>
+</div>

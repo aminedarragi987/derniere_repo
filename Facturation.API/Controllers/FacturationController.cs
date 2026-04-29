@@ -1,79 +1,44 @@
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using Service.DTO;
 using Service.IService;
 
 namespace Facturation.API.Controllers;
 
-[Produces("application/json")]
 [Route("Facture")]
-[EnableCors("CORSPolicy")]
-[Authorize(Roles = "Comptable")]
+[Authorize(Roles = "Comptable,Administrateur")]
 [ApiController]
 public class FacturationController : ControllerBase
 {
-    private readonly IGestionStockService _gestionStockService;
+    private readonly IFacturationService _service;
 
-    public FacturationController(IGestionStockService gestionStockService)
+    public FacturationController(IFacturationService service)
     {
-        _gestionStockService = gestionStockService;
+        _service = service;
     }
 
-    [HttpPost("Commande/{idcommande:int}")]
-    public async Task<IActionResult> GenererFacture(int idcommande)
+    [HttpPost("Commande/{id:int}")]
+    public async Task<IActionResult> Generer(int id)
     {
-        var facture = await _gestionStockService.GenererFacture(idcommande);
-        if (facture == null)
-        {
-            return NotFound(new { Message = "Commande introuvable." });
-        }
-
-        return Ok(facture);
+        var res = await _service.GenererFacture(id);
+        return res == null ? NotFound() : Ok(res);
     }
 
-    [HttpPost("{idfacture:int}/Paiement")]
-    public async Task<IActionResult> AjouterPaiement(int idfacture, [FromBody] PaiementCreateDto paiement)
+    [HttpPost("{id:int}/Paiement")]
+    public async Task<IActionResult> Paiement(int id, PaiementCreateDto dto)
     {
-        try
-        {
-            var created = await _gestionStockService.AddPaiement(idfacture, paiement);
-            if (created == null)
-            {
-                return NotFound(new { Message = "Facture introuvable." });
-            }
-
-            return Ok(created);
-        }
-        catch (InvalidOperationException ex)
-        {
-            return BadRequest(new { Message = ex.Message });
-        }
+        var res = await _service.AddPaiement(id, dto);
+        return res == null ? NotFound() : Ok(res);
     }
 
-    [HttpPost("{idfacture:int}/Paiement/Carte")]
-    public async Task<IActionResult> PayerParCarte(int idfacture, [FromBody] CardPaymentDto paiementCarte)
+    [HttpPost("{id:int}/Carte")]
+    public async Task<IActionResult> PaiementCarte(int id, CardPaymentDto dto)
     {
-        try
-        {
-            var created = await _gestionStockService.ProcessCardPayment(idfacture, paiementCarte);
-            if (created == null)
-            {
-                return NotFound(new { Message = "Facture introuvable." });
-            }
-
-            return Ok(created);
-        }
-        catch (InvalidOperationException ex)
-        {
-            return BadRequest(new { Message = ex.Message });
-        }
+        var res = await _service.ProcessCardPayment(id, dto);
+        return res == null ? NotFound() : Ok(res);
     }
 
     [HttpGet]
-    public async Task<IActionResult> GetFactures([FromQuery] FactureFilterDto filter)
-    {
-        var factures = await _gestionStockService.GetFactures(filter);
-        return Ok(factures);
-    }
+    public async Task<IActionResult> Get([FromQuery] FactureFilterDto filter)
+        => Ok(await _service.GetFactures(filter));
 }

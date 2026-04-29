@@ -1,0 +1,72 @@
+<!-- BARRE DE NAVIGATION -->
+<nav class="navbar">
+  <div class="nav-container">
+    <div class="logo">
+      <i class="material-icons">shopping_bag</i>
+      <span>ModeShop<span class="highlight">ERP</span></span>
+    </div>
+    <ul class="nav-links">
+      <li><a href="#">Accueil</a></li>
+      <li><a href="#features">Fonctionnalités</a></li>
+      <li><a routerLink="/auth/login" class="nav-btn">Connexion</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- SECTION HERO -->
+<section class="landing-container">
+  <div class="bg-shape shape-1"></div>
+  <div class="bg-shape shape-2"></div>
+
+  <div class="content-wrapper">
+    <div class="hero-section">
+      <div class="badge-new">Nouveauté : Module Stock Connecté</div>
+      <h1>Pilotez votre boutique avec <span>intelligence</span></h1>
+      <p class="subtitle">
+        L'ERP nouvelle génération dédié au prêt-à-porter. Gérez vos articles, 
+        suivez vos livraisons et analysez vos ventes en temps réel.
+      </p>
+      <div class="cta-group">
+        <a class="btn-main" routerLink="/auth/login">
+          Accéder à l'ERP <i class="material-icons">arrow_forward</i>
+        </a>
+        <a class="btn-outline" href="#features">Découvrir</a>
+      </div>
+      <div class="stats-bar">
+        <div class="stat">
+          <span class="stat-value">+1.2k</span>
+          <span class="stat-label">Utilisateurs</span>
+        </div>
+        <div class="stat-sep"></div>
+        <div class="stat">
+          <span class="stat-value">99.9%</span>
+          <span class="stat-label">Uptime</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- PARTIE IMAGE MODERNISÉE -->
+    <div class="image-section">
+      <div class="glass-frame floating" style="background:rgba(255,255,255,0.7);box-shadow:0 8px 32px #0001;backdrop-filter:blur(2px);border-radius:24px;padding:18px 18px 0 18px;">
+        <img src="https://images.unsplash.com/photo-1512436991641-6745cdb1723f?auto=format&fit=crop&w=800&q=80" alt="ModeShop ERP" class="hero-img" style="width:480px;max-width:100%;border-radius:18px;box-shadow:0 4px 24px #0002;object-fit:cover;" />
+        <div class="success-widget" style="margin-top:18px;box-shadow:0 2px 12px #0f766e22;">
+          <i class="material-icons" style="color:#22c55e;">check_circle</i>
+          <div class="widget-text">
+            <strong>Stock synchronisé</strong>
+            <span style="font-size:0.92em;color:#64748b;">Il y a 2 min</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="footer" style="margin-top:48px;background:rgba(36,59,99,0.04);padding:24px 0 12px 0;">
+  <div class="footer-content" style="display:flex;flex-direction:column;align-items:center;gap:8px;">
+    <p style="margin:0;font-size:1.05em;color:#64748b;">© 2026 ModeShop ERP. Tous droits réservés.</p>
+    <div class="footer-links" style="display:flex;gap:18px;">
+      <a href="#" style="color:#2563eb;">Support</a>
+      <a href="#" style="color:#2563eb;">Confidentialité</a>
+    </div>
+  </div>
+</footer>

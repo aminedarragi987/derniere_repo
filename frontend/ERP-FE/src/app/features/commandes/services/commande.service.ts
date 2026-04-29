@@ -14,11 +14,11 @@ export class CommandeService {
 
   getCommandes(filter?: CommandeFilterDto): Observable<CommandeDto[]> {
     let params = new HttpParams();
-    if (filter?.idclient) {
-      params = params.set('idclient', filter.idclient.toString());
+    if (filter?.idcommande) {
+      params = params.set('idcommande', filter.idcommande.toString());
     }
-    if (filter?.statut) {
-      params = params.set('statut', filter.statut);
+    if (filter?.datecommande) {
+      params = params.set('datecommande', filter.datecommande);
     }
 
     return this.http.get<CommandeDto[]>(this.api, { params });

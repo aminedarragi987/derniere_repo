@@ -130,11 +130,27 @@ export class UserFormComponent implements OnInit {
   private loadRoles(): void {
     this.userIamService.getRoles().subscribe({
       next: (roles) => {
-        this.roles = roles;
+        this.roles = this.uniqueRolesByName(roles).sort((a, b) => a.nom.localeCompare(b.nom));
+        if (this.roles.length <= 1) {
+          this.errorMessage =
+            'Un seul role est disponible dans les donnees API. Verifie la table des roles backend (Gestionnaire, Comptable, DG, ...).';
+        }
       },
       error: () => {
         this.errorMessage = 'Impossible de charger les roles.';
       }
+    });
+  }
+
+  private uniqueRolesByName(roles: RolesDto[]): RolesDto[] {
+    const seen = new Set<string>();
+    return roles.filter((role) => {
+      const key = role.nom.trim().toLowerCase();
+      if (!key || seen.has(key)) {
+        return false;
+      }
+      seen.add(key);
+      return true;
     });
   }
 

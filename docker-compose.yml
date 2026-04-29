@@ -11,20 +11,24 @@ services:
       - "5432:5432"
     networks:
       - backend
-    volumes:    
-      - ./init-db:/docker-entrypoint-initdb.d 
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./init-db:/docker-entrypoint-initdb.d
+
   authapi:
     container_name: authapi
     build:
       context: .
       dockerfile: ./Auth.API/Dockerfile
+    restart: always
     environment:
       ASPNETCORE_ENVIRONMENT: Development
+      ASPNETCORE_URLS: http://+:8080
       Jwt__Issuer: auth.api
       Jwt__Audience: AllMicroservices
       Jwt__Key: Dz65RkF0o2n023iLknkltZYz4XAMelP+mVY4le60kbY=
       Jwt__LifetimeMinutes: 15
-      ConnectionStrings__DefaultConnection: "Host=postgresdb;Port=5432;Database=IAM;Username=postgres;Password=data2010."
+      ConnectionStrings__DefaultConnection: Host=postgres;Port=5432;Database=IAM;Username=postgres;Password=data2010.
     ports:
       - "5002:8080"
     depends_on:
@@ -33,129 +37,136 @@ services:
       - backend
 
   userapi:
+    container_name: userapi
     build:
       context: .
       dockerfile: ./User.API/Dockerfile
-    container_name: userapi
     restart: always
     environment:
       ASPNETCORE_ENVIRONMENT: Development
-      ConnectionStrings__DefaultConnection: Host=postgresdb;Port=5432;Database=IAM;Username=postgres;Password=data2010.
+      ASPNETCORE_URLS: http://+:8080
+      ConnectionStrings__DefaultConnection: Host=postgres;Port=5432;Database=IAM;Username=postgres;Password=data2010.
       Services__AuthService: http://authapi:8080
       Jwt__Issuer: auth.api
       Jwt__Audience: AllMicroservices
       Jwt__Key: Dz65RkF0o2n023iLknkltZYz4XAMelP+mVY4le60kbY=
+    ports:
+      - "5101:8080"
     depends_on:
       - postgres
       - authapi
-    ports:
-      - "5101:8080"
     networks:
       - backend
 
   gestiondestockapi:
+    container_name: gestiondestockapi
     build:
       context: .
       dockerfile: ./Gestion_de_stock.API/Dockerfile
-    container_name: gestiondestockapi
     restart: always
     environment:
       ASPNETCORE_ENVIRONMENT: Development
-      DbConnectionString: Host=postgresdb;Port=5432;Database=IAM;Username=postgres;Password=data2010.
+      ASPNETCORE_URLS: http://+:8080
+      DbConnectionString: Host=postgres;Port=5432;Database=IAM;Username=postgres;Password=data2010.
       Jwt__Issuer: auth.api
       Jwt__Audience: AllMicroservices
       Jwt__Key: Dz65RkF0o2n023iLknkltZYz4XAMelP+mVY4le60kbY=
-    depends_on:
-      - postgres
     ports:
       - "5102:8080"
+    depends_on:
+      - postgres
     networks:
       - backend
 
   clientapi:
+    container_name: clientapi
     build:
       context: .
       dockerfile: ./Client.API/Dockerfile
-    container_name: clientapi
     restart: always
     environment:
       ASPNETCORE_ENVIRONMENT: Development
-      DbConnectionString: Host=postgresdb;Port=5432;Database=IAM;Username=postgres;Password=data2010.
+      ASPNETCORE_URLS: http://+:8080
+      DbConnectionString: Host=postgres;Port=5432;Database=IAM;Username=postgres;Password=data2010.
       Jwt__Issuer: auth.api
       Jwt__Audience: AllMicroservices
       Jwt__Key: Dz65RkF0o2n023iLknkltZYz4XAMelP+mVY4le60kbY=
-    depends_on:
-      - postgres
     ports:
       - "5103:8080"
+    depends_on:
+      - postgres
     networks:
       - backend
 
   commandeapi:
+    container_name: commandeapi
     build:
       context: .
       dockerfile: ./Commande.API/Dockerfile
-    container_name: commandeapi
     restart: always
     environment:
       ASPNETCORE_ENVIRONMENT: Development
-      DbConnectionString: Host=postgresdb;Port=5432;Database=IAM;Username=postgres;Password=data2010.
+      ASPNETCORE_URLS: http://+:8080
+      DbConnectionString: Host=postgres;Port=5432;Database=IAM;Username=postgres;Password=data2010.
       Jwt__Issuer: auth.api
       Jwt__Audience: AllMicroservices
       Jwt__Key: Dz65RkF0o2n023iLknkltZYz4XAMelP+mVY4le60kbY=
-    depends_on:
-      - postgres
     ports:
       - "5104:8080"
+    depends_on:
+      - postgres
     networks:
       - backend
 
   facturationapi:
+    container_name: facturationapi
     build:
       context: .
       dockerfile: ./Facturation.API/Dockerfile
-    container_name: facturationapi
     restart: always
     environment:
       ASPNETCORE_ENVIRONMENT: Development
-      DbConnectionString: Host=postgresdb;Port=5432;Database=IAM;Username=postgres;Password=data2010.
+      ASPNETCORE_URLS: http://+:8080
+      DbConnectionString: Host=postgres;Port=5432;Database=IAM;Username=postgres;Password=data2010.
       Jwt__Issuer: auth.api
       Jwt__Audience: AllMicroservices
       Jwt__Key: Dz65RkF0o2n023iLknkltZYz4XAMelP+mVY4le60kbY=
-    depends_on:
-      - postgres
     ports:
       - "5105:8080"
+    depends_on:
+      - postgres
     networks:
       - backend
 
   livraisonapi:
+    container_name: livraisonapi
     build:
       context: .
       dockerfile: ./Livraison.API/Dockerfile
-    container_name: livraisonapi
     restart: always
     environment:
       ASPNETCORE_ENVIRONMENT: Development
-      DbConnectionString: Host=postgresdb;Port=5432;Database=IAM;Username=postgres;Password=data2010.
+      ASPNETCORE_URLS: http://+:8080
+      DbConnectionString: Host=postgres;Port=5432;Database=IAM;Username=postgres;Password=data2010.
       Jwt__Issuer: auth.api
       Jwt__Audience: AllMicroservices
       Jwt__Key: Dz65RkF0o2n023iLknkltZYz4XAMelP+mVY4le60kbY=
-    depends_on:
-      - postgres
     ports:
       - "5106:8080"
+    depends_on:
+      - postgres
     networks:
       - backend
 
   apigateway:
-    build: 
+    container_name: apigateway
+    build:
       context: .
       dockerfile: ./Gateway/Dockerfile
-    container_name: apigateway
     restart: always
     environment:
       ASPNETCORE_ENVIRONMENT: Development
+      ASPNETCORE_URLS: http://+:8080
       ReverseProxy__Clusters__authCluster__Destinations__d1__Address: http://authapi:8080/
       ReverseProxy__Clusters__usersCluster__Destinations__d1__Address: http://userapi:8080/
       ReverseProxy__Clusters__stockCluster__Destinations__d1__Address: http://gestiondestockapi:8080/

@@ -1,163 +1,139 @@
+import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
-import { RouterLink } from '@angular/router';
-import { UserService } from '../../../core/services/user.service';
+import { DashboardService } from '../../../core/services/dashboard.service';
+import { DashboardStockDto } from '../models/dashboard.model';
 
-interface RoleAction {
-  title: string;
-  description: string;
-  link: string;
-  tone: 'teal' | 'amber' | 'slate' | 'rose';
+interface TrendPoint {
+  label: string;
+  value: number;
+}
+
+interface MetricPoint {
+  label: string;
+  value: number;
+  color: string;
 }
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, RouterLink],
+  imports: [CommonModule],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
-export class HomeComponent {
-  constructor(public userService: UserService) {}
+export class HomeComponent implements OnInit {
+  private dashboardService = inject(DashboardService);
 
-  readonly commonActions: RoleAction[] = [
-    {
-      title: 'Changer le mot de passe',
-      description: 'Mettre a jour le mot de passe du compte courant.',
-      link: '/auth/change-password',
-      tone: 'slate'
-    },
-    {
-      title: 'Consulter le tableau de bord',
-      description: 'Voir les indicateurs d’activite et de stock.',
-      link: '/dashboard/overview',
-      tone: 'teal'
-    }
-  ];
+  dashboard: DashboardStockDto | null = null;
+  loading = true;
+  error = '';
 
-  readonly adminActions: RoleAction[] = [
-    {
-      title: 'Gerer les utilisateurs',
-      description: 'Creer, modifier et affecter les comptes.',
-      link: '/users',
-      tone: 'amber'
-    },
-    {
-      title: 'Configurer les roles',
-      description: 'Controler les droits et la structure IAM.',
-      link: '/admin/roles',
-      tone: 'rose'
-    },
-    {
-      title: 'Administrer les profils',
-      description: 'Organiser les profils fonctionnels.',
-      link: '/admin/profiles',
-      tone: 'slate'
-    },
-    {
-      title: 'Gerer les menus',
-      description: 'Decider ce que chaque role voit dans la sidebar.',
-      link: '/admin/menus',
-      tone: 'teal'
-    }
-  ];
-
-  readonly managerActions: RoleAction[] = [
-    {
-      title: 'Gerer les articles',
-      description: 'Creer et maintenir le catalogue stock.',
-      link: '/articles',
-      tone: 'teal'
-    },
-    {
-      title: 'Gerer les fournisseurs',
-      description: 'Maintenir le reseau de fournisseurs actifs.',
-      link: '/fournisseurs',
-      tone: 'slate'
-    },
-    {
-      title: 'Gerer les clients',
-      description: 'Consulter et mettre a jour les clients.',
-      link: '/clients',
-      tone: 'amber'
-    },
-    {
-      title: 'Suivre les commandes',
-      description: 'Piloter le cycle de commande.',
-      link: '/commandes',
-      tone: 'rose'
-    }
-  ];
-
-  readonly accountantActions: RoleAction[] = [
-    {
-      title: 'Suivre les commandes',
-      description: 'Verifier les statuts de commandes et les montants.',
-      link: '/commandes',
-      tone: 'rose'
-    },
-    {
-      title: 'Consulter les clients',
-      description: 'Rechercher les clients et verifier leurs coordonnees.',
-      link: '/clients',
-      tone: 'amber'
-    }
-  ];
-
-  get displayName(): string {
-    return this.userService.getDisplayName();
+  ngOnInit(): void {
+    this.loadDashboard();
   }
 
-  get primaryRole(): string {
-    const user = this.userService.currentUserValue;
-    if (!user?.roles?.length) {
-      return 'Visiteur';
+  get validationRate(): number {
+    const total = this.dashboard?.nombreCommandes ?? 0;
+    const validated = this.dashboard?.nombreCommandesValidees ?? 0;
+
+    if (total <= 0) {
+      return 0;
     }
 
-    if (user.roles.some((role) => this.isExecutiveRole(role))) {
-      return user.roles.find((role) => this.isExecutiveRole(role)) ?? 'Administrateur';
-    }
-
-    if (user.roles.includes('Administrateur')) {
-      return 'Administrateur';
-    }
-
-    if (user.roles.includes('Gestionnaire')) {
-      return 'Gestionnaire';
-    }
-
-    if (user.roles.includes('Comptable')) {
-      return 'Comptable';
-    }
-
-    return user.roles[0];
+    return Math.round((validated / total) * 100);
   }
 
-  private isExecutiveRole(role: string): boolean {
-    const normalized = role
-      .normalize('NFD')
-      .replace(/[\u0300-\u036f]/g, '')
-      .trim()
-      .replace(/\s+/g, ' ')
-      .toLowerCase();
-
-    return normalized === 'dg' || normalized === 'directeur' || normalized === 'directeur general';
+  get ordersTrend(): TrendPoint[] {
+    const base = this.dashboard?.nombreCommandes ?? 0;
+    return this.createTrend(base);
   }
 
-  get visibleActions(): RoleAction[] {
-    if (this.userService.isAdmin()) {
-      return [...this.commonActions, ...this.managerActions, ...this.adminActions];
+  get stockMetrics(): MetricPoint[] {
+    if (!this.dashboard) {
+      return [];
     }
 
-    if (this.userService.isManager()) {
-      return [...this.commonActions, ...this.managerActions];
-    }
-
-    if (this.userService.isAccountant()) {
-      return [...this.commonActions, ...this.accountantActions];
-    }
-
-    return this.commonActions;
+    return [
+      { label: 'Articles', value: this.dashboard.nombreArticles, color: '#1d4ed8' },
+      { label: 'Fournisseurs', value: this.dashboard.nombreFournisseurs, color: '#0f766e' },
+      { label: 'En alerte', value: this.dashboard.nombreArticlesEnAlerte, color: '#dc2626' }
+    ];
   }
 
+  get maxStockMetric(): number {
+    return Math.max(...this.stockMetrics.map((metric) => metric.value), 1);
+  }
+
+  get ordersDonutGradient(): string {
+    const total = this.dashboard?.nombreCommandes ?? 0;
+    const validated = this.dashboard?.nombreCommandesValidees ?? 0;
+    const pending = Math.max(total - validated, 0);
+    const safeTotal = Math.max(total, 1);
+    const split = (validated / safeTotal) * 100;
+
+    return `conic-gradient(#16a34a 0% ${split}%, #f59e0b ${split}% 100%)`;
+  }
+
+  maxTrendValue(trend: TrendPoint[]): number {
+    return Math.max(...trend.map((point) => point.value), 1);
+  }
+
+  trendPath(trend: TrendPoint[], width = 420, height = 170, padding = 18): string {
+    if (trend.length === 0) {
+      return '';
+    }
+
+    const max = this.maxTrendValue(trend);
+    const stepX = trend.length > 1 ? (width - padding * 2) / (trend.length - 1) : 0;
+
+    return trend
+      .map((point, index) => {
+        const x = padding + index * stepX;
+        const y = height - padding - (point.value / max) * (height - padding * 2);
+        return `${index === 0 ? 'M' : 'L'} ${x.toFixed(2)} ${y.toFixed(2)}`;
+      })
+      .join(' ');
+  }
+
+  trendDots(trend: TrendPoint[], width = 420, height = 170, padding = 18): Array<{ x: number; y: number; value: number; label: string }> {
+    if (trend.length === 0) {
+      return [];
+    }
+
+    const max = this.maxTrendValue(trend);
+    const stepX = trend.length > 1 ? (width - padding * 2) / (trend.length - 1) : 0;
+
+    return trend.map((point, index) => ({
+      x: padding + index * stepX,
+      y: height - padding - (point.value / max) * (height - padding * 2),
+      value: point.value,
+      label: point.label
+    }));
+  }
+
+  loadDashboard(): void {
+    this.loading = true;
+    this.error = '';
+
+    this.dashboardService.getDashboard().subscribe({
+      next: (res) => {
+        this.dashboard = res;
+        this.loading = false;
+      },
+      error: () => {
+        this.error = 'Impossible de charger le dashboard';
+        this.loading = false;
+      }
+    });
+  }
+
+  private createTrend(base: number): TrendPoint[] {
+    const labels = ['Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam', 'Dim'];
+    const multipliers = [0.74, 0.81, 0.88, 0.93, 1, 1.08, 1.14];
+
+    return labels.map((label, index) => ({
+      label,
+      value: Math.max(Math.round(base * multipliers[index]), 0)
+    }));
+  }
 }

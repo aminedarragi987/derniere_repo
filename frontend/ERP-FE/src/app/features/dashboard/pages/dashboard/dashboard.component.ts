@@ -19,6 +19,12 @@ interface TrendPoint {
   value: number;
 }
 
+interface DonutSegment {
+  label: string;
+  value: number;
+  color: string;
+}
+
 @Component({
   selector: 'app-dashboard',
   standalone: true,
@@ -72,6 +78,31 @@ export class DashboardComponent implements OnInit {
 
   get hasCriticalAlert(): boolean {
     return this.lowStockAlerts.length > 0;
+  }
+
+  get stockSegments(): DonutSegment[] {
+    const critical = this.lowStockAlerts.length;
+    const normal = Math.max(this.articlesCount - critical, 0);
+
+    return [
+      { label: 'Stock normal', value: normal, color: '#16a34a' },
+      { label: 'Sous seuil', value: critical, color: '#dc2626' }
+    ];
+  }
+
+  get stockDonutGradient(): string {
+    const segments = this.stockSegments;
+    const total = segments.reduce((sum, segment) => sum + segment.value, 0) || 1;
+    let offset = 0;
+
+    const parts = segments.map((segment) => {
+      const start = (offset / total) * 100;
+      offset += segment.value;
+      const end = (offset / total) * 100;
+      return `${segment.color} ${start}% ${end}%`;
+    });
+
+    return `conic-gradient(${parts.join(', ')})`;
   }
 
   private loadOverview(): void {
@@ -134,6 +165,39 @@ export class DashboardComponent implements OnInit {
 
   maxTrendValue(trend: TrendPoint[]): number {
     return Math.max(...trend.map((point) => point.value), 1);
+  }
+
+  trendPath(trend: TrendPoint[], width = 420, height = 170, padding = 18): string {
+    if (trend.length === 0) {
+      return '';
+    }
+
+    const max = this.maxTrendValue(trend);
+    const stepX = trend.length > 1 ? (width - padding * 2) / (trend.length - 1) : 0;
+
+    return trend
+      .map((point, index) => {
+        const x = padding + index * stepX;
+        const y = height - padding - (point.value / max) * (height - padding * 2);
+        return `${index === 0 ? 'M' : 'L'} ${x.toFixed(2)} ${y.toFixed(2)}`;
+      })
+      .join(' ');
+  }
+
+  trendDots(trend: TrendPoint[], width = 420, height = 170, padding = 18): Array<{ x: number; y: number; value: number; label: string }> {
+    if (trend.length === 0) {
+      return [];
+    }
+
+    const max = this.maxTrendValue(trend);
+    const stepX = trend.length > 1 ? (width - padding * 2) / (trend.length - 1) : 0;
+
+    return trend.map((point, index) => ({
+      x: padding + index * stepX,
+      y: height - padding - (point.value / max) * (height - padding * 2),
+      value: point.value,
+      label: point.label
+    }));
   }
 
   private createTrend(base: number): TrendPoint[] {

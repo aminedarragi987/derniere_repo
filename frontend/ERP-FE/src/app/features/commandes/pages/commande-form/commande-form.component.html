@@ -1,0 +1,88 @@
+<section class="commande-form-page">
+  <div class="form-card">
+    <header>
+      <h1>Nouvelle commande</h1>
+      <p>Cree une commande client, ajoute des articles puis valide-la.</p>
+      <p class="permission-hint" *ngIf="!canCreateCommande">
+        Votre profil ne permet pas de creer une commande. Le role Gestionnaire est requis.
+      </p>
+    </header>
+
+    <p class="error" *ngIf="errorMessage">{{ errorMessage }}</p>
+    <p class="success" *ngIf="successMessage">{{ successMessage }}</p>
+
+    <div class="form-grid">
+      <label>
+        <span>Client *</span>
+        <select [(ngModel)]="selectedClientId" [disabled]="isLoadingClients || isSubmitting">
+          <option [ngValue]="null">-- Selectionner un client --</option>
+          <option *ngFor="let client of clients" [ngValue]="client.idclient">
+            {{ client.nom }} (ID: {{ client.idclient }})
+          </option>
+        </select>
+      </label>
+
+      <div class="line-editor">
+        <label>
+          <span>Article</span>
+          <select [(ngModel)]="selectedArticleId" [disabled]="isLoadingArticles || isSubmitting">
+            <option [ngValue]="null">-- Selectionner un article --</option>
+            <option *ngFor="let article of articles" [ngValue]="article.idarticle">
+              {{ article.nom }} - {{ article.prix | number: '1.2-2' }} DH
+            </option>
+          </select>
+        </label>
+
+        <label>
+          <span>Quantite</span>
+          <input type="number" min="1" [(ngModel)]="quantity" [disabled]="isSubmitting" />
+        </label>
+
+        <button type="button" class="btn-light" (click)="addLigne()" [disabled]="isSubmitting">
+          Ajouter ligne
+        </button>
+      </div>
+
+      <div class="line-list">
+        <h2>Lignes de commande</h2>
+
+        <table class="table" *ngIf="lignes.length > 0; else emptyLines">
+          <thead>
+            <tr>
+              <th>Article</th>
+              <th>Quantite</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let ligne of lignes">
+              <td>{{ ligne.nom }}</td>
+              <td>{{ ligne.quantite }}</td>
+              <td>
+                <button type="button" class="btn-danger" (click)="removeLigne(ligne.idarticle)" [disabled]="isSubmitting">
+                  Supprimer
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <ng-template #emptyLines>
+          <p class="empty">Aucune ligne ajoutee. Tu peux creer la commande sans lignes si besoin.</p>
+        </ng-template>
+      </div>
+
+      <label class="checkbox">
+        <input type="checkbox" [(ngModel)]="validateAfterCreate" [disabled]="isSubmitting" />
+        <span>Valider automatiquement apres creation</span>
+      </label>
+
+      <div class="actions">
+        <button type="button" class="btn-light" (click)="goBack()">Retour</button>
+        <button type="button" class="btn-primary" (click)="createCommande()" [disabled]="isSubmitting || !canCreateCommande">
+          {{ isSubmitting ? 'Creation...' : 'Creer la commande' }}
+        </button>
+      </div>
+    </div>
+  </div>
+</section>

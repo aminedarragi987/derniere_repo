@@ -1,28 +1,15 @@
-<header class="topbar">
-	<div class="brand-block">
-		<div class="logo">ERP</div>
-		<div>
-			<p class="eyebrow">Plateforme de gestion</p>
-			<h1>ERP Microservices</h1>
-		</div>
-	</div>
+<header class="navbar">
+  <div class="left">
+    <div class="logo">MS</div>
+    <h1>ModeShop - E-commerce Vetements</h1>
+  </div>
 
-	<div class="user-block" *ngIf="userService.currentUser$ | async as user; else guestTpl">
-		<div class="user-meta">
-			<strong>{{ userService.getDisplayName() }}</strong>
-			<span>
-				{{ user.roles.join(', ') || 'Aucun role' }}
-			</span>
-		</div>
+  <div class="right" *ngIf="userService.currentUser$ | async as user; else guest">
+    <span class="user">{{ userService.getDisplayName() }}</span>
+    <button type="button" (click)="logout()">Logout</button>
+  </div>
 
-		<a routerLink="/dashboard" class="nav-link">Accueil</a>
-		<a routerLink="/auth/change-password" class="nav-link">Mot de passe</a>
-		<button type="button" class="logout-btn" (click)="logout()">Deconnexion</button>
-	</div>
-
-	<ng-template #guestTpl>
-		<div class="user-block guest">
-			<a routerLink="/auth/login" class="nav-link">Connexion</a>
-		</div>
-	</ng-template>
+  <ng-template #guest>
+    <a routerLink="/auth/login">Login</a>
+  </ng-template>
 </header>

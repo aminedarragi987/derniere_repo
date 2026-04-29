@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using System;
+
 namespace Service.Models
 {
     public class ResponseLogin
@@ -13,7 +15,8 @@ namespace Service.Models
         public string? Email { get; set; }
         public int? Idrole { get; set; }
         public string? AccessToken { get; set; }
-        public string TokenType { get; set; } = string.Empty;
+        public string? RefreshToken { get; set; }
+        public string TokenType { get; set; } = "Bearer";
         public int ExpireIn { get; set; }
     }
 }

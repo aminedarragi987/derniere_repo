@@ -1,56 +1,43 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Cors;
+﻿using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using Service.DTO;
 using Service.IService;
 
-namespace Auth.API.Controllers
+namespace Auth.API.Controllers;
+
+[Produces("application/json")]
+[Route("Auth")]
+[EnableCors("CORSPolicy")]
+[ApiController]
+public class AuthController : ControllerBase
 {
-    [Produces("application/json")]
-    [Route("Auth")]
-    [EnableCors("CORSPolicy")]
-    [Authorize(Roles = "Administrateur")]
-    [ApiController]
+    private readonly IAuthService _authService;
 
-    public class AuthController : ControllerBase
+    public AuthController(IAuthService authService)
     {
-        private readonly IAuthService _authService;
+        _authService = authService;
+    }
 
-        public AuthController(IAuthService authService)
-        {
-            _authService = authService;
-        }
+    // ================= TOKEN =================
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="model"></param>
-        /// <returns></returns>
+    [HttpPost("GenToken")]
+    public IActionResult Generate([FromBody] UtilisateurDto user)
+    {
+        var token = _authService.GenerateAccessToken(user);
+        return Ok(token);
+    }
 
-        [HttpPost("GenToken")]
-        public IActionResult Generate([FromBody] UtilisateurDto user)
-        {
-            var token = _authService.GenerateAccessToken(user);
-            return Ok(new { token });
-        }
+    // ================= VALIDATE =================
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="token"></param>
-        /// <returns></returns>
+    [HttpPost("ValidateToken")]
+    public IActionResult Validate([FromBody] string token)
+    {
+        var principal = _authService.ValidateToken(token);
 
-        [HttpPost("ValidateToken")]
-        public IActionResult Validate([FromBody] string token)
-        {
-            var principal = _authService.ValidateToken(token);
+        if (principal == null)
+            return Unauthorized();
 
-            if (principal == null)
-                return Unauthorized();
-
-            var claims = principal.Claims.Select(c => new { c.Type, c.Value });
-            return Ok(new { valid = true, claims });
-        }
+        var claims = principal.Claims.Select(c => new { c.Type, c.Value });
+        return Ok(new { valid = true, claims });
     }
 }
-
