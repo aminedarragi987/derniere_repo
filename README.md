@@ -10,3 +10,9 @@ gestionnaire
   "Username": "foulen",
   "Password": "Admin123"
 }
+
+------
+directeur generale:
+dg
+dgdg123
+
