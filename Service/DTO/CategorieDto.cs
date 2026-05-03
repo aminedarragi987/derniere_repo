@@ -16,6 +16,15 @@ public partial class CategorieDto : IMapFrom<Categorie>
     [StringLength(500)]
     public string? Description { get; set; }
 
+    [StringLength(30)]
+    public string? Sexe { get; set; }
+
+    [StringLength(50)]
+    public string? Typevetement { get; set; }
+
+    [StringLength(50)]
+    public string? Couleur { get; set; }
+
     public void Mapping(AutoMapper.Profile profile)
     {
         profile.CreateMap<Categorie, CategorieDto>().ReverseMap();

@@ -1,8 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { FactureDetail } from '../../models/facture.model';
-import { FactureService } from '../../../../core/services/facture.service';
+import { FactureDetail } from '../../../../shared/models';
+import { FactureService } from '../../../../shared/services';
 
 @Component({
   selector: 'app-facture-list',

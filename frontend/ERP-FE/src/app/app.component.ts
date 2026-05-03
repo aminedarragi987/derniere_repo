@@ -8,8 +8,7 @@ import { NavbarComponent } from './core/layout/navbar/navbar.component';
 import { FooterComponent } from './core/layout/footer/footer.component';
 import { SidebarComponent } from './layout/sidebar/sidebar.component';
 
-import { AuthService } from './core/services/auth.service';
-import { MenuService } from './core/services/menu.service';
+import { AuthService, MenuService } from './shared/services';
 
 @Component({
   selector: 'app-root',

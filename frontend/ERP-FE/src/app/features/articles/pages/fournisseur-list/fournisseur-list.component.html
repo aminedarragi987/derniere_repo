@@ -17,9 +17,8 @@
   </header>
 
   <div class="feedback loading" *ngIf="isLoading">Chargement des fournisseurs...</div>
-  <div class="feedback error" *ngIf="errorMessage">{{ errorMessage }}</div>
 
-  <div class="table-card" *ngIf="!isLoading && !errorMessage">
+  <div class="table-card" *ngIf="!isLoading">
     <table class="article-table" aria-label="Liste des fournisseurs">
       <thead>
         <tr>

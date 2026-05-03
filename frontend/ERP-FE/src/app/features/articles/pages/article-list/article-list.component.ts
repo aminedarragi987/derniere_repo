@@ -1,13 +1,28 @@
+/* src/app/features/articles/pages/article-list/article-list.component.ts */
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { HttpErrorResponse } from '@angular/common/http';
-import { ArticleService } from '../../services/article.service';
-import { ArticleDto, ArticleFilterDto, CategorieDto, FournisseurDto } from '../../models/article.model';
-import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { HttpErrorResponse } from '@angular/common/http';
+import { Router } from '@angular/router';
 import { ReactiveFormsModule, FormBuilder, FormGroup } from '@angular/forms';
+
 import { Subject } from 'rxjs';
 import { debounceTime, takeUntil } from 'rxjs/operators';
-import { AuthService } from '../../../../core/services/auth.service';
+
+import {
+  ArticleService,
+  CategorieService,
+  AuthService,
+  DataService,
+  ImageService
+} from '../../../../shared/services';
+
+import {
+  ArticleDto,
+  ArticleFilterDto,
+  CategorieDto
+} from '../../../../shared/models';
+
+import { OptionItem } from '../../../../shared/services/data.service';
 
 @Component({
   standalone: true,
@@ -16,12 +31,18 @@ import { AuthService } from '../../../../core/services/auth.service';
   styleUrl: './article-list.component.css'
 })
 export class ArticleListComponent implements OnInit, OnDestroy {
-
   articles: ArticleDto[] = [];
+  categories: CategorieDto[] = [];
+
+  genres: OptionItem[] = [];
+  tailles: OptionItem[] = [];
+  couleurs: OptionItem[] = [];
+  marques: OptionItem[] = [];
+  typesVetement: OptionItem[] = [];
+
   isLoading = false;
   errorMessage = '';
-  categories: CategorieDto[] = [];
-  fournisseurs: FournisseurDto[] = [];
+
   filterForm!: FormGroup;
 
   private destroy$ = new Subject<void>();
@@ -29,37 +50,37 @@ export class ArticleListComponent implements OnInit, OnDestroy {
 
   constructor(
     private service: ArticleService,
+    private categorieService: CategorieService,
     private router: Router,
     private fb: FormBuilder,
-    private authService: AuthService
+    private authService: AuthService,
+    private dataService: DataService,
+    private imageService: ImageService
   ) {
-    this.filterForm = this.fb.nonNullable.group({
+    this.filterForm = this.fb.group({
       search: [''],
-      idcategorie: [''],
-      idfournisseur: [''],
+      sexe: [''],
+      typevetement: [''],
+      marque: [''],
+      couleur: [''],
+      taille: [''],
       prixMin: [''],
       prixMax: ['']
     });
 
-    this.filter$.pipe(
-      debounceTime(300),
-      takeUntil(this.destroy$)
-    ).subscribe((filter) => {
-      this.applyFilter(filter);
-    });
+    this.filter$
+      .pipe(debounceTime(300), takeUntil(this.destroy$))
+      .subscribe((filter: ArticleFilterDto) => this.applyFilter(filter));
   }
 
   ngOnInit(): void {
+    this.loadEnumerations();
     this.load();
     this.loadCategories();
-    this.loadFournisseurs();
-    
+
     this.filterForm.valueChanges
       .pipe(takeUntil(this.destroy$))
-      .subscribe(() => {
-        const filter = this.buildFilter();
-        this.filter$.next(filter);
-      });
+      .subscribe(() => this.filter$.next(this.buildFilter()));
   }
 
   ngOnDestroy(): void {
@@ -67,82 +88,113 @@ export class ArticleListComponent implements OnInit, OnDestroy {
     this.destroy$.complete();
   }
 
+  private loadEnumerations(): void {
+    this.genres = this.dataService.getGenres();
+    this.tailles = this.dataService.getTailles();
+    this.couleurs = this.dataService.getCouleurs();
+    this.marques = this.dataService.getMarques();
+    this.typesVetement = this.dataService.getTypesVetement();
+  }
+
   load(): void {
     this.isLoading = true;
     this.errorMessage = '';
+
     this.service.getAll().subscribe({
-      next: (res) => {
-        this.articles = res;
+      next: (res: ArticleDto[]) => {
+        this.articles = res.map(a => ({
+          ...a,
+          imageUrl: (a as any).imageUrl || this.getFakeImage(a.nom)
+        }));
         this.isLoading = false;
       },
       error: (error: HttpErrorResponse) => {
-        this.errorMessage = error.status === 403
-          ? "Acces refuse: le role Gestionnaire est requis pour consulter les articles."
-          : 'Impossible de charger les articles.';
+        this.errorMessage =
+          error.status === 403
+            ? 'Accès refusé : rôle Gestionnaire requis.'
+            : 'Impossible de charger les articles.';
         this.isLoading = false;
       }
     });
   }
 
   loadCategories(): void {
-    this.service.getCategories().subscribe({
-      next: (res) => {
-        this.categories = res;
-      },
-      error: () => {
-        this.categories = [];
-      }
-    });
-  }
-
-  loadFournisseurs(): void {
-    this.service.getFournisseurs().subscribe({
-      next: (res) => {
-        this.fournisseurs = res;
-      },
-      error: () => {
-        console.error('Erreur chargement fournisseurs');
-      }
+    this.categorieService.getCategories().subscribe({
+      next: (res: CategorieDto[]) => (this.categories = res),
+      error: () => (this.categories = [])
     });
   }
 
   buildFilter(): ArticleFilterDto {
     const formValue = this.filterForm.getRawValue();
+
     return {
       search: formValue.search || null,
-      idcategorie: formValue.idcategorie ? parseInt(formValue.idcategorie) : null,
-      idfournisseur: formValue.idfournisseur ? parseInt(formValue.idfournisseur) : null,
-      prixMin: formValue.prixMin ? parseFloat(formValue.prixMin) : null,
-      prixMax: formValue.prixMax ? parseFloat(formValue.prixMax) : null
+      idcategorie: null,
+      idfournisseur: null,
+      sexe: formValue.sexe || null,
+      typevetement: formValue.typevetement || null,
+      marque: formValue.marque || null,
+      couleur: formValue.couleur || null,
+      taille: formValue.taille || null,
+      prixMin: formValue.prixMin ? Number(formValue.prixMin) : null,
+      prixMax: formValue.prixMax ? Number(formValue.prixMax) : null
     };
   }
 
   applyFilter(filter: ArticleFilterDto): void {
     this.isLoading = true;
+
     this.service.getArticles(filter).subscribe({
-      next: (res) => {
-        this.articles = res;
+      next: (res: ArticleDto[]) => {
+        this.articles = res.map(a => ({
+          ...a,
+          imageUrl: (a as any).imageUrl || this.getFakeImage(a.nom)
+        }));
         this.isLoading = false;
       },
       error: (error: HttpErrorResponse) => {
-        this.errorMessage = error.status === 403
-          ? "Acces refuse: le role Gestionnaire est requis pour filtrer les articles."
-          : 'Erreur lors du filtre.';
+        this.errorMessage =
+          error.status === 403
+            ? 'Accès refusé : rôle Gestionnaire requis.'
+            : 'Erreur lors du filtre.';
         this.isLoading = false;
       }
     });
   }
 
   clearFilter(): void {
-    this.filterForm.reset();
+    this.filterForm.reset({
+      search: '',
+      sexe: '',
+      typevetement: '',
+      marque: '',
+      couleur: '',
+      taille: '',
+      prixMin: '',
+      prixMax: ''
+    });
+
+    this.load();
+  }
+
+  getCategoryName(article: ArticleDto): string {
+    if (article.categorieNom) return article.categorieNom;
+    return this.categories.find(c => c.idcategorie === article.idcategorie)?.nom ?? '-';
+  }
+
+  getFakeImage(name: string): string {
+    return `https://source.unsplash.com/600x800/?fashion,clothing,${encodeURIComponent(name)}`;
   }
 
   create(): void {
-    if (!this.canManageArticles) {
-      this.errorMessage = "Action refusee: le role Gestionnaire est requis pour ajouter un article.";
-      return;
-    }
+    if (!this.canManageArticles) return;
     this.router.navigate(['/articles/new']);
+  }
+
+  viewDetail(id: number | undefined): void {
+    if (!id) return;
+    this.router.navigate(['/articles', id]);
   }
 
   goToFournisseurs(): void {
@@ -150,58 +202,16 @@ export class ArticleListComponent implements OnInit, OnDestroy {
   }
 
   edit(id: number | undefined): void {
-    if (!this.canManageArticles) {
-      this.errorMessage = "Action refusee: le role Gestionnaire est requis pour modifier un article.";
-      return;
-    }
-    if (id) {
-      this.router.navigate(['/articles/edit', id]);
-    }
+    if (!this.canManageArticles || !id) return;
+    this.router.navigate(['/articles/edit', id]);
   }
 
-  defineAlertThreshold(article: ArticleDto): void {
-    if (!this.canManageArticles) {
-      this.errorMessage = "Action refusee: le role Gestionnaire est requis pour definir le seuil d'alerte.";
-      return;
-    }
+  delete(id: number | undefined): void {
+    if (!this.canManageArticles || !id || !confirm('Êtes-vous sûr ?')) return;
 
-    if (!article.idarticle) {
-      this.errorMessage = "Impossible de definir le seuil pour cet article.";
-      return;
-    }
-
-    const current = article.seuilminimum ?? 0;
-    const input = prompt(`Definir le seuil d'alerte pour ${article.nom}:`, String(current));
-
-    if (input === null) {
-      return;
-    }
-
-    const next = Number(input);
-    if (!Number.isFinite(next) || next < 0) {
-      this.errorMessage = 'Le seuil doit etre un nombre positif ou nul.';
-      return;
-    }
-
-    this.isLoading = true;
-    this.errorMessage = '';
-
-    const payload: ArticleDto = {
-      ...article,
-      seuilminimum: next,
-      fournisseurIds: article.fournisseurIds ?? []
-    };
-
-    this.service.update(article.idarticle, payload).subscribe({
-      next: () => {
-        this.load();
-      },
-      error: (error: HttpErrorResponse) => {
-        this.errorMessage = error.status === 403
-          ? "Action refusee: le role Gestionnaire est requis pour definir le seuil d'alerte."
-          : 'Erreur lors de la mise a jour du seuil d alerte.';
-        this.isLoading = false;
-      }
+    this.service.delete(id).subscribe({
+      next: () => this.load(),
+      error: () => (this.errorMessage = 'Erreur lors de la suppression.')
     });
   }
 
@@ -209,21 +219,19 @@ export class ArticleListComponent implements OnInit, OnDestroy {
     return article.quantitestock <= article.seuilminimum;
   }
 
-  delete(id: number | undefined): void {
-    if (!this.canManageArticles) {
-      this.errorMessage = "Action refusee: le role Gestionnaire est requis pour supprimer un article.";
-      return;
-    }
-    if (!id || !confirm('Êtes-vous sûr de vouloir supprimer cet article ?')) return;
-    
-    this.service.delete(id).subscribe({
-      next: () => {
-        this.load();
-      },
-      error: () => {
-        this.errorMessage = 'Erreur lors de la suppression.';
-      }
-    });
+  /**
+   * Retourne l'URL de l'image pour un article
+   */
+  getImageUrl(article: ArticleDto): string {
+    return this.imageService.getImageUrl(article.imageUrl || null);
+  }
+
+  /**
+   * Gère l'erreur de chargement d'image
+   */
+  onImageError(event: Event): void {
+    const img = event.target as HTMLImageElement;
+    img.src = this.imageService.getPlaceholderImage();
   }
 
   get canManageArticles(): boolean {

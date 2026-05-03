@@ -31,5 +31,23 @@ public class ArticleDto
     public int? Idcategorie { get; set; }
     public string? CategorieNom { get; set; }
 
+    // E-commerce attributes
+    [StringLength(1000)]
+    public string? ImageUrl { get; set; }
+
+    [StringLength(50)]
+    public string? Sku { get; set; }
+
+    [StringLength(20)]
+    public string? Statut { get; set; } = "Actif";
+
+    [StringLength(160)]
+    public string? Slug { get; set; }
+
+    public bool IsFeatured { get; set; } = false;
+
+    [StringLength(80)]
+    public string? Matiere { get; set; }
+
     public List<int> FournisseurIds { get; set; } = new();
 }

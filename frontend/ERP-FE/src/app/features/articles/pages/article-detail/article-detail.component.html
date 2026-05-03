@@ -1,0 +1,138 @@
+<section class="detail-page">
+  <!-- Loader -->
+  <div class="loader-overlay" *ngIf="isLoading">
+    <div class="spinner-blue"></div>
+  </div>
+
+  <!-- Erreur -->
+  <div class="alert error-alert" *ngIf="errorMessage">
+    <i class="material-icons">error</i> {{ errorMessage }}
+  </div>
+
+  <!-- Contenu -->
+  <div *ngIf="article && !isLoading">
+    <!-- Header -->
+    <header class="detail-header">
+      <button class="btn ghost" (click)="goBack()">
+        <i class="material-icons">arrow_back</i> Retour
+      </button>
+      <h1>{{ article.nom }}</h1>
+      <div class="header-actions" *ngIf="canManageArticles">
+        <button class="btn-icon" (click)="edit()" title="Modifier">
+          <i class="material-icons">edit</i>
+        </button>
+        <button class="btn-icon btn-danger-icon" (click)="delete()" title="Supprimer">
+          <i class="material-icons">delete</i>
+        </button>
+      </div>
+    </header>
+
+    <!-- Contenu Principal -->
+    <div class="detail-content">
+      <!-- Image de l'article -->
+      <div class="detail-image-section">
+        <img 
+          [src]="getImageUrl()" 
+          [alt]="article.nom"
+          class="detail-main-image"
+          (error)="onImageError($event)"
+        />
+      </div>
+
+      <!-- Colonne Gauche: Infos Basiques -->
+      <div class="detail-column">
+        <div class="detail-card">
+          <h2>Informations de base</h2>
+          
+          <div class="detail-row">
+            <label>Nom</label>
+            <p>{{ article.nom }}</p>
+          </div>
+
+          <div class="detail-row">
+            <label>Description</label>
+            <p>{{ article.description || 'N/A' }}</p>
+          </div>
+
+          <div class="detail-row">
+            <label>Catégorie</label>
+            <p>
+              <span class="category-tag">{{ category?.nom || 'N/A' }}</span>
+            </p>
+          </div>
+        </div>
+
+        <!-- Prix et Stock -->
+        <div class="detail-card">
+          <h2>Prix et Stock</h2>
+
+          <div class="detail-row">
+            <label>Prix (DH)</label>
+            <p class="price">{{ article.prix | number:'1.2-2' }} DH</p>
+          </div>
+
+          <div class="detail-row">
+            <label>Quantité en stock</label>
+            <p [ngClass]="{'danger-text': isInAlert()}">{{ article.quantitestock }} unités</p>
+          </div>
+
+          <div class="detail-row">
+            <label>Seuil minimum</label>
+            <p>{{ article.seuilminimum }} unités</p>
+          </div>
+
+          <div class="detail-row">
+            <label>Statut Stock</label>
+            <p>
+              <span class="badge" [ngClass]="isInAlert() ? 'badge-danger' : 'badge-success'">
+                {{ isInAlert() ? 'SOUS SEUIL' : 'NORMAL' }}
+              </span>
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Colonne Droite: Détails Produit -->
+      <div class="detail-column">
+        <div class="detail-card">
+          <h2>Détails du produit</h2>
+
+          <div class="detail-row">
+            <label>Genre</label>
+            <p>{{ getGenreLabel(article.sexe) }}</p>
+          </div>
+
+          <div class="detail-row">
+            <label>Type de vêtement</label>
+            <p>{{ getTypeVetementLabel(article.typevetement) }}</p>
+          </div>
+
+          <div class="detail-row">
+            <label>Marque</label>
+            <p>{{ getMarqueLabel(article.marque) }}</p>
+          </div>
+
+          <div class="detail-row">
+            <label>Couleur</label>
+            <p>{{ getCouleurLabel(article.couleur) }}</p>
+          </div>
+
+          <div class="detail-row">
+            <label>Taille</label>
+            <p>{{ getTailleLabel(article.taille) }}</p>
+          </div>
+        </div>
+
+        <!-- Fournisseurs -->
+        <div class="detail-card">
+          <h2>Fournisseurs</h2>
+
+          <div class="detail-row">
+            <label>Fournisseurs</label>
+            <p>{{ getFournisseurNames() }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

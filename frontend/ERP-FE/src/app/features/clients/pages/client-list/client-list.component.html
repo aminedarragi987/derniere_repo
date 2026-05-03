@@ -1,41 +1,99 @@
-<section class="page">
+<section class="articles-page">
+  <!-- Header Moderne -->
   <header class="page-header">
-    <div>
-      <h1>Clients</h1>
-      <p>Consulte la base clients et recherche rapidement un contact.</p>
+    <div class="page-titles">
+      <h1 class="title">Gestion Clients</h1>
+      <p class="subtitle">Consultez la base clients et gérez vos contacts rapidement.</p>
+      <div class="alert info-alert" *ngIf="!canManageClients">
+        <i class="material-icons">lock</i> 
+        <span>Mode lecture : Rôle <b>Gestionnaire</b> requis pour modifier.</span>
+      </div>
     </div>
-    <button type="button" class="btn-outline" (click)="loadClients()">Actualiser</button>
+
+    <div class="header-actions">
+      <div class="header-buttons">
+        <button class="btn-secondary" (click)="loadClients()">
+          <i class="material-icons">refresh</i> Actualiser
+        </button>
+        <button class="btn-primary" [disabled]="!canManageClients" (click)="createClient()">
+          <i class="material-icons">person_add</i> Ajouter un client
+        </button>
+      </div>
+    </div>
   </header>
 
-  <div class="toolbar">
-    <input
-      type="text"
-      [(ngModel)]="search"
-      (ngModelChange)="applyFilter()"
-      placeholder="Rechercher nom, email, telephone..." />
+  <!-- Toolbar de recherche -->
+  <section class="filters-container">
+    <div class="search-box full-width">
+      <i class="material-icons">search</i>
+      <input
+        type="text"
+        [(ngModel)]="search"
+        (ngModelChange)="applyFilter()"
+        placeholder="Rechercher par nom, email, téléphone..." />
+    </div>
+  </section>
+
+  <!-- Feedbacks -->
+  <div class="loader-overlay" *ngIf="isLoading">
+    <div class="spinner-blue"></div>
+  </div>
+  
+  <div class="alert error-alert" *ngIf="errorMessage">
+    <i class="material-icons">error</i> {{ errorMessage }}
   </div>
 
-  <p class="loading" *ngIf="isLoading">Chargement des clients...</p>
-  <p class="error" *ngIf="errorMessage">{{ errorMessage }}</p>
+  <!-- Table Card -->
+  <div class="table-card" *ngIf="!isLoading && filtered.length > 0">
+    <table class="modern-table">
+      <thead>
+        <tr>
+          <th>Client</th>
+          <th>Contact</th>
+          <th>Localisation</th>
+          <th class="text-center">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let client of filtered" class="row-hover">
+          <td>
+            <div class="article-cell">
+              <div class="icon-thumb blue">
+                <i class="material-icons">person</i>
+              </div>
+              <div class="article-meta">
+                <span class="name">{{ client.nom }}</span>
+                <span class="desc">Client ID: #{{ client.idclient }}</span>
+              </div>
+            </div>
+          </td>
+          <td>
+            <div class="contact-info">
+              <div class="info-item"><i class="material-icons">email</i> {{ client.email || '-' }}</div>
+              <div class="info-item"><i class="material-icons">phone</i> {{ client.telephone || '-' }}</div>
+            </div>
+          </td>
+          <td class="text-muted">
+            <div class="info-item"><i class="material-icons">place</i> {{ client.adresse || '-' }}</div>
+          </td>
+          <td class="text-center">
+            <div class="action-btns">
+              <button class="btn-icon" (click)="editClient(client)" [disabled]="!canManageClients" title="Modifier">
+                <i class="material-icons">edit</i>
+              </button>
+              <button class="btn-icon btn-danger-icon" (click)="deleteClient(client)" [disabled]="!canManageClients" title="Supprimer">
+                <i class="material-icons">delete</i>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 
-  <table class="table" *ngIf="!isLoading && !errorMessage && filtered.length > 0">
-    <thead>
-      <tr>
-        <th>Nom</th>
-        <th>Email</th>
-        <th>Téléphone</th>
-        <th>Adresse</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let client of filtered">
-        <td>{{ client.nom }}</td>
-        <td>{{ client.email || '-' }}</td>
-        <td>{{ client.telephone || '-' }}</td>
-        <td>{{ client.adresse || '-' }}</td>
-      </tr>
-    </tbody>
-  </table>
-
-  <p class="empty" *ngIf="!isLoading && !errorMessage && filtered.length === 0">Aucun client trouvé.</p>
+  <!-- Etat Vide -->
+  <div class="empty-state-card" *ngIf="!isLoading && filtered.length === 0">
+    <i class="material-icons">person_search</i>
+    <p>Aucun client ne correspond à votre recherche.</p>
+  </div>
 </section>

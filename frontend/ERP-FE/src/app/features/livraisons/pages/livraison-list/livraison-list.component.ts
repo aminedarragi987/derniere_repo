@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { LivraisonService } from '../../../../core/services/livraison.service';
-import { Livraison, ComptabiliteExport } from '../../models/livraison.model';
+import { LivraisonService } from '../../../../shared/services';
+import { Livraison, ComptabiliteExport } from '../../../../shared/models';
 
 @Component({
   selector: 'app-livraison-list',

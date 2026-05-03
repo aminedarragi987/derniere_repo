@@ -4,7 +4,8 @@ import { roleGuard } from './core/guards/role.guard';
 import { PublicHomeComponent } from './features/public-home/public-home.component';
 
 export const routes: Routes = [
-  // ================= PUBLIC LANDING =================
+
+  // ================= PUBLIC =================
   {
     path: '',
     pathMatch: 'full',
@@ -32,21 +33,23 @@ export const routes: Routes = [
         .then(m => m.ChangePasswordComponent)
   },
 
-  // ================= APP (MAIN LAYOUT) =================
+  // ================= APP LAYOUT =================
   {
     path: '',
     canActivate: [authGuard],
     loadComponent: () =>
       import('./layout/main-layout/main-layout.component')
         .then(m => m.MainLayoutComponent),
+
     children: [
+
       { path: '', pathMatch: 'full', redirectTo: 'dashboard' },
 
       // ================= DASHBOARD =================
       {
         path: 'dashboard',
         canActivate: [roleGuard],
-        data: { roles: ['Gestionnaire', 'Comptable', 'Administrateur'] },
+        data: { roles: ['Gestionnaire', 'Comptable', 'Administrateur', 'Directeur Générale'] },
         loadComponent: () =>
           import('./features/dashboard/home/home.component')
             .then(m => m.HomeComponent)
@@ -66,16 +69,22 @@ export const routes: Routes = [
         canActivate: [roleGuard],
         data: { roles: ['Gestionnaire', 'Administrateur'] },
         loadComponent: () =>
-          import('./features/articles/pages/article-form/article-form.component')
-            .then(m => m.ArticleFormComponent)
+          import('./features/articles/pages/article-add/article-add.component')
+            .then(m => m.ArticleAddComponent)
       },
       {
         path: 'articles/edit/:id',
         canActivate: [roleGuard],
         data: { roles: ['Gestionnaire', 'Administrateur'] },
         loadComponent: () =>
-          import('./features/articles/pages/article-form/article-form.component')
-            .then(m => m.ArticleFormComponent)
+          import('./features/articles/pages/article-edit/article-edit.component')
+            .then(m => m.ArticleEditComponent)
+      },
+      {
+        path: 'articles/:id',
+        loadComponent: () =>
+          import('./features/articles/pages/article-detail/article-detail.component')
+            .then(m => m.ArticleDetailComponent)
       },
 
       // ================= FOURNISSEURS =================
@@ -92,16 +101,16 @@ export const routes: Routes = [
         canActivate: [roleGuard],
         data: { roles: ['Gestionnaire', 'Administrateur'] },
         loadComponent: () =>
-          import('./features/articles/pages/fournisseur-form/fournisseur-form.component')
-            .then(m => m.FournisseurFormComponent)
+          import('./features/articles/pages/fournisseur-add/fournisseur-add.component')
+            .then(m => m.FournisseurAddComponent)
       },
       {
         path: 'fournisseurs/edit/:id',
         canActivate: [roleGuard],
         data: { roles: ['Gestionnaire', 'Administrateur'] },
         loadComponent: () =>
-          import('./features/articles/pages/fournisseur-form/fournisseur-form.component')
-            .then(m => m.FournisseurFormComponent)
+          import('./features/articles/pages/fournisseur-edit/fournisseur-edit.component')
+            .then(m => m.FournisseurEditComponent)
       },
 
       // ================= CLIENTS =================
@@ -112,6 +121,22 @@ export const routes: Routes = [
         loadComponent: () =>
           import('./features/clients/pages/client-list/client-list.component')
             .then(m => m.ClientListComponent)
+      },
+      {
+        path: 'clients/new',
+        canActivate: [roleGuard],
+        data: { roles: ['Gestionnaire', 'Administrateur'] },
+        loadComponent: () =>
+          import('./features/clients/pages/client-add/client-add.component')
+            .then(m => m.ClientAddComponent)
+      },
+      {
+        path: 'clients/edit/:id',
+        canActivate: [roleGuard],
+        data: { roles: ['Gestionnaire', 'Administrateur'] },
+        loadComponent: () =>
+          import('./features/clients/pages/client-edit/client-edit.component')
+            .then(m => m.ClientEditComponent)
       },
 
       // ================= COMMANDES =================
@@ -134,7 +159,7 @@ export const routes: Routes = [
             .then(m => m.LivraisonListComponent)
       },
 
-      // ================= FACTURATION =================
+      // ================= FACTURES =================
       {
         path: 'factures',
         canActivate: [roleGuard],
@@ -154,7 +179,7 @@ export const routes: Routes = [
             .then(m => m.PaiementListComponent)
       },
 
-      // ================= ADMIN / USERS =================
+      // ================= USERS =================
       {
         path: 'users',
         canActivate: [roleGuard],
@@ -168,19 +193,19 @@ export const routes: Routes = [
         canActivate: [roleGuard],
         data: { roles: ['Administrateur'] },
         loadComponent: () =>
-          import('./features/users/user-form/user-form.component')
-            .then(m => m.UserFormComponent)
+          import('./features/users/user-add/user-add.component')
+            .then(m => m.UserAddComponent)
       },
       {
-        path: 'users/:id/edit',
+        path: 'users/edit/:id',
         canActivate: [roleGuard],
         data: { roles: ['Administrateur'] },
         loadComponent: () =>
-          import('./features/users/user-form/user-form.component')
-            .then(m => m.UserFormComponent)
+          import('./features/users/user-edit/user-edit.component')
+            .then(m => m.UserEditComponent)
       },
 
-      // ================= ADMIN / IAM =================
+      // ================= ADMIN IAM =================
       {
         path: 'admin/roles',
         canActivate: [roleGuard],

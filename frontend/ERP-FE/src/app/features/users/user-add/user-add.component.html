@@ -1,0 +1,58 @@
+<section class="page-shell">
+	<header class="page-header">
+		<div>
+			<h1>Créer un nouvel utilisateur</h1>
+			<p>Ajoute un compte utilisateur à ta base de données.</p>
+		</div>
+		<button class="btn ghost" type="button" (click)="goBack()">Retour</button>
+	</header>
+
+	<p class="state-info" *ngIf="isLoading">Chargement des donnees...</p>
+
+	<form class="form-card" [formGroup]="form" (ngSubmit)="save()">
+		<label>
+			Username
+			<input type="text" formControlName="userName" placeholder="username" />
+		</label>
+
+		<label>
+			Email
+			<input type="email" formControlName="email" placeholder="email@erp.local" />
+		</label>
+
+		<label>
+			Nom
+			<input type="text" formControlName="nom" placeholder="Nom" />
+		</label>
+
+		<label>
+			Prenom
+			<input type="text" formControlName="prenom" placeholder="Prenom" />
+		</label>
+
+		<label>
+			Telephone
+			<input type="text" formControlName="telephone" placeholder="Telephone" />
+		</label>
+
+		<label>
+			Role *
+			<select formControlName="idrole">
+				<option [ngValue]="null">Selectionner un role</option>
+				<option *ngFor="let role of roles" [ngValue]="role.idrole">{{ role.nom }}</option>
+			</select>
+		</label>
+
+		<label>
+			Mot de passe
+			<input type="password" formControlName="motdepasse" placeholder="******" />
+		</label>
+
+		<div class="actions">
+			<button class="btn primary" [disabled]="isSaving" type="submit">
+				{{ isSaving ? 'Enregistrement...' : 'Créer l\'utilisateur' }}
+			</button>
+			<a class="btn ghost" routerLink="/users">Annuler</a>
+		</div>
+	</form>
+</section>

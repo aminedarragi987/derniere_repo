@@ -212,12 +212,19 @@ CategorieDto { idcategorie, nom, description }
 - Load fournisseurs for filter dropdown
 - Actions: Create, Edit, Delete
 
-#### Article Form
-**`src/app/features/articles/pages/article-form/article-form.component.ts`**
+#### Article Add
+**`src/app/features/articles/pages/article-add/article-add.component.ts`**
 - Form: nom, description, prix, quantitestock, seuilminimum, idcategorie, fournisseurIds (multi-select)
-- Create or Edit mode based on :id param
+- Create mode with auto-redirect on success
 - Load fournisseurs list
 - Validations: nom (required), prix (required), quantité (required), seuil (required)
+- Toast notifications for success/error
+
+#### Article Edit
+**`src/app/features/articles/pages/article-edit/article-edit.component.ts`**
+- Same form as Add but in Edit mode
+- Load existing article data on init
+- Toast notifications for success/error
 
 ### 🗂️ Layout
 

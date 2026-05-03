@@ -9,9 +9,9 @@ public class IAMDbContextFactory : IDesignTimeDbContextFactory<IAMDbContext>
     {
         var optionsBuilder = new DbContextOptionsBuilder<IAMDbContext>();
 
-        // IMPORTANT: pour EF CLI en local => localhost
+        // Pour container Docker: postgresdb (résolvable dans le réseau Docker)
         var connectionString =
-            "Host=localhost;Port=5432;Database=IAM;Username=postgres;Password=data2010.";
+            "Host=postgresdb;Port=5432;Database=IAM;Username=postgres;Password=data2010.";
 
         optionsBuilder.UseNpgsql(connectionString);
 

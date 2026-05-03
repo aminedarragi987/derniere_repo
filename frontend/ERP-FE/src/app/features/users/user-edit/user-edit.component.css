@@ -1,0 +1,10 @@
+.form-card {
+  max-width: 600px;
+}
+
+.actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 24px;
+  justify-content: flex-end;
+}

@@ -12,7 +12,7 @@ namespace User.API.Controllers
     [Produces("application/json")]
     [Route("User")]
     [EnableCors("CORSPolicy")]
-    [Authorize(Roles = "Administrateur")]
+    [Authorize(Roles = "Administrateur,Directeur Général,Directeur Générale")]
     [ApiController]
     public class UtilisateurController : ControllerBase
     {

@@ -11,9 +11,8 @@
 	</header>
 
 	<p class="state-info" *ngIf="isLoading">Chargement des utilisateurs...</p>
-	<p class="state-error" *ngIf="errorMessage">{{ errorMessage }}</p>
 
-	<div class="table-wrap" *ngIf="!isLoading && !errorMessage && users.length > 0">
+	<div class="table-wrap" *ngIf="!isLoading && users.length > 0">
 		<table class="data-table">
 			<thead>
 				<tr>
@@ -31,12 +30,12 @@
 					<td>{{ user.email || '-' }}</td>
 					<td>{{ (user.roles?.length ? user.roles?.join(', ') : '-') }}</td>
 					<td>
-						<a class="table-link" [routerLink]="['/users', user.iduser, 'edit']">Editer</a>
+						<a class="table-link" [routerLink]="['/users/edit', user.iduser]">Editer</a>
 					</td>
 				</tr>
 			</tbody>
 		</table>
 	</div>
 
-	<p class="state-info" *ngIf="!isLoading && !errorMessage && users.length === 0">Aucun utilisateur trouve.</p>
+	<p class="state-info" *ngIf="!isLoading && users.length === 0">Aucun utilisateur trouve.</p>
 </section>

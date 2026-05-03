@@ -10,5 +10,11 @@ public partial class Categorie
 
     public string? Description { get; set; }
 
+    public string? Sexe { get; set; }
+
+    public string? Typevetement { get; set; }
+
+    public string? Couleur { get; set; }
+
     public virtual ICollection<Article> Articles { get; set; } = new List<Article>();
 }

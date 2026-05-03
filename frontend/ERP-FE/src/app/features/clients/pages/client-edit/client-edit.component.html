@@ -1,0 +1,40 @@
+<section class="page-shell">
+	<header class="page-header">
+		<div>
+			<h1>Modifier le client</h1>
+			<p>Mets à jour les informations de ce client.</p>
+		</div>
+		<button class="btn ghost" type="button" (click)="cancel()">Retour</button>
+	</header>
+
+	<p class="state-info" *ngIf="isLoading">Chargement du client...</p>
+
+	<form class="form-card" [formGroup]="form" (ngSubmit)="save()" *ngIf="!isLoading">
+		<label>
+			Nom *
+			<input type="text" formControlName="nom" placeholder="Nom complet" />
+		</label>
+
+		<label>
+			Email
+			<input type="email" formControlName="email" placeholder="email@client.com" />
+		</label>
+
+		<label>
+			Téléphone
+			<input type="text" formControlName="telephone" placeholder="+212 6 XX XX XX XX" />
+		</label>
+
+		<label>
+			Adresse
+			<textarea formControlName="adresse" placeholder="Adresse complète..."></textarea>
+		</label>
+
+		<div class="actions">
+			<button class="btn primary" [disabled]="isSubmitting" type="submit">
+				{{ isSubmitting ? 'Mise à jour...' : 'Mettre à jour' }}
+			</button>
+			<button class="btn ghost" type="button" (click)="cancel()">Annuler</button>
+		</div>
+	</form>
+</section>

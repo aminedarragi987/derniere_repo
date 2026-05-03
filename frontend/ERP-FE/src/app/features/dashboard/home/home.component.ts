@@ -1,7 +1,7 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { DashboardService } from '../../../core/services/dashboard.service';
-import { DashboardStockDto } from '../models/dashboard.model';
+import { DashboardService } from '../../../shared/services';
+import { DashboardStockDto } from '../../../shared/models';
 
 interface TrendPoint {
   label: string;

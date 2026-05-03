@@ -1,0 +1,36 @@
+/* Style de la page liste des menus */
+.page {
+  max-width: 900px;
+  margin: 2rem auto;
+}
+
+.page-header {
+  margin-bottom: 1.5rem;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table th, .table td {
+  border: 1px solid #e5e7eb;
+  padding: 0.5rem 1rem;
+}
+
+.btn-primary, .btn-outline, .btn-danger {
+  margin-right: 0.5rem;
+}
+
+.loading {
+  color: #888;
+}
+
+.error {
+  color: #dc2626;
+}
+
+.empty {
+  color: #888;
+  font-style: italic;
+}

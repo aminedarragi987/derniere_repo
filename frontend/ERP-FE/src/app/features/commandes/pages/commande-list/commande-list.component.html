@@ -3,6 +3,9 @@
     <div>
       <h1>Commandes</h1>
       <p>Suivi des commandes clients et de leur état d'avancement.</p>
+      <p class="permission-hint" *ngIf="!canManageCommande">
+        Vous êtes en lecture seule. Le rôle Gestionnaire ou Administrateur est requis pour gérer les commandes.
+      </p>
     </div>
     <div class="header-actions">
       <button *ngIf="canCreateCommande" type="button" class="btn-primary" (click)="openCreateCommandeDialog()">Nouvelle commande</button>
@@ -17,12 +20,12 @@
     </label>
     <button type="button" class="btn-outline" (click)="loadCommandes()">Filtrer</button>
     <button type="button" class="btn-light" (click)="idFilter = null; loadCommandes()">Reinitialiser</button>
+    <button type="button" class="btn-danger" [disabled]="!canManageCommande" (click)="deleteAllDrafts()">Effacer tous les brouillons</button>
   </div>
 
   <p class="loading" *ngIf="isLoading">Chargement des commandes...</p>
-  <p class="error" *ngIf="errorMessage">{{ errorMessage }}</p>
 
-  <table class="table" *ngIf="!isLoading && !errorMessage && commandes.length > 0">
+  <table class="table" *ngIf="!isLoading && commandes.length > 0">
     <thead>
       <tr>
         <th>ID</th>
@@ -30,6 +33,7 @@
         <th>Client</th>
         <th>Statut</th>
         <th>Total</th>
+        <th class="actions-col">Actions</th>
       </tr>
     </thead>
     <tbody>
@@ -39,11 +43,14 @@
         <td>{{ commande.idclient }}</td>
         <td>{{ commande.statut }}</td>
         <td>{{ commande.totalcommande | number: '1.2-2' }}</td>
+        <td class="actions">
+          <button type="button" class="btn-danger" [disabled]="!canManageCommande" (click)="deleteCommande(commande)">Supprimer</button>
+        </td>
       </tr>
     </tbody>
   </table>
 
-  <p class="empty" *ngIf="!isLoading && !errorMessage && commandes.length === 0">Aucune commande trouvée.</p>
+  <p class="empty" *ngIf="!isLoading && commandes.length === 0">Aucune commande trouvée.</p>
 
   <div class="dialog-backdrop" *ngIf="isDialogOpen" (click)="closeCreateCommandeDialog()"></div>
   <section class="dialog" *ngIf="isDialogOpen" aria-modal="true" role="dialog">
@@ -51,9 +58,6 @@
       <h2>Ajouter une commande</h2>
       <button type="button" class="btn-icon" (click)="closeCreateCommandeDialog()">X</button>
     </header>
-
-    <p class="error" *ngIf="dialogErrorMessage">{{ dialogErrorMessage }}</p>
-    <p class="success" *ngIf="dialogSuccessMessage">{{ dialogSuccessMessage }}</p>
 
     <div class="dialog-grid">
       <label>

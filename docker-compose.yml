@@ -27,7 +27,7 @@ services:
       Jwt__Issuer: auth.api
       Jwt__Audience: AllMicroservices
       Jwt__Key: Dz65RkF0o2n023iLknkltZYz4XAMelP+mVY4le60kbY=
-      Jwt__LifetimeMinutes: 15
+      Jwt__LifetimeMinutes: 45
       ConnectionStrings__DefaultConnection: Host=postgres;Port=5432;Database=IAM;Username=postgres;Password=data2010.
     ports:
       - "5002:8080"

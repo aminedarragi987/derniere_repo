@@ -1,108 +1,126 @@
-<section class="articles-page">
-  <header class="page-header">
-    <div class="page-titles">
-      <h1 class="title">Catalogue vêtements</h1>
-      <p class="subtitle">Consultez, modifiez et gérez les articles de votre boutique.</p>
-      <p class="permission-hint" *ngIf="!canManageArticles">
-        Vous êtes en lecture seule pour ce module. Rôle requis: Gestionnaire.
-      </p>
+<!-- src/app/features/articles/pages/article-list/article-list.component.html -->
+<section class="luxury-catalog-page">
+  <header class="premium-topbar">
+    <div class="brand-block">
+      <span class="brand-label">LUXE FASHION</span>
+      <h1>Premium Inventory</h1>
+      <p>Luxury merchandising dashboard inspired by Zara, Nike & Shopify.</p>
     </div>
 
-    <div class="header-actions">
-      <div class="search-short">
-        <input type="text" placeholder="Recherche rapide..." (input)="filterForm.patchValue({ search: $any($event.target).value })" />
+    <div class="topbar-actions">
+      <div class="search-luxury">
+        <i class="material-icons">search</i>
+        <input
+          type="text"
+          placeholder="Search luxury pieces..."
+          (input)="filterForm.patchValue({ search: $any($event.target).value })"
+        />
       </div>
-      <div class="header-buttons">
-        <button class="btn-outline" type="button" (click)="goToFournisseurs()">Fournisseurs</button>
-        <button class="btn-primary" type="button" [disabled]="!canManageArticles" (click)="create()">Nouvel article</button>
-      </div>
+
+      <button class="btn-outline-dark" (click)="goToFournisseurs()">
+        <i class="material-icons">local_shipping</i>
+        Suppliers
+      </button>
+
+      <button class="btn-premium" (click)="create()" [disabled]="!canManageArticles">
+        <i class="material-icons">add</i>
+        New Product
+      </button>
     </div>
   </header>
 
-  <section class="filters" *ngIf="filterForm">
-    <form [formGroup]="filterForm" class="filters-row">
-      <div class="row-left">
-        <select formControlName="idcategorie">
-          <option value="">Toutes catégories</option>
-          <option *ngFor="let c of categories" [value]="c.idcategorie">{{ c.nom }}</option>
-        </select>
+  <section class="luxury-filters" [formGroup]="filterForm">
+    <select formControlName="sexe">
+      <option value="">Gender</option>
+      <option *ngFor="let g of genres" [value]="g.id">{{ g.label }}</option>
+    </select>
 
-        <select formControlName="idfournisseur">
-          <option value="">Tous fournisseurs</option>
-          <option *ngFor="let f of fournisseurs" [value]="f.idfournisseur">{{ f.nom }}</option>
-        </select>
+    <select formControlName="typevetement">
+      <option value="">Category</option>
+      <option *ngFor="let t of typesVetement" [value]="t.id">{{ t.label }}</option>
+    </select>
 
-        <input type="number" formControlName="prixMin" placeholder="Prix min" />
-        <input type="number" formControlName="prixMax" placeholder="Prix max" />
-      </div>
-      <div class="row-right">
-        <button class="btn-secondary" type="button" (click)="clearFilter()">Réinitialiser</button>
-      </div>
-    </form>
+    <select formControlName="marque">
+      <option value="">Brand</option>
+      <option *ngFor="let m of marques" [value]="m.id">{{ m.label }}</option>
+    </select>
+
+    <select formControlName="couleur">
+      <option value="">Color</option>
+      <option *ngFor="let c of couleurs" [value]="c.id">{{ c.label }}</option>
+    </select>
+
+    <select formControlName="taille">
+      <option value="">Size</option>
+      <option *ngFor="let t of tailles" [value]="t.id">{{ t.label }}</option>
+    </select>
+
+    <button class="reset-btn" type="button" (click)="clearFilter()">Reset</button>
   </section>
 
-  <div class="feedback loading" *ngIf="isLoading">Chargement des articles...</div>
-  <div class="feedback error" *ngIf="errorMessage">{{ errorMessage }}</div>
-
-  <div class="table-card" *ngIf="!isLoading && !errorMessage">
-    <table class="article-table" aria-label="Liste des articles">
-      <thead>
-        <tr>
-          <th class="col-icon"></th>
-          <th class="col-name">Nom</th>
-          <th class="col-desc">Description</th>
-          <th class="col-price">Prix</th>
-          <th class="col-stock">Stock</th>
-          <th class="col-threshold">Seuil Min</th>
-          <th class="col-alert">Alerte</th>
-          <th class="col-actions">Actions</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let a of articles" class="article-row">
-          <td class="col-icon">
-            <div class="row-icon">
-              <span class="material-icons">inventory_2</span>
-            </div>
-          </td>
-          <td class="col-name">
-            <div class="name-wrap">
-              <div class="name-text">
-                <strong>{{ a.nom }}</strong>
-              </div>
-            </div>
-          </td>
-          <td class="col-desc">{{ a.description || '-' }}</td>
-          <td class="col-price">
-            <div class="price-val">{{ a.prix | number:'1.2-2' }}</div>
-            <div class="price-currency">DH</div>
-          </td>
-          <td class="col-stock" [ngClass]="{ 'low': isInAlert(a) }">{{ a.quantitestock }}</td>
-          <td class="col-threshold">{{ a.seuilminimum }}</td>
-          <td class="col-alert">
-            <span class="alert-badge" [ngClass]="{ 'bad': isInAlert(a), 'ok': !isInAlert(a) }">
-              {{ isInAlert(a) ? 'SOUS SEUIL' : 'NORMAL' }}
-            </span>
-          </td>
-          <td class="col-actions">
-            <div class="icon-actions">
-              <button class="icon-btn" title="Alerte" (click)="defineAlertThreshold(a)" [disabled]="!canManageArticles">
-                <span class="material-icons">warning_amber</span>
-              </button>
-              <button class="icon-btn" title="Modifier" (click)="edit(a.idarticle)" [disabled]="!canManageArticles">
-                <span class="material-icons">edit</span>
-              </button>
-              <button class="icon-btn danger" title="Supprimer" (click)="delete(a.idarticle)" [disabled]="!canManageArticles">
-                <span class="material-icons">delete</span>
-              </button>
-            </div>
-          </td>
-        </tr>
-        <tr *ngIf="articles.length === 0">
-          <td colspan="7" class="empty">Aucun article disponible.</td>
-        </tr>
-      </tbody>
-    </table>
+  <div class="lux-loader" *ngIf="isLoading">
+    <div class="spinner"></div>
   </div>
 
-  <button class="fab-add" [disabled]="!canManageArticles" (click)="create()" title="Ajouter un article">+</button>
+  <div class="lux-error" *ngIf="errorMessage">
+    <i class="material-icons">error</i>
+    {{ errorMessage }}
+  </div>
+
+  <section class="luxury-grid" *ngIf="!isLoading">
+    <article class="lux-card" *ngFor="let a of articles">
+      <div class="lux-image-wrap" (click)="viewDetail(a.idarticle)">
+        <img 
+          [src]="getImageUrl(a)" 
+          [alt]="a.nom"
+          (error)="onImageError($event)"
+        />
+
+        <div class="image-overlay">
+          <button type="button" (click)="viewDetail(a.idarticle); $event.stopPropagation()">
+            <i class="material-icons">visibility</i>
+          </button>
+
+          <button
+            type="button"
+            (click)="edit(a.idarticle); $event.stopPropagation()"
+            [disabled]="!canManageArticles">
+            <i class="material-icons">edit</i>
+          </button>
+
+          <button
+            type="button"
+            (click)="delete(a.idarticle); $event.stopPropagation()"
+            [disabled]="!canManageArticles">
+            <i class="material-icons">delete</i>
+          </button>
+        </div>
+
+        <span class="lux-badge badge-alert" *ngIf="isInAlert(a)">Low Stock</span>
+        <span class="lux-badge badge-ok" *ngIf="!isInAlert(a)">In Stock</span>
+      </div>
+
+      <div class="lux-body">
+        <div class="lux-meta">
+          <span>{{ getCategoryName(a) }}</span>
+          <span class="stock">{{ a.quantitestock }} pcs</span>
+        </div>
+
+        <h3 (click)="viewDetail(a.idarticle)">{{ a.nom }}</h3>
+        <p>{{ a.description || 'Luxury ready-to-wear curated for premium retail.' }}</p>
+
+        <div class="lux-footer">
+          <strong>{{ a.prix | number:'1.2-2' }} DH</strong>
+          <button type="button" class="quick-btn" (click)="viewDetail(a.idarticle)">
+            Quick View
+          </button>
+        </div>
+      </div>
+    </article>
+
+    <div class="lux-empty" *ngIf="articles.length === 0">
+      <i class="material-icons">inventory_2</i>
+      <p>No premium products found.</p>
+    </div>
+  </section>
+</section>

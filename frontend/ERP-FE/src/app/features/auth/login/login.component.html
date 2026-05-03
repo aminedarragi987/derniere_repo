@@ -21,13 +21,6 @@
       </div>
 
       <!-- Messages d'alerte -->
-      <div class="alert info-alert" *ngIf="infoMessage">
-        <i class="material-icons">info</i> {{ infoMessage }}
-      </div>
-      
-      <div class="alert error-alert" *ngIf="errorMessage">
-        <i class="material-icons">error_outline</i> {{ errorMessage }}
-      </div>
 
       <form [formGroup]="form" (ngSubmit)="submit()">
         <div class="input-group">

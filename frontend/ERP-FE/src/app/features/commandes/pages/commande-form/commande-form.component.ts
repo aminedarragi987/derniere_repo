@@ -2,14 +2,10 @@ import { CommonModule } from '@angular/common';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { Router } from '@angular/router';
 import { firstValueFrom } from 'rxjs';
-import { AuthService } from '../../../../core/services/auth.service';
-import { ArticleDto } from '../../../articles/models/article.model';
-import { ArticleService } from '../../../articles/services/article.service';
-import { ClientDto } from '../../../clients/models/client.model';
-import { ClientService } from '../../../clients/services/client.service';
-import { CommandeService } from '../../services/commande.service';
+import { Router } from '@angular/router';
+import { AuthService, ArticleService, ClientService, CommandeService, NotificationService } from '../../../../shared/services';
+import { ArticleDto, ClientDto } from '../../../../shared/models';
 
 interface LigneSelection {
   idarticle: number;
@@ -24,28 +20,31 @@ interface LigneSelection {
   styleUrl: './commande-form.component.css'
 })
 export class CommandeFormComponent implements OnInit {
+
   clients: ClientDto[] = [];
   articles: ArticleDto[] = [];
 
   selectedClientId: number | null = null;
   selectedArticleId: number | null = null;
   quantity = 1;
-  validateAfterCreate = true;
 
   lignes: LigneSelection[] = [];
 
+  // ✅ AJOUTS OBLIGATOIRES
   isLoadingClients = false;
   isLoadingArticles = false;
   isSubmitting = false;
-  errorMessage = '';
-  successMessage = '';
+  validateAfterCreate = true;
+
+  isLoading = false;
 
   constructor(
     private clientService: ClientService,
     private articleService: ArticleService,
     private commandeService: CommandeService,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private notificationService: NotificationService
   ) {}
 
   ngOnInit(): void {
@@ -53,64 +52,35 @@ export class CommandeFormComponent implements OnInit {
     this.loadArticles();
   }
 
-  loadClients(): void {
-    this.isLoadingClients = true;
+  // ================= ROLES =================
 
-    this.clientService.getClients().subscribe({
-      next: (clients) => {
-        this.clients = clients;
-      },
-      error: () => {
-        this.errorMessage = 'Impossible de charger les clients.';
-      },
-      complete: () => {
-        this.isLoadingClients = false;
-      }
-    });
+  get canCreateCommande(): boolean {
+    return this.authService.hasAnyRole(['Gestionnaire', 'Administrateur']);
   }
 
-  loadArticles(): void {
-    this.isLoadingArticles = true;
-
-    this.articleService.getAll().subscribe({
-      next: (articles) => {
-        this.articles = articles;
-      },
-      error: () => {
-        this.errorMessage = 'Impossible de charger les articles.';
-      },
-      complete: () => {
-        this.isLoadingArticles = false;
-      }
-    });
-  }
+  // ================= LIGNES =================
 
   addLigne(): void {
-    this.errorMessage = '';
-
-    if (!this.selectedArticleId) {
-      this.errorMessage = 'Selectionne un article.';
+    if (!this.selectedArticleId || this.quantity <= 0) {
+      this.notificationService.error('Données invalides.');
       return;
     }
 
-    if (!Number.isFinite(this.quantity) || this.quantity <= 0) {
-      this.errorMessage = 'La quantite doit etre superieure a 0.';
+    const article = this.articles.find(a => a.idarticle === this.selectedArticleId);
+
+    if (!article || !article.idarticle) {
+      this.notificationService.error('Article introuvable.');
       return;
     }
 
-    const selectedArticle = this.articles.find((article) => article.idarticle === this.selectedArticleId);
-    if (!selectedArticle || !selectedArticle.idarticle) {
-      this.errorMessage = 'Article introuvable.';
-      return;
-    }
+    const existing = this.lignes.find(l => l.idarticle === article.idarticle);
 
-    const existing = this.lignes.find((ligne) => ligne.idarticle === selectedArticle.idarticle);
     if (existing) {
       existing.quantite += this.quantity;
     } else {
       this.lignes.push({
-        idarticle: selectedArticle.idarticle,
-        nom: selectedArticle.nom,
+        idarticle: article.idarticle,
+        nom: article.nom,
         quantite: this.quantity
       });
     }
@@ -120,26 +90,31 @@ export class CommandeFormComponent implements OnInit {
   }
 
   removeLigne(idarticle: number): void {
-    this.lignes = this.lignes.filter((ligne) => ligne.idarticle !== idarticle);
+    this.lignes = this.lignes.filter(l => l.idarticle !== idarticle);
   }
 
+  // ================= CREATION =================
+
   async createCommande(): Promise<void> {
+
     if (!this.canCreateCommande) {
-      this.errorMessage = 'Action refusee: le role Gestionnaire est requis.';
+      this.notificationService.error('Accès refusé : rôle requis.');
       return;
     }
 
     if (!this.selectedClientId) {
-      this.errorMessage = 'Selectionne un client.';
+      this.notificationService.error('Client obligatoire.');
       return;
     }
 
-    this.isSubmitting = true;
-    this.errorMessage = '';
-    this.successMessage = '';
+    this.isLoading = true;
 
     try {
-      const created = await firstValueFrom(this.commandeService.createCommande({ idclient: this.selectedClientId }));
+      const created = await firstValueFrom(
+        this.commandeService.createCommande({
+          idclient: this.selectedClientId
+        })
+      );
 
       for (const ligne of this.lignes) {
         await firstValueFrom(
@@ -150,29 +125,58 @@ export class CommandeFormComponent implements OnInit {
         );
       }
 
+      // Validation automatique si demandé
       if (this.validateAfterCreate) {
         await firstValueFrom(this.commandeService.validateCommande(created.idcommande));
       }
 
-      this.successMessage = `Commande #${created.idcommande} creee avec succes.`;
-      this.router.navigate(['/commandes']);
-    } catch (error) {
-      const httpError = error as HttpErrorResponse;
-      this.errorMessage =
-        httpError.error?.Message ??
-        (httpError.status === 403
-          ? 'Action refusee: le role Gestionnaire est requis.'
-          : 'Erreur lors de la creation de la commande.');
+      this.notificationService.success('Commande créée avec succès.');
+      setTimeout(() => this.router.navigate(['/commandes']), 1500);
+
+    } catch (err) {
+      const httpError = err as HttpErrorResponse;
+
+      const errorMsg =
+        httpError.status === 403
+          ? 'Accès refusé : rôle Gestionnaire ou Administrateur requis.'
+          : 'Erreur lors de la création de la commande.';
+      
+      this.notificationService.error(errorMsg);
+
     } finally {
-      this.isSubmitting = false;
+      this.isLoading = false;
     }
   }
 
-  goBack(): void {
-    this.router.navigate(['/commandes']);
+  // ================= DATA LOAD =================
+
+  private loadClients(): void {
+    this.clientService.getClients().subscribe({
+      next: (res) => this.clients = res,
+      error: (err: HttpErrorResponse) => {
+        const errorMsg = err.status === 403
+          ? 'Accès refusé clients'
+          : 'Erreur chargement clients';
+        this.notificationService.error(errorMsg);
+      }
+    });
   }
 
-  get canCreateCommande(): boolean {
-    return this.authService.hasAnyRole(['Gestionnaire']);
+  private loadArticles(): void {
+    this.articleService.getAll().subscribe({
+      next: (res) => this.articles = res,
+      error: (err: HttpErrorResponse) => {
+        const errorMsg = err.status === 403
+          ? 'Accès refusé articles'
+          : 'Erreur chargement articles';
+        this.notificationService.error(errorMsg);
+      }
+    });
+  }
+
+  // ================= NAVIGATION =================
+
+  goBack(): void {
+    this.router.navigate(['/commandes']);
   }
 }

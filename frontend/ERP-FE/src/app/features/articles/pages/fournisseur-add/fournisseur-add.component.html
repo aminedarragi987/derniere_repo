@@ -1,0 +1,33 @@
+<section class="page-shell">
+	<header class="page-header">
+		<div>
+			<h1>Créer un nouveau fournisseur</h1>
+			<p>Ajoute un fournisseur à ta base de données.</p>
+		</div>
+		<button class="btn ghost" type="button" (click)="cancel()">Retour</button>
+	</header>
+
+	<form class="form-card" [formGroup]="form" (ngSubmit)="save()">
+		<label>
+			Nom *
+			<input type="text" formControlName="nom" placeholder="Nom du fournisseur" />
+		</label>
+
+		<label>
+			Email
+			<input type="email" formControlName="email" placeholder="email@fournisseur.com" />
+		</label>
+
+		<label>
+			Téléphone
+			<input type="text" formControlName="telephone" placeholder="+212 6 XX XX XX XX" />
+		</label>
+
+		<div class="actions">
+			<button class="btn primary" [disabled]="isSubmitting" type="submit">
+				{{ isSubmitting ? 'Création...' : 'Créer le fournisseur' }}
+			</button>
+			<button class="btn ghost" type="button" (click)="cancel()">Annuler</button>
+		</div>
+	</form>
+</section>

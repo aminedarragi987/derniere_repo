@@ -3,13 +3,8 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { firstValueFrom } from 'rxjs';
-import { AuthService } from '../../../../core/services/auth.service';
-import { ArticleDto } from '../../../articles/models/article.model';
-import { ArticleService } from '../../../articles/services/article.service';
-import { ClientDto } from '../../../clients/models/client.model';
-import { ClientService } from '../../../clients/services/client.service';
-import { CommandeDto } from '../../models/commande.model';
-import { CommandeService } from '../../services/commande.service';
+import { AuthService, ArticleService, ClientService, CommandeService, NotificationService } from '../../../../shared/services';
+import { ArticleDto, ClientDto, CommandeDto } from '../../../../shared/models';
 
 interface LigneSelection {
   idarticle: number;
@@ -24,65 +19,114 @@ interface LigneSelection {
   styleUrl: './commande-list.component.css'
 })
 export class CommandeListComponent implements OnInit {
+
   commandes: CommandeDto[] = [];
   isLoading = false;
-  errorMessage = '';
+
   idFilter: number | null = null;
 
+  // ===== DIALOG STATE =====
   isDialogOpen = false;
-  dialogErrorMessage = '';
-  dialogSuccessMessage = '';
   isSubmittingCommande = false;
+
   isLoadingClients = false;
   isLoadingArticles = false;
 
   clients: ClientDto[] = [];
   articles: ArticleDto[] = [];
+
   selectedClientId: number | null = null;
   selectedArticleId: number | null = null;
   selectedQuantity = 1;
   validateAfterCreate = true;
+
   lignes: LigneSelection[] = [];
 
   constructor(
     private commandeService: CommandeService,
     private authService: AuthService,
     private clientService: ClientService,
-    private articleService: ArticleService
+    private articleService: ArticleService,
+    private notificationService: NotificationService
   ) {}
 
   ngOnInit(): void {
     this.loadCommandes();
   }
 
+  // ================= COMMANDES =================
+
   loadCommandes(): void {
     this.isLoading = true;
-    this.errorMessage = '';
 
     this.commandeService.getCommandes({ idcommande: this.idFilter ?? undefined }).subscribe({
-      next: (commandes) => {
-        this.commandes = commandes;
-      },
+      next: (res) => this.commandes = res,
+      error: () => this.notificationService.error('Impossible de charger les commandes.'),
+      complete: () => this.isLoading = false
+    });
+  }
+
+  deleteCommande(cmd: CommandeDto): void {
+    if (!this.canManageCommande) return;
+    if (!cmd.idcommande || !confirm(`Supprimer commande #${cmd.idcommande} ?`)) return;
+
+    this.isLoading = true;
+
+    this.commandeService.deleteCommande(cmd.idcommande).subscribe({
+      next: () => this.loadCommandes(),
       error: () => {
-        this.errorMessage = 'Impossible de charger les commandes.';
-      },
-      complete: () => {
+        this.notificationService.error('Erreur suppression.');
         this.isLoading = false;
       }
     });
   }
 
+  // ================= ROLES =================
+
+  get canManageCommande(): boolean {
+    return this.authService.hasAnyRole(['Gestionnaire', 'Administrateur']);
+  }
+
   get canCreateCommande(): boolean {
-    return this.authService.hasAnyRole(['Gestionnaire']);
+    return this.authService.hasAnyRole(['Gestionnaire', 'Administrateur']);
+  }
+
+  // ================= DIALOG =================
+  // ================= SUPPRESSION BROUILLONS =================
+
+  deleteAllDrafts(): void {
+    if (!this.canManageCommande) return;
+    const drafts = this.commandes.filter(c => c.statut === 'Brouillon');
+    if (drafts.length === 0) return;
+    if (!confirm(`Supprimer toutes les commandes Brouillon (${drafts.length}) ?`)) return;
+
+    this.isLoading = true;
+    let deleted = 0;
+    let failed = 0;
+
+    const next = () => {
+      const cmd = drafts[deleted + failed];
+      if (!cmd) {
+        this.isLoading = false;
+        this.loadCommandes();
+        if (failed > 0) {
+          this.notificationService.error(`${failed} suppression(s) ont échoué.`);
+        }
+        return;
+      }
+      this.commandeService.deleteCommande(cmd.idcommande).subscribe({
+        next: () => { deleted++; next(); },
+        error: () => { failed++; next(); }
+      });
+    };
+    next();
   }
 
   openCreateCommandeDialog(): void {
-    if (!this.canCreateCommande) {
-      return;
-    }
+    if (!this.canCreateCommande) return;
 
     this.isDialogOpen = true;
-    this.resetDialogState();
+    this.resetDialog();
     this.loadDialogData();
   }
 
@@ -90,26 +134,47 @@ export class CommandeListComponent implements OnInit {
     this.isDialogOpen = false;
   }
 
+  private resetDialog(): void {
+    this.selectedClientId = null;
+    this.selectedArticleId = null;
+    this.selectedQuantity = 1;
+    this.lignes = [];
+    this.validateAfterCreate = true;
+  }
+
+  private loadDialogData(): void {
+    this.isLoadingClients = true;
+    this.isLoadingArticles = true;
+
+    this.clientService.getClients().subscribe({
+      next: (res) => this.clients = res,
+      complete: () => this.isLoadingClients = false
+    });
+
+    this.articleService.getAll().subscribe({
+      next: (res) => this.articles = res,
+      complete: () => this.isLoadingArticles = false
+    });
+  }
+
+  // ================= LIGNES =================
+
   addLigne(): void {
-    this.dialogErrorMessage = '';
-
     if (!this.selectedArticleId) {
-      this.dialogErrorMessage = 'Selectionne un article.';
+      this.notificationService.error('Article requis');
       return;
     }
 
-    if (!Number.isFinite(this.selectedQuantity) || this.selectedQuantity <= 0) {
-      this.dialogErrorMessage = 'La quantite doit etre superieure a 0.';
+    if (this.selectedQuantity <= 0) {
+      this.notificationService.error('Quantité invalide');
       return;
     }
 
-    const article = this.articles.find((item) => item.idarticle === this.selectedArticleId);
-    if (!article || !article.idarticle) {
-      this.dialogErrorMessage = 'Article introuvable.';
-      return;
-    }
+    const article = this.articles.find(a => a.idarticle === this.selectedArticleId);
+    if (!article?.idarticle) return;
 
-    const existing = this.lignes.find((item) => item.idarticle === article.idarticle);
+    const existing = this.lignes.find(l => l.idarticle === article.idarticle);
+
     if (existing) {
       existing.quantite += this.selectedQuantity;
     } else {
@@ -124,87 +189,53 @@ export class CommandeListComponent implements OnInit {
     this.selectedQuantity = 1;
   }
 
-  removeLigne(idarticle: number): void {
-    this.lignes = this.lignes.filter((item) => item.idarticle !== idarticle);
+  removeLigne(id: number): void {
+    this.lignes = this.lignes.filter(l => l.idarticle !== id);
   }
+
+  // ================= CREATE =================
 
   async createCommandeFromDialog(): Promise<void> {
     if (!this.selectedClientId) {
-      this.dialogErrorMessage = 'Selectionne un client.';
+      this.notificationService.error('Client requis');
       return;
     }
 
     this.isSubmittingCommande = true;
-    this.dialogErrorMessage = '';
-    this.dialogSuccessMessage = '';
 
     try {
-      const created = await firstValueFrom(this.commandeService.createCommande({ idclient: this.selectedClientId }));
+      const cmd = await firstValueFrom(
+        this.commandeService.createCommande({ idclient: this.selectedClientId })
+      );
 
-      for (const ligne of this.lignes) {
+      for (const l of this.lignes) {
         await firstValueFrom(
-          this.commandeService.addLigneCommande(created.idcommande, {
-            idarticle: ligne.idarticle,
-            quantite: ligne.quantite
+          this.commandeService.addLigneCommande(cmd.idcommande, {
+            idarticle: l.idarticle,
+            quantite: l.quantite
           })
         );
       }
 
       if (this.validateAfterCreate) {
-        await firstValueFrom(this.commandeService.validateCommande(created.idcommande));
+        await firstValueFrom(this.commandeService.validateCommande(cmd.idcommande));
       }
 
-      this.dialogSuccessMessage = `Commande #${created.idcommande} creee avec succes.`;
+      this.notificationService.success(`Commande #${cmd.idcommande} créée.`);
       this.isDialogOpen = false;
       this.loadCommandes();
-    } catch (error) {
-      const httpError = error as HttpErrorResponse;
-      this.dialogErrorMessage =
-        httpError.error?.Message ??
-        (httpError.status === 403
-          ? 'Action refusee: le role Gestionnaire est requis.'
-          : 'Erreur lors de la creation de la commande.');
+
+    } catch (e) {
+      const err = e as HttpErrorResponse;
+
+      const errorMsg =
+        err.status === 403
+          ? 'Accès refusé: rôle Gestionnaire ou Administrateur requis.'
+          : 'Erreur création commande.';
+      
+      this.notificationService.error(errorMsg);
     } finally {
       this.isSubmittingCommande = false;
     }
-  }
-
-  private loadDialogData(): void {
-    this.isLoadingClients = true;
-    this.isLoadingArticles = true;
-
-    this.clientService.getClients().subscribe({
-      next: (clients) => {
-        this.clients = clients;
-      },
-      error: () => {
-        this.dialogErrorMessage = 'Impossible de charger les clients.';
-      },
-      complete: () => {
-        this.isLoadingClients = false;
-      }
-    });
-
-    this.articleService.getAll().subscribe({
-      next: (articles) => {
-        this.articles = articles;
-      },
-      error: () => {
-        this.dialogErrorMessage = 'Impossible de charger les articles.';
-      },
-      complete: () => {
-        this.isLoadingArticles = false;
-      }
-    });
-  }
-
-  private resetDialogState(): void {
-    this.dialogErrorMessage = '';
-    this.dialogSuccessMessage = '';
-    this.selectedClientId = null;
-    this.selectedArticleId = null;
-    this.selectedQuantity = 1;
-    this.validateAfterCreate = true;
-    this.lignes = [];
   }
 }

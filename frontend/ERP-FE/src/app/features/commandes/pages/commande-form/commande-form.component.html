@@ -5,11 +5,9 @@
       <p>Cree une commande client, ajoute des articles puis valide-la.</p>
       <p class="permission-hint" *ngIf="!canCreateCommande">
         Votre profil ne permet pas de creer une commande. Le role Gestionnaire est requis.
+        Votre profil ne permet pas de creer une commande. Le role Gestionnaire ou Administrateur est requis.
       </p>
     </header>
-
-    <p class="error" *ngIf="errorMessage">{{ errorMessage }}</p>
-    <p class="success" *ngIf="successMessage">{{ successMessage }}</p>
 
     <div class="form-grid">
       <label>

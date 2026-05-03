@@ -2,8 +2,9 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
-import { FournisseurDto } from '../../models/article.model';
-import { FournisseurService } from '../../services/fournisseur.service';
+
+import { FournisseurDto } from '../../../../shared/models';
+import { FournisseurService, NotificationService } from '../../../../shared/services';
 
 @Component({
   standalone: true,
@@ -16,11 +17,11 @@ export class FournisseurListComponent implements OnInit {
   filtered: FournisseurDto[] = [];
   search = '';
   isLoading = false;
-  errorMessage = '';
 
   constructor(
     private fournisseurService: FournisseurService,
-    private router: Router
+    private router: Router,
+    private notificationService: NotificationService
   ) {}
 
   ngOnInit(): void {
@@ -29,15 +30,15 @@ export class FournisseurListComponent implements OnInit {
 
   loadFournisseurs(): void {
     this.isLoading = true;
-    this.errorMessage = '';
 
     this.fournisseurService.getAll().subscribe({
-      next: (fournisseurs) => {
+      next: (fournisseurs: FournisseurDto[]) => {
         this.fournisseurs = fournisseurs;
         this.applyFilter();
       },
       error: () => {
-        this.errorMessage = 'Impossible de charger les fournisseurs.';
+        this.notificationService.error('Impossible de charger les fournisseurs.');
+        this.isLoading = false;
       },
       complete: () => {
         this.isLoading = false;
@@ -47,15 +48,16 @@ export class FournisseurListComponent implements OnInit {
 
   applyFilter(): void {
     const term = this.search.trim().toLowerCase();
+
     if (!term) {
       this.filtered = [...this.fournisseurs];
       return;
     }
 
-    this.filtered = this.fournisseurs.filter((fournisseur) =>
+    this.filtered = this.fournisseurs.filter((fournisseur: FournisseurDto) =>
       [fournisseur.nom, fournisseur.email, fournisseur.telephone]
-        .filter(Boolean)
-        .some((value) => (value as string).toLowerCase().includes(term))
+        .filter((value): value is string => !!value)
+        .some((value: string) => value.toLowerCase().includes(term))
     );
   }
 
@@ -64,9 +66,8 @@ export class FournisseurListComponent implements OnInit {
   }
 
   edit(idfournisseur: number | undefined): void {
-    if (idfournisseur) {
-      this.router.navigate(['/fournisseurs/edit', idfournisseur]);
-    }
+    if (!idfournisseur) return;
+    this.router.navigate(['/fournisseurs/edit', idfournisseur]);
   }
 
   delete(idfournisseur: number | undefined): void {
@@ -79,7 +80,7 @@ export class FournisseurListComponent implements OnInit {
         this.loadFournisseurs();
       },
       error: () => {
-        this.errorMessage = 'Erreur lors de la suppression du fournisseur.';
+        this.notificationService.error('Erreur lors de la suppression du fournisseur.');
       }
     });
   }

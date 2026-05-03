@@ -26,6 +26,8 @@ public class StockService : IStockService
 
     public async Task<ArticleDto> AddArticle(ArticleDto dto)
     {
+        var slug = GenerateSlug(dto.Slug ?? dto.Nom);
+
         var entity = new Article
         {
             Nom = dto.Nom,
@@ -40,11 +42,19 @@ public class StockService : IStockService
             Couleur = dto.Couleur,
             Taille = dto.Taille,
 
-            Idcategorie = dto.Idcategorie
+            Idcategorie = dto.Idcategorie,
+
+            ImageUrl = dto.ImageUrl,
+            Sku = dto.Sku,
+            Statut = dto.Statut ?? "Actif",
+            Slug = slug,
+            IsFeatured = dto.IsFeatured,
+            Matiere = dto.Matiere
         };
 
         await _articleRepo.Add(entity);
         dto.Idarticle = entity.Idarticle;
+        dto.Slug = slug;
 
         return dto;
     }
@@ -67,6 +77,13 @@ public class StockService : IStockService
         entity.Taille = dto.Taille;
 
         entity.Idcategorie = dto.Idcategorie;
+
+        entity.ImageUrl = dto.ImageUrl;
+        entity.Sku = dto.Sku;
+        entity.Statut = dto.Statut ?? "Actif";
+        entity.Slug = GenerateSlug(dto.Slug ?? dto.Nom);
+        entity.IsFeatured = dto.IsFeatured;
+        entity.Matiere = dto.Matiere;
 
         await _articleRepo.Update(entity);
         return true;
@@ -103,6 +120,9 @@ public class StockService : IStockService
         if (!string.IsNullOrWhiteSpace(filter.Marque))
             query = query.Where(a => a.Marque == filter.Marque);
 
+        if (!string.IsNullOrWhiteSpace(filter.Couleur))
+            query = query.Where(a => a.Couleur == filter.Couleur);
+
         if (!string.IsNullOrWhiteSpace(filter.Taille))
             query = query.Where(a => a.Taille == filter.Taille);
 
@@ -111,6 +131,15 @@ public class StockService : IStockService
 
         if (filter.PrixMax.HasValue)
             query = query.Where(a => a.Prix <= filter.PrixMax.Value);
+
+        if (!string.IsNullOrWhiteSpace(filter.Statut))
+            query = query.Where(a => a.Statut == filter.Statut);
+
+        if (filter.IsFeatured.HasValue)
+            query = query.Where(a => a.IsFeatured == filter.IsFeatured.Value);
+
+        if (!string.IsNullOrWhiteSpace(filter.Matiere))
+            query = query.Where(a => a.Matiere == filter.Matiere);
 
         var list = await query.ToListAsync();
 
@@ -134,6 +163,13 @@ public class StockService : IStockService
             CategorieNom = a.IdcategorieNavigation != null
                 ? a.IdcategorieNavigation.Nom
                 : null,
+
+            ImageUrl = a.ImageUrl,
+            Sku = a.Sku,
+            Statut = a.Statut,
+            Slug = a.Slug,
+            IsFeatured = a.IsFeatured,
+            Matiere = a.Matiere,
 
             FournisseurIds = a.ArticleFournisseurs != null
                 ? a.ArticleFournisseurs.Select(f => f.Idfournisseur).ToList()
@@ -215,7 +251,10 @@ public class StockService : IStockService
         var entity = new Categorie
         {
             Nom = dto.Nom,
-            Description = dto.Description
+            Description = dto.Description,
+            Sexe = dto.Sexe,
+            Typevetement = dto.Typevetement,
+            Couleur = dto.Couleur
         };
 
         await _categorieRepo.Add(entity);
@@ -232,7 +271,10 @@ public class StockService : IStockService
         {
             Idcategorie = c.Idcategorie,
             Nom = c.Nom,
-            Description = c.Description
+            Description = c.Description,
+            Sexe = c.Sexe,
+            Typevetement = c.Typevetement,
+            Couleur = c.Couleur
         });
     }
 
@@ -243,6 +285,9 @@ public class StockService : IStockService
 
         c.Nom = dto.Nom;
         c.Description = dto.Description;
+        c.Sexe = dto.Sexe;
+        c.Typevetement = dto.Typevetement;
+        c.Couleur = dto.Couleur;
 
         await _categorieRepo.Update(c);
         return true;
@@ -261,14 +306,42 @@ public class StockService : IStockService
 
     public async Task<DashboardStockDto> GetDashboard()
     {
+        var articles = await _articleRepo.GetAll().ToListAsync();
+        var articlesEnAlerte = articles.Count(a => a.Quantitestock <= a.Seuilminimum);
+
         return new DashboardStockDto
         {
-            NombreArticles = await _articleRepo.Count(),
+            NombreArticles = articles.Count,
             NombreFournisseurs = await _fournisseurRepo.Count(),
             NombreCommandes = 0,
             NombreCommandesValidees = 0,
-            NombreArticlesEnAlerte = 0,
+            NombreArticlesEnAlerte = articlesEnAlerte,
             ChiffreAffaires = 0
         };
+    }
+
+    // ================= HELPERS =================
+
+    private string GenerateSlug(string text)
+    {
+        if (string.IsNullOrWhiteSpace(text))
+            return string.Empty;
+
+        // Normalize text
+        string slug = text.ToLowerInvariant();
+
+        // Remove special characters and replace spaces with hyphens
+        slug = System.Text.RegularExpressions.Regex.Replace(slug, @"[^\w\s-]", "");
+        slug = System.Text.RegularExpressions.Regex.Replace(slug, @"\s+", "-");
+        slug = System.Text.RegularExpressions.Regex.Replace(slug, @"-+", "-");
+
+        // Trim hyphens
+        slug = slug.Trim('-');
+
+        // Limit length to 160 characters
+        if (slug.Length > 160)
+            slug = slug.Substring(0, 160).TrimEnd('-');
+
+        return slug;
     }
 }

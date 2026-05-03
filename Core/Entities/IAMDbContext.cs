@@ -142,6 +142,15 @@ public partial class IAMDbContext : DbContext
             entity.Property(e => e.Nom)
                 .HasColumnType("character varying")
                 .HasColumnName("nom");
+            entity.Property(e => e.Sexe)
+                .HasMaxLength(30)
+                .HasColumnName("sexe");
+            entity.Property(e => e.Typevetement)
+                .HasMaxLength(50)
+                .HasColumnName("typevetement");
+            entity.Property(e => e.Couleur)
+                .HasMaxLength(50)
+                .HasColumnName("couleur");
         });
 
         modelBuilder.Entity<Fournisseur>(entity =>

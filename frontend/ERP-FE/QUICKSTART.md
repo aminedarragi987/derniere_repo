@@ -217,7 +217,8 @@ Response: 200 + [ArticleDto...]
 - ✅ `src/app/features/articles/services/article.service.ts` - Filtres implémentés
 - ✅ `src/app/features/articles/pages/article-list/article-list.component.ts` - Filtres
 - ✅ `src/app/features/articles/pages/article-list/article-list.component.html` - Filter form
-- ✅ `src/app/features/articles/pages/article-form/article-form.component.ts` - Validations
+- ✅ `src/app/features/articles/pages/article-add/article-add.component.ts` - Create articles
+- ✅ `src/app/features/articles/pages/article-edit/article-edit.component.ts` - Edit articles
 - ✅ `src/app/app.routes.ts` - Admin routes ajoutées
 - ✅ `src/environments/environment.ts` - Simplifié gatewayUrl
 

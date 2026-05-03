@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { UserIamService } from '../../../../core/services/user-iam.service';
+import { UserIamService } from '../../../../shared/services';
 import { MenuDto } from '../../models/user.models';
 
 @Component({

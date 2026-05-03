@@ -1,0 +1,125 @@
+<section class="page-shell">
+	<header class="page-header">
+		<div>
+			<h1>Modifier l'article</h1>
+			<p>Mets à jour les détails de ce produit.</p>
+		</div>
+		<button class="btn ghost" type="button" (click)="cancel()">Retour</button>
+	</header>
+
+	<p class="state-info" *ngIf="isLoading">Chargement de l'article...</p>
+
+	<form class="form-card" [formGroup]="form" (ngSubmit)="save()" *ngIf="!isLoading">
+		<!-- Informations de base -->
+		<fieldset>
+			<legend>Informations de base</legend>
+			
+			<label>
+				Nom *
+				<input type="text" formControlName="nom" placeholder="Nom de l'article" />
+			</label>
+
+			<label>
+				Description
+				<textarea formControlName="description" placeholder="Description détaillée..."></textarea>
+			</label>
+
+			<label>
+				Catégorie
+				<select formControlName="idcategorie">
+					<option [ngValue]="null">-- Sélectionner une catégorie --</option>
+					<option *ngFor="let cat of categories" [ngValue]="cat.idcategorie">{{ cat.nom }}</option>
+				</select>
+			</label>
+		</fieldset>
+
+		<!-- Pricing & Stock -->
+		<fieldset>
+			<legend>Prix et Stock</legend>
+			
+			<label>
+				Prix (DH) *
+				<input type="number" formControlName="prix" placeholder="0.00" step="0.01" />
+			</label>
+
+			<label>
+				Quantité en stock *
+				<input type="number" formControlName="quantitestock" placeholder="0" />
+			</label>
+
+			<label>
+				Seuil minimum *
+				<input type="number" formControlName="seuilminimum" placeholder="0" />
+			</label>
+		</fieldset>
+
+		<!-- Détails produit (Mode) -->
+		<fieldset>
+			<legend>Détails du produit (Mode)</legend>
+			
+			<label>
+				Sexe
+				<select formControlName="sexe">
+					<option value="">-- Sélectionner --</option>
+					<option *ngFor="let g of genres" [value]="g.id">{{ g.label }}</option>
+				</select>
+			</label>
+
+			<label>
+				Type de vêtement
+				<select formControlName="typevetement">
+					<option value="">-- Sélectionner --</option>
+					<option *ngFor="let t of typesVetement" [value]="t.id">{{ t.label }}</option>
+				</select>
+			</label>
+
+			<label>
+				Marque
+				<select formControlName="marque">
+					<option value="">-- Sélectionner --</option>
+					<option *ngFor="let m of marques" [value]="m.id">{{ m.label }}</option>
+				</select>
+			</label>
+
+			<label>
+				Couleur
+				<select formControlName="couleur">
+					<option value="">-- Sélectionner --</option>
+					<option *ngFor="let c of couleurs" [value]="c.id">{{ c.label }}</option>
+				</select>
+			</label>
+
+			<label>
+				Taille
+				<select formControlName="taille">
+					<option value="">-- Sélectionner --</option>
+					<option *ngFor="let t of tailles" [value]="t.id">{{ t.label }}</option>
+				</select>
+			</label>
+		</fieldset>
+
+		<!-- Fournisseurs -->
+		<fieldset>
+			<legend>Fournisseurs</legend>
+			
+			<label>
+				Fournisseurs
+				<select multiple (change)="onSelectFournisseurs($event)">
+					<option *ngFor="let f of fournisseurs" [ngValue]="f.idfournisseur" 
+						[selected]="isSelectedFournisseur(f.idfournisseur)">
+						{{ f.nom }}
+					</option>
+				</select>
+				<small>Maintiens Ctrl pour sélectionner plusieurs</small>
+			</label>
+		</fieldset>
+
+		<!-- Actions -->
+		<div class="actions">
+			<button class="btn primary" [disabled]="isSubmitting" type="submit">
+				{{ isSubmitting ? 'Mise à jour...' : 'Mettre à jour' }}
+			</button>
+			<button class="btn ghost" type="button" (click)="cancel()">Annuler</button>
+		</div>
+	</form>
+</section>

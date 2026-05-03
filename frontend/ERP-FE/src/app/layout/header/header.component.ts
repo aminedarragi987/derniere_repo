@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { Observable } from 'rxjs';
 import { AuthUserState } from '../../features/auth/models/user.models';
-import { AuthService } from '../../core/services/auth.service';
+import { AuthService } from '../../shared/services';
 
 @Component({
   selector: 'app-header',

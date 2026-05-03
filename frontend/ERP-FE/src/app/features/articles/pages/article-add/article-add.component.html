@@ -1,0 +1,147 @@
+<section class="page-shell">
+	<header class="page-header">
+		<div>
+			<h1>Créer un nouvel article</h1>
+			<p>Ajoute un produit à ton catalogue avec tous les détails nécessaires.</p>
+		</div>
+		<button class="btn ghost" type="button" (click)="cancel()">Retour</button>
+	</header>
+
+	<form class="form-card" [formGroup]="form" (ngSubmit)="save()">
+		<!-- Informations de base -->
+		<fieldset>
+			<legend>Informations de base</legend>
+			
+			<label>
+				Nom *
+				<input type="text" formControlName="nom" placeholder="Nom de l'article" />
+			</label>
+		</fieldset>
+
+		<!-- Pricing & Stock -->
+		<fieldset>
+			<legend>Prix et Stock</legend>
+			
+			<label>
+				Prix (DH) *
+				<input type="number" formControlName="prix" placeholder="0.00" step="0.01" />
+			</label>
+
+			<label>
+				Quantité en stock *
+				<input type="number" formControlName="quantitestock" placeholder="0" />
+			</label>
+
+			<label>
+				Seuil minimum *
+				<input type="number" formControlName="seuilminimum" placeholder="0" />
+			</label>
+		</fieldset>
+
+		<!-- Détails produit (Mode) -->
+		<fieldset>
+			<legend>Détails du produit (Mode)</legend>
+			
+			<label>
+				Sexe
+				<select formControlName="sexe">
+					<option value="">-- Sélectionner --</option>
+					<option *ngFor="let g of genres" [value]="g.id">{{ g.label }}</option>
+				</select>
+			</label>
+
+			<label>
+				Type de vêtement
+				<select formControlName="typevetement">
+					<option value="">-- Sélectionner --</option>
+					<option *ngFor="let t of typesVetement" [value]="t.id">{{ t.label }}</option>
+				</select>
+			</label>
+
+			<label>
+				Marque
+				<select formControlName="marque">
+					<option value="">-- Sélectionner --</option>
+					<option *ngFor="let m of marques" [value]="m.id">{{ m.label }}</option>
+				</select>
+			</label>
+
+			<label>
+				Couleur
+				<select formControlName="couleur">
+					<option value="">-- Sélectionner --</option>
+					<option *ngFor="let c of couleurs" [value]="c.id">{{ c.label }}</option>
+				</select>
+			</label>
+
+			<label>
+				Taille
+				<select formControlName="taille">
+					<option value="">-- Sélectionner --</option>
+					<option *ngFor="let t of tailles" [value]="t.id">{{ t.label }}</option>
+				</select>
+			</label>
+		</fieldset>
+
+		<!-- Images -->
+		<fieldset>
+			<legend>Image du produit</legend>
+			
+			<!-- Preview -->
+			<div *ngIf="imagePreview" class="image-preview-wrapper">
+				<p class="preview-label"><strong>✓ Aperçu de l'image</strong></p>
+				<div class="image-preview">
+					<img [src]="imagePreview" [alt]="form.get('nom')?.value || 'Preview'" />
+					<button class="btn-remove-image" type="button" (click)="removeImage()" title="Supprimer l'image">
+						<i class="material-icons">close</i>
+					</button>
+				</div>
+			</div>
+
+			<!-- Saisie du chemin manuel -->
+			<label class="manual-path-label">
+				<strong>📁 Ou saisir le chemin d'une image existante</strong>
+				<input 
+					type="text" 
+					formControlName="imageUrl" 
+					placeholder="Ex: brand/surchemise_gris.jpg ou shirt-black.svg"
+					(change)="onImagePathChange()"
+					class="manual-path-input"
+				/>
+				<small>Chemins disponibles: assets/articles/ ou assets/brand/ ou autres dossiers</small>
+			</label>
+
+			<!-- Upload personnalisé -->
+			<label class="image-upload-label">
+				📤 Uploader une image
+				<input type="file" accept="image/*" (change)="onImageUpload($event)" />
+			</label>
+
+			<!-- Images d'exemple -->
+			<div class="example-images">
+				<p><strong>Ou choisir une image d'exemple :</strong></p>
+				<div class="examples-grid">
+					<button 
+						*ngFor="let img of exampleImages"
+						type="button"
+						class="example-image-btn"
+						(click)="selectExampleImage(img.filename)"
+						[class.active]="form.get('imageUrl')?.value === img.filename"
+						title="{{ img.label }}"
+					>
+						<img [src]="'assets/articles/' + img.filename" [alt]="img.label" />
+						<span>{{ img.label }}</span>
+					</button>
+				</div>
+			</div>
+		</fieldset>
+
+		<!-- Actions -->
+		<div class="actions">
+			<button class="btn primary" [disabled]="isSubmitting" type="submit">
+				{{ isSubmitting ? 'Création...' : 'Créer l\'article' }}
+			</button>
+			<button class="btn ghost" type="button" (click)="cancel()">Annuler</button>
+		</div>
+	</form>
+</section>

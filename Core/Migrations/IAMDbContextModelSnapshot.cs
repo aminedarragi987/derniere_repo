@@ -82,6 +82,37 @@ namespace Core.Migrations
                         .HasColumnType("character varying(50)")
                         .HasColumnName("typevetement");
 
+                    b.Property<string>("ImageUrl")
+                        .HasMaxLength(1000)
+                        .HasColumnType("character varying(1000)")
+                        .HasColumnName("imageurl");
+
+                    b.Property<string>("Sku")
+                        .HasMaxLength(50)
+                        .HasColumnType("character varying(50)")
+                        .HasColumnName("sku");
+
+                    b.Property<string>("Statut")
+                        .HasMaxLength(20)
+                        .HasColumnType("character varying(20)")
+                        .HasColumnName("statut")
+                        .HasDefaultValue("Actif");
+
+                    b.Property<string>("Slug")
+                        .HasMaxLength(160)
+                        .HasColumnType("character varying(160)")
+                        .HasColumnName("slug");
+
+                    b.Property<bool>("IsFeatured")
+                        .HasColumnType("boolean")
+                        .HasColumnName("isfeatured")
+                        .HasDefaultValue(false);
+
+                    b.Property<string>("Matiere")
+                        .HasMaxLength(80)
+                        .HasColumnType("character varying(80)")
+                        .HasColumnName("matiere");
+
                     b.HasKey("Idarticle")
                         .HasName("article_pkey");
 
@@ -117,6 +148,11 @@ namespace Core.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Idcategorie"));
 
+                        b.Property<string>("Couleur")
+                            .HasMaxLength(50)
+                            .HasColumnType("character varying(50)")
+                            .HasColumnName("couleur");
+
                     b.Property<string>("Description")
                         .HasColumnType("character varying")
                         .HasColumnName("description");
@@ -125,6 +161,16 @@ namespace Core.Migrations
                         .IsRequired()
                         .HasColumnType("character varying")
                         .HasColumnName("nom");
+
+                        b.Property<string>("Sexe")
+                            .HasMaxLength(30)
+                            .HasColumnType("character varying(30)")
+                            .HasColumnName("sexe");
+
+                        b.Property<string>("Typevetement")
+                            .HasMaxLength(50)
+                            .HasColumnType("character varying(50)")
+                            .HasColumnName("typevetement");
 
                     b.HasKey("Idcategorie")
                         .HasName("categorie_pkey");

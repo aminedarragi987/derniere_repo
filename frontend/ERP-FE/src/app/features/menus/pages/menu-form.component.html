@@ -1,0 +1,44 @@
+<section class="page">
+  <header class="page-header">
+    <h1>{{ isEdit ? 'Modifier' : 'Créer' }} un menu</h1>
+  </header>
+
+  <form (ngSubmit)="submit()" *ngIf="!isLoading">
+    <label>
+      Titre
+      <input type="text" [(ngModel)]="menu.titre" name="titre" required />
+    </label>
+    <label>
+      Description
+      <input type="text" [(ngModel)]="menu.description" name="description" />
+    </label>
+    <label>
+      RouterLink
+      <input type="text" [(ngModel)]="menu.memRouterlink" name="memRouterlink" />
+    </label>
+    <label>
+      Href
+      <input type="text" [(ngModel)]="menu.memHref" name="memHref" />
+    </label>
+    <label>
+      Icon
+      <input type="text" [(ngModel)]="menu.memIcon" name="memIcon" />
+    </label>
+    <label>
+      Target
+      <input type="text" [(ngModel)]="menu.memTarget" name="memTarget" />
+    </label>
+    <label>
+      Sous-menu ?
+      <input type="checkbox" [(ngModel)]="menu.hassubmenu" name="hassubmenu" />
+    </label>
+    <label>
+      Parent ID
+      <input type="number" [(ngModel)]="menu.parentid" name="parentid" />
+    </label>
+    <button type="submit" class="btn-primary">{{ isEdit ? 'Modifier' : 'Créer' }}</button>
+    <a class="btn-outline" routerLink="/menus">Annuler</a>
+    <p class="error" *ngIf="error">{{ error }}</p>
+  </form>
+  <p class="loading" *ngIf="isLoading">Chargement...</p>
+</section>
